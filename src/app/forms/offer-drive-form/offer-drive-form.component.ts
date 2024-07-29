@@ -7,7 +7,7 @@ import { Trip } from '../../shared/trip.model';
 @Component({
   selector: 'app-offer-drive-form',
   standalone: true,
-  imports: [FormsModule,],
+  imports: [FormsModule],
   templateUrl: './offer-drive-form.component.html',
   styleUrl: './offer-drive-form.component.css'
 })
