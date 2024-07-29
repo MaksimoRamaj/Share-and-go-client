@@ -1,0 +1,127 @@
+#searchForm{
+    margin-top: 11%;
+    margin-left: 25%;
+}
+
+
+/* styles.css */
+body {
+    /* background-image: url('background.jpg'); Replace with your background image */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+.form-container {
+    margin: 25%;
+    background-color: #474a4a;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    color: #f1f1f1;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-container .icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px 10px 10px 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+
+/* SEARCH CONTAINER */
+
+.search-container {
+    position: relative;
+    width: 300px;
+}
+
+#searchBar {
+    width: 87%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    background-color: white;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+}
+
+.suggestions div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestions div:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* styles.css */
+.scroll-container {
+    width: 87%; /* Width of the container */
+    height: 5%; /* Height of the container */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    position: relative; /* Ensure it respects z-index */
+    z-index: 10000; /* Higher z-index to float over other components */
+    border: 1px solid #ccc; /* Optional: border for visibility */
+}
+
+
+

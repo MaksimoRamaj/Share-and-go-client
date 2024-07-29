@@ -1,0 +1,54 @@
+<div class="form-container ml-5" id="searchForm">
+        <form>
+            <label for="from">Qyteti nisjes:</label>
+            <div class="search-container">
+                <input type="text" id="searchBar" name="from" placeholder="Search..." [(ngModel)]="tripDetails.fromCity" (input)="onInputFromCity($event)">
+                @if (filteredFromCityOptions().length > 0) {
+                   <div class="scroll-container">
+                     @for (city of filteredFromCityOptions(); track city) {
+                        <div (click)="selectFromCity(city)">{{city}}</div>
+                     }
+                    </div>
+               }
+            </div>
+            
+            <label for="to">Qyteti mberritjes:</label>
+            <div class="search-container">
+                <input type="text" id="searchBar" name="to" placeholder="Search..." [(ngModel)]="tripDetails.toCity" (input)="onInputToCity($event)">
+                @if (filteredToCityOptions().length > 0) {
+                    <div class="scroll-container">
+                      @for (city of filteredToCityOptions(); track city) {
+                         <div (click)="selectToCity(city)">{{city}}</div>
+                      }
+                     </div>
+                }
+            </div>
+
+            <label for="dateNisje">Data e nisjes:</label>
+            <div class="search-container">
+                <input type="date" id="dateNisje" name="dateNisje" [(ngModel)]="tripDetails.dateOfTrip">
+            </div>
+
+            <label for="selectedTime">Ora e nisjes:</label>
+            <div class="search-container">
+                <input type="time" id="time" name="time" [(ngModel)]="tripDetails.timeOfTrip">
+            </div>
+
+            <label for="bookingType">Tipi udhetimit:</label>
+            <div class="input-container">
+        
+                <select id="bookingType" name="bookingType" [(ngModel)] = "tripDetails.bookingType">
+                    <option [value]="bookingTypes[0]">Pasagjer</option>
+                    <option [value]="bookingTypes[1]">Valixhe</option>
+                    <option [value]="bookingTypes[2]">Pasagjer me valixhe</option>
+                </select>
+            </div>
+            
+            <label for="passengers">Pasagjeret:</label>
+            <div class="input-container">
+                <input type="number" id="passengers" name="passengers" min="1" [(ngModel)]="tripDetails.passengerCount">
+            </div>
+            
+            <button type="submit">Post a ride</button>
+        </form>
+    </div>
