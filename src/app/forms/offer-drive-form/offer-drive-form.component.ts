@@ -1,5 +1,6 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BookingType } from '../../shared/bookingtype.model';
 import { Trip } from '../../shared/trip.model';
 import { CityService } from '../../shared/city.service';
@@ -9,13 +10,14 @@ import { City } from '../../shared/city.model';
 @Component({
   selector: 'app-offer-drive-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,HttpClientModule],
   templateUrl: './offer-drive-form.component.html',
   styleUrls: ['./offer-drive-form.component.css']
 })
 export class OfferDriveFormComponent implements OnInit {
 
   private cityService = inject(CityService);
+  private http = inject(HttpClient);
 
   bookingTypes = Object.values(BookingType);
 
@@ -35,7 +37,14 @@ export class OfferDriveFormComponent implements OnInit {
 
   cities: City[] = citiesArray;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cityService.duration$.subscribe(duration => {
+      this.tripDetails.duration = duration;
+    });
+    this.cityService.distance$.subscribe(distance => {
+      this.tripDetails.distance = distance;
+    });
+  }
 
   onInputFromCity(event: Event): void {
     const query = this.tripDetails.fromCity.toLowerCase();
@@ -57,5 +66,14 @@ export class OfferDriveFormComponent implements OnInit {
     this.tripDetails.toCity = city.name;
     this.cityService.updateEndCity(city);
     this.filteredToCityOptions = [];
+  }
+
+  submitForm(): void {
+    const url = 'http://localhost:8080/api/trip/create-trip';  // Replace with your actual API endpoint
+    this.http.post(url, this.tripDetails).subscribe(response => {
+      console.log('Trip details submitted successfully', response);
+    }, error => {
+      console.error('Error submitting trip details', error);
+    });
   }
 }

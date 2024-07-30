@@ -1,5 +1,5 @@
 <div class="form-container ml-5" id="searchForm">
-        <form>
+        <form (ngSubmit)="submitForm()">
             <label for="from">Qyteti nisjes:</label>
             <div class="search-container">
                 <input type="text" id="searchBar" name="from" placeholder="Search..." [(ngModel)]="tripDetails.fromCity" (input)="onInputFromCity($event)">
