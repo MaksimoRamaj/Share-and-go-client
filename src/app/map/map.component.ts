@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
+import { CityService } from '../shared/city.service';
+import { City } from '../shared/city.model';
 
 @Component({
   selector: 'app-map',
@@ -12,6 +14,7 @@ import 'leaflet-routing-machine';
 })
 export class MapComponent implements OnInit {
 
+  private cityService = inject(CityService);
 
   options = {
     layers: [
@@ -21,14 +24,20 @@ export class MapComponent implements OnInit {
       })
     ],
     zoom: 10,
-    center: L.latLng(40.61861000, 20.78083000) // Default center (New York)
+    center: L.latLng(40.7058, 19.9522)
   };
 
-  private map !: L.Map;
-  private startPoint: L.LatLng | null = null;
-  private endPoint: L.LatLng | null = null;
+  private map!: L.Map;
+  private routingControl!: L.Routing.Control;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cityService.startCity$.subscribe(startCity => {
+      this.updateRoutingControl();
+    });
+    this.cityService.endCity$.subscribe(endCity => {
+      this.updateRoutingControl();
+    });
+  }
 
   onMapReady(map: L.Map): void {
     this.map = map;
@@ -36,10 +45,10 @@ export class MapComponent implements OnInit {
   }
 
   addRoutingControl(): void {
-    const control = L.Routing.control({
+    this.routingControl = L.Routing.control({
       waypoints: [
-        L.latLng(40.70583000, 19.95222000), // New York
-        L.latLng(41.3275000, 19.8188900) // Los Angeles
+        L.latLng(40.7058, 19.9522), 
+        L.latLng(40.6275, 20.9897)
       ],
       routeWhileDragging: true
     }).on('routesfound', (e) => {
@@ -48,14 +57,16 @@ export class MapComponent implements OnInit {
       console.log(`Distance: ${summary.totalDistance / 1000} km`);
       console.log(`Time: ${Math.round(summary.totalTime / 60)} minutes`);
     }).addTo(this.map);
-  
-
-  const waypoints = control.getPlan().getWaypoints();
-  if (waypoints.length > 0) {
-    this.startPoint = waypoints[0].latLng;
-    this.endPoint = waypoints[waypoints.length - 1].latLng;
-    console.log(`Start Point: ${this.startPoint}`);
-    console.log(`End Point: ${this.endPoint}`);
   }
-}
+
+  updateRoutingControl(): void {
+    if (this.routingControl) {
+      const startCity = this.cityService.startCitySubject.value;
+      const endCity = this.cityService.endCitySubject.value;
+      this.routingControl.setWaypoints([
+        L.latLng(startCity.lat, startCity.lng),
+        L.latLng(endCity.lat, endCity.lng)
+      ]);
+    }
+  }
 }
