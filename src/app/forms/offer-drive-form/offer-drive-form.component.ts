@@ -1,59 +1,61 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Cities } from '../../shared/cities.model';
 import { BookingType } from '../../shared/bookingtype.model';
 import { Trip } from '../../shared/trip.model';
+import { CityService } from '../../shared/city.service';
+import { citiesArray } from '../../shared/citiesArray.model';
+import { City } from '../../shared/city.model';
 
 @Component({
   selector: 'app-offer-drive-form',
   standalone: true,
-  imports: [FormsModule,],
+  imports: [FormsModule],
   templateUrl: './offer-drive-form.component.html',
-  styleUrl: './offer-drive-form.component.css'
+  styleUrls: ['./offer-drive-form.component.css']
 })
 export class OfferDriveFormComponent implements OnInit {
 
+  private cityService = inject(CityService);
+
   bookingTypes = Object.values(BookingType);
 
-  tripDetails : Trip = {
-    fromCity: "Tirane",
-    toCity: "Shkoder",
+  tripDetails: Trip = {
+    fromCity: 'Berat',
+    toCity: 'Korce',
     dateOfTrip: new Date().toISOString().split('T')[0],
     timeOfTrip: "07:00",
     bookingType: this.bookingTypes[0],
     passengerCount: 1,
     duration: 0,
-    distance:0
-  }
+    distance: 0
+  };
 
-  filteredFromCityOptions : any = signal([]);
-  filteredToCityOptions : any = signal([]);
+  filteredFromCityOptions: City[] = [];
+  filteredToCityOptions: City[] = [];
 
-  cities : string[] = Object.values(Cities);
+  cities: City[] = citiesArray;
 
-  ngOnInit(){
-    
-  }
+  ngOnInit(): void {}
 
-  onInputFromCity(event: Event){
+  onInputFromCity(event: Event): void {
     const query = this.tripDetails.fromCity.toLowerCase();
-    this.filteredFromCityOptions.set(this.cities.filter(option => option.toLowerCase().includes(query)));
-    console.log(this.tripDetails.bookingType)
+    this.filteredFromCityOptions = this.cities.filter(city => city.name.toLowerCase().includes(query));
   }
 
-  selectFromCity(city: string){
-    this.tripDetails.fromCity = city;
-    this.filteredFromCityOptions.set([]);
+  selectFromCity(city: City): void {
+    this.tripDetails.fromCity = city.name;
+    this.cityService.updateStartCity(city);
+    this.filteredFromCityOptions = [];
   }
 
-  onInputToCity(event: Event){
+  onInputToCity(event: Event): void {
     const query = this.tripDetails.toCity.toLowerCase();
-    this.filteredToCityOptions.set(this.cities.filter(option => option.toLowerCase().includes(query)));
+    this.filteredToCityOptions = this.cities.filter(city => city.name.toLowerCase().includes(query));
   }
 
-  selectToCity(city: string){
-    this.tripDetails.toCity = city;
-    this.filteredToCityOptions.set([]);
+  selectToCity(city: City): void {
+    this.tripDetails.toCity = city.name;
+    this.cityService.updateEndCity(city);
+    this.filteredToCityOptions = [];
   }
-
 }

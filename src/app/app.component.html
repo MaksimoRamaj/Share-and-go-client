@@ -1,30 +1,16 @@
-<app-navbar></app-navbar>
 
 <main class="bg-black">
-  <div class="container mb-5">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="row">
-          <router-outlet/>
-        </div>
+  <app-navbar></app-navbar>
+  
+  <router-outlet/>
+    <div class="container mb-5 mt-5 pt-5">
+      <div class="row mt-5 pt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center text-white"><h2>What our users say</h2></div>
+        <div class="col-md-4"></div>
       </div>
-      <div class="col-md-6">
-        <img src="../assets/images/request_a_ride.jpeg" id="request_a_ride">
-      </div>
+      <app-cards></app-cards>
     </div>
-  </div>
 
-  <div class="container mb-5 mt-5 pt-5">
-    <div class="row mt-5 pt-3">
-      <div class="col-md-4"></div>
-      <div class="col-md-4 text-center text-white"><h2>What our users say</h2></div>
-      <div class="col-md-4"></div>
-    </div>
-    <app-cards></app-cards>
-  </div>
-
-  <app-footer/>
+  <app-footer/> 
 </main>
-
-
-

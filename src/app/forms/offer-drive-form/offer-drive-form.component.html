@@ -3,10 +3,10 @@
             <label for="from">Qyteti nisjes:</label>
             <div class="search-container">
                 <input type="text" id="searchBar" name="from" placeholder="Search..." [(ngModel)]="tripDetails.fromCity" (input)="onInputFromCity($event)">
-                @if (filteredFromCityOptions().length > 0) {
+                @if (filteredFromCityOptions.length > 0) {
                    <div class="scroll-container">
-                     @for (city of filteredFromCityOptions(); track city) {
-                        <div (click)="selectFromCity(city)">{{city}}</div>
+                     @for (city of filteredFromCityOptions; track city) {
+                        <div (click)="selectFromCity(city)">{{city.name}}</div>
                      }
                     </div>
                }
@@ -15,10 +15,10 @@
             <label for="to">Qyteti mberritjes:</label>
             <div class="search-container">
                 <input type="text" id="searchBar" name="to" placeholder="Search..." [(ngModel)]="tripDetails.toCity" (input)="onInputToCity($event)">
-                @if (filteredToCityOptions().length > 0) {
+                @if (filteredToCityOptions.length > 0) {
                     <div class="scroll-container">
-                      @for (city of filteredToCityOptions(); track city) {
-                         <div (click)="selectToCity(city)">{{city}}</div>
+                      @for (city of filteredToCityOptions; track city) {
+                         <div (click)="selectToCity(city)">{{city.name}}</div>
                       }
                      </div>
                 }
