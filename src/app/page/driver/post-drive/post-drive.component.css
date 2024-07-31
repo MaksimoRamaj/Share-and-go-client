@@ -1,0 +1,22 @@
+.navbar-nav.ms-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .navbar-nav.me-auto {
+    margin-right: auto;
+  }
+  
+
+  .navbar-custom {
+    background-color: black;
+    font-family: 'Arial', sans-serif;
+}
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand {
+    color: white;
+}
+.navbar-custom .nav-link:hover,
+.navbar-custom .navbar-brand:hover {
+    color: #ddd;
+}

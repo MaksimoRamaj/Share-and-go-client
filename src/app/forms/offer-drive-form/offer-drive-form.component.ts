@@ -1,18 +1,26 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BookingType } from '../../shared/bookingtype.model';
 import { Trip } from '../../shared/trip.model';
 import { CityService } from '../../shared/city.service';
 import { citiesArray } from '../../shared/citiesArray.model';
 import { City } from '../../shared/city.model';
+import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { MyInterceptor } from '../../services/my-interceptor.service';
 
 @Component({
   selector: 'app-offer-drive-form',
   standalone: true,
-  imports: [FormsModule,HttpClientModule],
+  imports: [FormsModule],
   templateUrl: './offer-drive-form.component.html',
-  styleUrls: ['./offer-drive-form.component.css']
+  styleUrls: ['./offer-drive-form.component.css'],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MyInterceptor,
+      multi: true
+    }
+  ]
 })
 export class OfferDriveFormComponent implements OnInit {
 
@@ -70,10 +78,15 @@ export class OfferDriveFormComponent implements OnInit {
 
   submitForm(): void {
     const url = 'http://localhost:8080/api/trip/create-trip';  // Replace with your actual API endpoint
-    this.http.post(url, this.tripDetails).subscribe(response => {
-      console.log('Trip details submitted successfully', response);
-    }, error => {
-      console.error('Error submitting trip details', error);
+    this.http.post(url, this.tripDetails,{observe: 'response'}).subscribe({
+      next: (response: HttpResponse<any>) => {
+        console.log('Trip details submitted successfully', response);
+        console.log('Status Code:', response.status);  // Accessing the status code
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error submitting trip details', error);
+        console.log('Status Code:', error.status);  // Accessing the status code in case of error
+      }
     });
   }
 }
