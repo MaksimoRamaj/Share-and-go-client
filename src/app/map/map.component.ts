@@ -56,6 +56,8 @@ export class MapComponent implements OnInit {
       const summary = routes[0].summary;
       console.log(`Distance: ${summary.totalDistance / 1000} km`);
       console.log(`Time: ${Math.round(summary.totalTime / 60)} minutes`);
+      this.cityService.updateDistance(summary.totalDistance / 1000);
+      this.cityService.updateDuration(Math.round(summary.totalTime / 60));
     }).addTo(this.map);
   }
 
