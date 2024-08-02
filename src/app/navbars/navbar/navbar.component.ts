@@ -1,11 +1,11 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { AuthService } from '../../services/auth-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -30,6 +30,14 @@ export class NavbarComponent implements OnInit{
 
     logIn() {
         this.router.navigate(['login']);
+    }
+
+    onDriver(){
+        this.router.navigate(["driver-profile"]);
+    }
+
+    onPassenger(){
+        this.router.navigate(["passenger"]);
     }
 
 }

@@ -59,11 +59,12 @@ select {
 }
 
 button {
+    margin: 2%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #000000;
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
