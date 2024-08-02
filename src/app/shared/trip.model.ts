@@ -1,6 +1,7 @@
 import { BookingType } from "./bookingtype.model";
 
 export interface Trip{
+    id?: number;
     fromCity: string;
     toCity: string;
     dateOfTrip: string;
@@ -9,4 +10,5 @@ export interface Trip{
     passengerCount: number;
     duration: number;
     distance: number;
+    cmimi: number;
 }
