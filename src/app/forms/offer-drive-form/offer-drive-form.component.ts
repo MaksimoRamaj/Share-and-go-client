@@ -7,6 +7,7 @@ import { citiesArray } from '../../shared/citiesArray.model';
 import { City } from '../../shared/city.model';
 import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { MyInterceptor } from '../../services/my-interceptor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-offer-drive-form',
@@ -26,6 +27,7 @@ export class OfferDriveFormComponent implements OnInit {
 
   private cityService = inject(CityService);
   private http = inject(HttpClient);
+  private router = inject(Router);
 
   bookingTypes = Object.values(BookingType);
 
@@ -37,7 +39,8 @@ export class OfferDriveFormComponent implements OnInit {
     bookingType: this.bookingTypes[0],
     passengerCount: 1,
     duration: 0,
-    distance: 0
+    distance: 0,
+    cmimi: 0
   };
 
   filteredFromCityOptions: City[] = [];
@@ -88,5 +91,7 @@ export class OfferDriveFormComponent implements OnInit {
         console.log('Status Code:', error.status);  // Accessing the status code in case of error
       }
     });
+    //to be added to next 
+    this.router.navigate(['driver/preferences']);
   }
 }

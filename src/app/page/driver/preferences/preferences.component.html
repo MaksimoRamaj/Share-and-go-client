@@ -1,0 +1,28 @@
+<div class="form-container ml-5" id="searchForm">
+    <form>
+        
+            @if(preferences.length > 0){
+                @for(pref of preferences; track pref){
+                    <label for="pref">Preferenca: </label>
+                    <div class="search-container">
+                        <input type="text" id="searchBar" name="pref" placeholder="{{pref.title}}" disabled />
+                        <button (click)="removePreference(pref)">Fshi</button>
+                    </div>
+                }
+                <label for="from">Preferenca: </label>
+                <div class="search-container">
+                    <input type="text" id="searchBar" name="from" placeholder="Add ..." [(ngModel)] = "nextPreference" />
+                </div>
+                <button (click)="addPreference()">Shto</button>
+            }@else{
+                <label for="from">Preferenca: </label>
+                <div class="search-container">
+                    <input type="text" id="searchBar" name="from" placeholder="Add ..." [(ngModel)] = "nextPreference" />
+                </div>
+                <button (click)="addPreference()">Shto</button>
+            }    
+        
+        <button type="submit" (click)="submitForm()">Dergoje</button>
+    </form>
+</div>
+

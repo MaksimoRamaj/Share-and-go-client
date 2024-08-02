@@ -4,13 +4,13 @@ import { OfferDriveFormComponent } from '../../../forms/offer-drive-form/offer-d
 import { MapComponent } from '../../../map/map.component';
 import { FooterComponent } from "../../../footer/footer.component";
 import { AuthService } from '../../../services/auth-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "../../../navbars/navbar/navbar.component";
 
 @Component({
   selector: 'app-post-drive',
   standalone: true,
-  imports: [OfferDriveFormComponent, MapComponent, FooterComponent, NavbarComponent],
+  imports: [OfferDriveFormComponent, MapComponent, FooterComponent, NavbarComponent,RouterOutlet],
   templateUrl: './post-drive.component.html',
   styleUrl: './post-drive.component.css'
 })
