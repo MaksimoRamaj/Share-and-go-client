@@ -1,0 +1,25 @@
+<div class="container" (scroll)="onScroll()" style="margin-top: 20%;">
+    <div class="card-custom" *ngFor="let item of items">
+      <div class="date-header">{{ item.date }}</div>
+      <div class="timeline">
+        <span class="time">{{ item.time }}</span>
+        <span class="location">{{ item.startCity }}</span>
+        <!-- <span class="price">{{ item.price }}</span> -->
+      </div>
+      <div class="timeline" style="color: #6c757d;">
+        <span class="time">{{ item.duration }}</span>
+        <span class="location">{{ item.endCity }}</span>
+      </div>
+      <!-- <div class="profile">
+        <img [src]="item." alt="Profile Image">
+        <span class="name">{{ item.name }}</span>
+      </div>
+      <div class="icon-row">
+        <img [src]="item.smokingIcon" alt="Smoking Icon">
+        <img [src]="item.petIcon" alt="Pet Icon">
+      </div>
+    </div> -->
+    <div *ngIf="loading" class="loading">
+      Loading...
+    </div>
+  </div>

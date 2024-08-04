@@ -12,11 +12,30 @@ import { PassengerprofileComponent } from './page/passenger/passengerprofile/pas
 import { PtriplistComponent } from './page/passenger/ptriplist/ptriplist.component';
 import { Path } from 'leaflet';
 import { PreferencesComponent } from './page/driver/preferences/preferences.component';
+import { VeturatComponent } from './page/driver/driverprofile/veturat/veturat.component';
+import { FindPostComponent } from './forms/find-trip-form/find-post/find-post.component';
+import { TripformComponent } from './forms/find-trip-form/tripform/tripform.component';
+import { InifintescrolltripsComponent } from './page/passenger/unfilteredtrips/inifintescrolltrips/inifintescrolltrips.component';
 
 export const routes: Routes = [
     {
+        path: "infinte-scroll",
+        component: InifintescrolltripsComponent
+    },
+    {
         path: "",
         component: HomepageComponent,
+        children: [
+            {
+                path: "",
+                component: FindPostComponent,  
+
+            },
+            {
+                path: "find-trip",
+                component: TripformComponent,
+            }
+        ]
     },
     {
         path: "driver",
@@ -54,6 +73,10 @@ export const routes: Routes = [
             {
                 path: "trip/:id",
                 component: TripdetailsComponent,
+            },
+            {
+                path: "veturat",
+                component: VeturatComponent
             }
         ]
     },

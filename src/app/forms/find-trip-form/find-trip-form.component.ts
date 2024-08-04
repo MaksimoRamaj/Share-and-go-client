@@ -14,4 +14,16 @@ import { CardsComponent } from '../../cards/cards.component';
 })
 export class FindTripFormComponent {
 
+    constructor(
+      private router : Router
+    ) { } 
+
+    onGjejUdhetim(){
+        this.router.navigate(['find-trip']);
+    }   
+
+    onPostoUdhetim(){
+        this.router.navigate(['driver']);
+    }
+
 }

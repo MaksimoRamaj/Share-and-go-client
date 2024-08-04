@@ -8,7 +8,16 @@
         </div>
       </div>
       <div class="col-md-6">
-        <img src="../assets/images/request_a_ride.jpeg" id="request_a_ride">
+        @if (isLoggegIn() && availableTrips()) {
+          @if (true) {
+             <app-inifintescrolltrips></app-inifintescrolltrips>
+          }
+          @else {
+          <app-unfilteredtrips></app-unfilteredtrips>
+          }
+        }@else{
+          <img src="../assets/images/request_a_ride.jpeg" id="request_a_ride">
+        }
       </div>
     </div>
   </div>
