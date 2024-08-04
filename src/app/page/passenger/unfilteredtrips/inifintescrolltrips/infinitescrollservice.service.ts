@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { City } from '../../../../shared/city.model';
 
@@ -14,6 +14,9 @@ export class InfinitescrollserviceService {
   endCity$ = this.endCitySubject.asObservable();
   date$ = this.dateSubject.asObservable();
 
+ private ready  = new BehaviorSubject<boolean>(false);
+  ready$ = this.ready.asObservable();
+
   updateStartCity(city: City) {
     this.startCitySubject.next(city);
   }
@@ -25,4 +28,9 @@ export class InfinitescrollserviceService {
   updateDate(date: string) {
     this.dateSubject.next(date);
   }
+
+  updateReady(value: boolean){
+    this.ready.next(value);
+  }
+
 }

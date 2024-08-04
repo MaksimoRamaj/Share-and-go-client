@@ -1,17 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { Component, inject, OnInit } from '@angular/core';
 import { TripResponse } from '../../../../shared/responses/tripresponse.model';
+import { DurationPipe } from '../../../../shared/pipes/duration.pipe';
 import { InfinitescrollserviceService } from './infinitescrollservice.service';
 import { City } from '../../../../shared/city.model';
-import { DurationPipe } from '../../../../shared/pipes/duration.pipe';
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
+import { MyInterceptor } from '../../../../services/my-interceptor.service';
 
 @Component({
   selector: 'app-inifintescrolltrips',
   standalone: true,
+  imports: [CommonModule,DurationPipe],
   templateUrl: './inifintescrolltrips.component.html',
   styleUrls: ['./inifintescrolltrips.component.css'],
-  imports:[DurationPipe,CurrencyPipe,DatePipe,CommonModule]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MyInterceptor,
+      multi: true
+    }
+  ]
 })
 export class InifintescrolltripsComponent implements OnInit {
   
@@ -19,28 +27,37 @@ export class InifintescrolltripsComponent implements OnInit {
   loading = false;
   page = 0;
   pageSize = 10;
-  
-  startCity !: City |null;
-  endCity !: City | null;
-  date!: string;
 
-  constructor(private http: HttpClient, private cityService: InfinitescrollserviceService) {}
+  private cityService = inject(InfinitescrollserviceService);
+
+  startCityObs = this.cityService.startCity$;  
+  endCityObs = this.cityService.endCity$;
+  dateObs = this.cityService.date$;
+
+  startCity !: City | null;
+  endCity !: City | null;
+  date !: string | null;
+
+  ready = this.cityService.ready$;
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.cityService.startCity$.subscribe((city) => {
+    this.startCityObs.subscribe((city) => {
       this.startCity = city;
-      this.resetAndLoad();
     });
-
-    this.cityService.endCity$.subscribe((city) => {
-      this.endCity = city;
-      this.resetAndLoad();
+    this.endCityObs.subscribe((city) => {
+     this.endCity = city;
     });
-
-    this.cityService.date$.subscribe((date) => {
+    this.dateObs.subscribe((date) => {
       this.date = date;
-      this.resetAndLoad();
     });
+    this.ready.subscribe((value) => {
+      if(value){
+        this.loadMore();
+      }
+    });
+    this.loadMore();
   }
 
   onScroll() {
@@ -52,19 +69,25 @@ export class InifintescrolltripsComponent implements OnInit {
       }
     }
   }
-  
+
   loadMore() {
-    if (this.loading || !this.startCity || !this.endCity) {
+    if (this.loading) {
       return;
     }
 
     this.loading = true;
-
-    this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/filtered-trips?page=${this.page}&size=${this.pageSize}&startCity=${encodeURIComponent(this.startCity.name)}&endCity=${encodeURIComponent(this.endCity.name)}&date=${encodeURIComponent(this.date)}`)
+    console.log(this.startCity);
+    console.log(this.endCity);
+    if(this.startCity?.name !== '' && this.endCity?.name !=='' && this.date!==''){
+      console.log('filtered');
+      this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/filtered-trips?page=${this.page}&size=${this.pageSize}&startCity=${this.startCity?.name}&endCity=${this.endCity?.name}&date=${this.date}`)
       .subscribe({
         next: (data) => {
-          this.items = [...this.items, ...data];
-          this.page++;
+          this.items =  [...data];
+          // if(data.length === 0){
+          //   this.page = -1;
+          // }
+          // this.page++;
           this.loading = false;
         },
         error: (err) => {
@@ -72,11 +95,22 @@ export class InifintescrolltripsComponent implements OnInit {
           this.loading = false;
         }
       });
+    }else{
+        this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/all-trips?page=${this.page}&size=${this.pageSize}`)
+          .subscribe({
+            next: (data) => {
+              this.items = [...data];
+              // if(data.length === 0){
+              //   this.page = -1;
+              // }
+              // this.page++;
+              this.loading = false;
+            },
+            error: (err) => {
+              console.error('Error loading data', err);
+              this.loading = false;
+            }
+          });
   }
-
-  resetAndLoad() {
-    this.page = 0;
-    this.items = [];
-    this.loadMore();
-  }
+}
 }

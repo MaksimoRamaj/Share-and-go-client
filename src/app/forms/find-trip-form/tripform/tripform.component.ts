@@ -7,6 +7,7 @@ import { CityService } from '../../../shared/city.service';
 import { Router } from '@angular/router';
 import { citiesArray } from '../../../shared/citiesArray.model';
 import { FormsModule } from '@angular/forms';
+import { InfinitescrollserviceService } from '../../../page/passenger/unfilteredtrips/inifintescrolltrips/infinitescrollservice.service';
 
 @Component({
   selector: 'app-tripform',
@@ -15,69 +16,75 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './tripform.component.html',
   styleUrl: './tripform.component.css'
 })
-export class TripformComponent implements OnInit{
-  private cityService = inject(CityService);
-  private http = inject(HttpClient);
-  private router = inject(Router);
-
-  bookingTypes = Object.values(BookingType);
-
+export class TripformComponent implements OnInit{ 
   tripDetails: Trip = {
-    startCity: 'Zgjidh qytetin ...',
-    endCity: 'Zgjidh qytetin ...',
-    dateOfTrip: new Date().toISOString().split('T')[0],
-    timeOfTrip: "07:00",
-    passengerCount: 1,
-    duration: 0,
-    distance: 0,
-    pricePerSeat: 0
-  };
+  startCity: '',
+  endCity: '',
+  dateOfTrip: '',
+  timeOfTrip: "07:00",
+  passengerCount: 1,
+  duration: 0,
+  distance: 0,
+  pricePerSeat: 0
+};
 
-  filteredFromCityOptions: City[] = [];
-  filteredToCityOptions: City[] = [];
+filteredFromCityOptions: City[] = [];
+filteredToCityOptions: City[] = [];
+cities: City[] = citiesArray;
 
-  cities: City[] = citiesArray;
+updatedStartCity : City = { name: '', lat: 0, lng: 0 };
+updatedEndCity : City = { name: '', lat: 0, lng: 0 };
+updatedDate : string = '';
 
-  ngOnInit(): void {
-   
-  }
+constructor(private cityService: InfinitescrollserviceService) {}
 
-  onInputFromCity(event: Event): void {
-    const query = this.tripDetails.startCity.toLowerCase();
-    this.filteredFromCityOptions = this.cities.filter(city => city.name.toLowerCase().includes(query));
-  }
+ngOnInit(): void {}
 
-  selectFromCity(city: City): void {
-    this.tripDetails.startCity = city.name;
-    this.cityService.updateStartCity(city);
-    this.filteredFromCityOptions = [];
-  }
+onInputFromCity(event: Event): void {
+  const query = this.tripDetails.startCity.toLowerCase();
+  this.filteredFromCityOptions = this.cities.filter(city => city.name.toLowerCase().includes(query));
+}
 
-  onInputToCity(event: Event): void {
-    const query = this.tripDetails.endCity.toLowerCase();
-    this.filteredToCityOptions = this.cities.filter(city => city.name.toLowerCase().includes(query));
-  }
+selectFromCity(city: City): void {
+  this.tripDetails.startCity = city.name;
+  this.updatedStartCity = city;
+  // this.cityService.updateStartCity(city);
+  this.filteredFromCityOptions = [];
+}
 
-  selectToCity(city: City): void {
-    this.tripDetails.endCity = city.name;
-    this.cityService.updateEndCity(city);
-    this.filteredToCityOptions = [];
-  }
+onInputToCity(event: Event): void {
+  const query = this.tripDetails.endCity.toLowerCase();
+  this.filteredToCityOptions = this.cities.filter(city => city.name.toLowerCase().includes(query));
+}
 
-  submitForm(): void {
-    // const url = 'http://localhost:8080/api/trip/create-trip';  // Replace with your actual API endpoint
-    // this.http.post(url, this.tripDetails,{observe: 'response'}).subscribe({
-    //   next: (response: HttpResponse<any>) => {
-    //     console.log('Trip details submitted successfully', response);
-    //     console.log('Status Code:', response.status);  // Accessing the status code
-    //   },
-    //   error: (error: HttpErrorResponse) => {
-    //     console.error('Error submitting trip details', error);
-    //     console.log('Status Code:', error.status);  // Accessing the status code in case of error
-    //   }
-    // });
-    //to be added to next 
-   
-  }
+selectToCity(city: City): void {
+  this.tripDetails.endCity = city.name;
+  // this.cityService.updateEndCity(city);
+  this.updatedEndCity = city;
+  this.filteredToCityOptions = [];
+}
+
+onInputToDate(event: Event): void {
+  // this.cityService.updateDate(this.tripDetails.dateOfTrip);
+  this.updatedDate = this.tripDetails.dateOfTrip;
+}
+
+submitForm(): void {
+  if (this.tripDetails.startCity === '' || this.tripDetails.endCity === '' || this.tripDetails.dateOfTrip === '') {
+    alert('Please fill all the fields');
+    return;}
+    console.log("this.tripDetails");
+  this.cityService.updateStartCity(this.updatedStartCity);
+  this.cityService.updateEndCity(this.updatedEndCity);
+  this.cityService.updateDate(this.updatedDate);
+  this.cityService.updateReady(true);
+}
+
+shfaqGjithe(){
+  this.cityService.updateStartCity({ name: '', lat: 0, lng: 0 });
+  this.cityService.updateEndCity({ name: '', lat: 0, lng: 0 });
+  this.cityService.updateDate('');
+  this.cityService.updateReady(true);
+}
 }
 
