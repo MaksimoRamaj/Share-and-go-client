@@ -22,8 +22,8 @@
                       <tbody>
                         @for (trip of trips; track trip) {
                         <tr>
-                          <th>{{trip.fromCity}}</th>
-                          <td>{{trip.toCity}}</td>
+                          <th>{{trip.startCity}}</th>
+                          <td>{{trip.endCity}}</td>
                           <td>{{trip.dateOfTrip}}</td>
                           <td>{{trip.passengerCount}}</td>
                           <td><button (click)="getTripDetails(trip.id!)" class="btn btn-success">Show</button></td>

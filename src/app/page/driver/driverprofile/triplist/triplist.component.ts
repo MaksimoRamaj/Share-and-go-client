@@ -19,15 +19,14 @@ export class TriplistComponent {
 
   trips : Trip[] = [{
     id: 105,
-    fromCity: "Berat",
-    toCity: "Elbasan",
+    startCity: "Berat",
+    endCity: "Elbasan",
     dateOfTrip: "2024-08-01",
     timeOfTrip: "07:00",
-    bookingType: BookingType.PASSENGER_ONLY,
     passengerCount: 3,
     duration: 90,
     distance: 151,
-    cmimi: 0
+    pricePerSeat: 0
   }
   ]
 

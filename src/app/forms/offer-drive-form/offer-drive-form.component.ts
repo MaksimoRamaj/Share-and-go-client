@@ -32,15 +32,14 @@ export class OfferDriveFormComponent implements OnInit {
   bookingTypes = Object.values(BookingType);
 
   tripDetails: Trip = {
-    fromCity: 'Berat',
-    toCity: 'Korce',
+    startCity: 'Berat',
+    endCity: 'Korce',
     dateOfTrip: new Date().toISOString().split('T')[0],
     timeOfTrip: "07:00",
-    bookingType: this.bookingTypes[0],
+    pricePerSeat: 0,
     passengerCount: 1,
     duration: 0,
     distance: 0,
-    cmimi: 0
   };
 
   filteredFromCityOptions: City[] = [];
@@ -58,23 +57,23 @@ export class OfferDriveFormComponent implements OnInit {
   }
 
   onInputFromCity(event: Event): void {
-    const query = this.tripDetails.fromCity.toLowerCase();
+    const query = this.tripDetails.startCity.toLowerCase();
     this.filteredFromCityOptions = this.cities.filter(city => city.name.toLowerCase().includes(query));
   }
 
   selectFromCity(city: City): void {
-    this.tripDetails.fromCity = city.name;
+    this.tripDetails.startCity = city.name;
     this.cityService.updateStartCity(city);
     this.filteredFromCityOptions = [];
   }
 
   onInputToCity(event: Event): void {
-    const query = this.tripDetails.toCity.toLowerCase();
+    const query = this.tripDetails.endCity.toLowerCase();
     this.filteredToCityOptions = this.cities.filter(city => city.name.toLowerCase().includes(query));
   }
 
   selectToCity(city: City): void {
-    this.tripDetails.toCity = city.name;
+    this.tripDetails.endCity = city.name;
     this.cityService.updateEndCity(city);
     this.filteredToCityOptions = [];
   }

@@ -1,7 +1,8 @@
-<div class="form-container ml-5" id="searchForm">
-        <form (ngSubmit)="submitForm()">
+<div class="button-container mt-5">
+    <div class="form-container ml-5" id="searchForm">
+        <form >
             <label for="from">Qyteti nisjes:</label>
-            <div class="search-container">
+            <div class="search-container" style="margin-bottom: 2%;">
                 <input type="text" id="searchBar" name="from" placeholder="Search..." [(ngModel)]="tripDetails.startCity" (input)="onInputFromCity($event)">
                 @if (filteredFromCityOptions.length > 0) {
                    <div class="scroll-container">
@@ -13,7 +14,7 @@
             </div>
             
             <label for="to">Qyteti mberritjes:</label>
-            <div class="search-container">
+            <div class="search-container" style="margin-bottom: 2%;">
                 <input type="text" id="searchBar" name="to" placeholder="Search..." [(ngModel)]="tripDetails.endCity" (input)="onInputToCity($event)">
                 @if (filteredToCityOptions.length > 0) {
                     <div class="scroll-container">
@@ -25,25 +26,11 @@
             </div>
 
             <label for="dateNisje">Data e nisjes:</label>
-            <div class="search-container">
+            <div class="search-container" style="margin-bottom: 10%;">
                 <input type="date" id="dateNisje" name="dateNisje" [(ngModel)]="tripDetails.dateOfTrip">
             </div>
-
-            <label for="selectedTime">Ora e nisjes:</label>
-            <div class="search-container">
-                <input type="time" id="time" name="time" [(ngModel)]="tripDetails.timeOfTrip">
-            </div>
-
-            <label for="passengers">Pasagjeret:</label>
-            <div class="input-container">
-                <input type="number" id="passengers" name="passengers" min="1" [(ngModel)]="tripDetails.passengerCount">
-            </div>
-
-            <label for="cmimi">Cmimi:</label>
-            <div class="input-container">
-                <input type="number" id="passengers" name="cmimi" min="1" [(ngModel)]="tripDetails.pricePerSeat">
-            </div>
             
-            <button type="submit">Post a ride</button>
+            <button (click)="submitForm()">Gjej Udhetim</button>
         </form>
     </div>
+</div>
