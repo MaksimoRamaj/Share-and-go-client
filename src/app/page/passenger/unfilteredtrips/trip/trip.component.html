@@ -1,24 +1,67 @@
-<div class="container mt-4">
-    <div class="card-custom">
-        <div class="date-header">
-            Sunday, August 4
+
+
+
+<app-navbar></app-navbar> 
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="container mt-5">
+            <div class="trip-card">
+                <div class="date-header">{{trip.date | date : "fullDate"}}</div>
+                <div class="timeline">
+                    <span class="icon">🕒 Nisja: </span><span class="time">{{trip.time}}</span>
+                    <span class="location">{{trip.startCity}}</span>
+                </div>
+                <div class="timeline">
+                    <span class="icon">🕒 Kohezgjatja: </span><span class="time">{{trip.duration | duration}}</span>
+                    <span class="location">Mberritja: {{trip.endCity}}</span>
+                </div>
+                <div class="features">
+                    <div class="price">{{ trip.pricePerSeat | currency }}</div>
+                    <div>Cmimi per nje pasagjer: </div>
+                    <div>Ulese te disponueshme: {{trip.availableSeats}}/{{trip.totalSeats}}</div>
+                </div>
+                <div class="features">
+                    <div>Vleresimi i shoferit</div>
+                    <div>⭐  / 5</div>
+                </div>
+                <div class="features">
+                    <div class="icon">🐾</div><div>Pets Allowed</div>
+                </div>
+                <div class="features">
+                    <div>Mercedes-Benz E 250</div>
+                    <div>Black</div>
+                </div>
+                <div class="profile">
+                    <img [src]="'http://localhost:8080/images/default_profile_picture.jpg'" alt="Profile Image">
+                    <span class="name">{{trip.driverFirstname}} {{trip.driverLastname}}</span>
+                </div>
+                <div class="button-container">
+                    <button class="btn" (click)="toggle()">Ikim se bashku?</button>
+                </div>
+            </div>
         </div>
-        <div class="timeline">
-            <span class="time">21:00</span>
-            <span class="location">White City</span>
-            <span class="price">30 €</span>
-        </div>
-        <div class="timeline" style="color: #6c757d;">
-            <span class="time">04:55</span>
-            <span class="location">Ulcinj</span>
-        </div>
-        <div class="profile">
-            <img src="https://via.placeholder.com/40" alt="Profile Image">
-            <span class="name">Zoran</span>
-        </div>
-        <div class="icon-row">
-            <img src="https://via.placeholder.com/20" alt="Smoking Icon">
-            <img src="https://via.placeholder.com/20" alt="Pet Icon">
-        </div>
+
+
+      </div>
+      <div class="col-md-6">
+        @if (isApplying()) {
+          <app-rezervoform></app-rezervoform>
+        } @else{
+        <div style="height: 100%; width: 100%; margin-top: 8%;" leaflet 
+        [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"></div>
+        }
+      </div>
     </div>
-</div>
+  </div>
+  <div class="container mb-5 mt-5 pt-5">
+      <div class="row mt-5 pt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center text-white"><h2>What our users say</h2></div>
+        <div class="col-md-4"></div>
+      </div>
+      <app-cards></app-cards>
+    </div>
+
+  <app-footer/>  

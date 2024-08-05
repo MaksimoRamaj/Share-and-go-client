@@ -14,6 +14,9 @@
       <img [src]="'http://localhost:8080/images/default_profile_picture.jpg'" alt="Profile Image">
       <span class="name">{{ item.driverFirstname }} {{ item.driverLastname }}</span>
     </div>
+    <div class="button-container">
+      <button class="btn btn-success" (click)="showMore(item.id)">Show more</button>
+    </div>
   </div>
   <div *ngIf="loading" class="loading">Loading...</div>
 </div>

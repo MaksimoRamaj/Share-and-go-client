@@ -1,55 +1,58 @@
-.card-custom {
-    border-radius: 15px;
-    background-color: #f8f9fa;
+.trip-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
     padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-.date-header {
-    font-weight: bold;
-    color: #6c757d;
-    margin-bottom: 15px;
-}
-.timeline {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.timeline .time {
-    color: green;
-    font-weight: bold;
-    margin-right: 10px;
-}
-.timeline .location {
-    font-weight: bold;
-    margin-right: auto;
-}
-.timeline .price {
-    color: green;
-    font-size: 1.2em;
+.trip-card .date-header {
+    font-size: 1.5rem;
     font-weight: bold;
 }
-.profile {
+.trip-card .timeline {
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
-.profile img {
+.trip-card .timeline span {
+    margin-right: 10px;
+}
+.trip-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.trip-card .profile {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.trip-card .profile img {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
     margin-right: 10px;
 }
-.profile .name {
+.trip-card .profile .name {
+    font-size: 1rem;
     font-weight: bold;
 }
-.icon-row {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+.trip-card .button-container {
+    text-align: right;
+    margin-top: 20px;
 }
-.icon-row img {
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
+.trip-card .button-container button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.trip-card .button-container button:hover {
+    background-color: #218838;
+}
+.trip-card .icon {
+    margin-right: 5px;
+}
+.trip-card .features {
+    margin-top: 10px;
 }

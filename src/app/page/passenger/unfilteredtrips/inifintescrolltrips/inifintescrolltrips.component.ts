@@ -6,6 +6,9 @@ import { DurationPipe } from '../../../../shared/pipes/duration.pipe';
 import { InfinitescrollserviceService } from './infinitescrollservice.service';
 import { City } from '../../../../shared/city.model';
 import { MyInterceptor } from '../../../../services/my-interceptor.service';
+import { TripService } from '../../../driver/driverprofile/tripdetails/trip.service';
+import { TripserviceService } from '../trip/tripservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inifintescrolltrips',
@@ -26,7 +29,7 @@ export class InifintescrolltripsComponent implements OnInit {
   items: TripResponse[] = [];
   loading = false;
   page = 0;
-  pageSize = 10;
+  pageSize = 100;
 
   private cityService = inject(InfinitescrollserviceService);
 
@@ -40,7 +43,9 @@ export class InifintescrolltripsComponent implements OnInit {
 
   ready = this.cityService.ready$;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private tripService : TripserviceService,
+    private router : Router
+  ) {}
 
   ngOnInit() {
     this.startCityObs.subscribe((city) => {
@@ -58,6 +63,11 @@ export class InifintescrolltripsComponent implements OnInit {
       }
     });
     this.loadMore();
+  }
+
+  showMore(tripId : number){
+      this.tripService.selectedTripId.set(tripId);
+      this.router.navigate(['reserve-trip/'+tripId]); 
   }
 
   onScroll() {
@@ -85,7 +95,7 @@ export class InifintescrolltripsComponent implements OnInit {
         next: (data) => {
           this.items =  [...data];
           // if(data.length === 0){
-          //   this.page = -1;
+          //   this.page = 0;
           // }
           // this.page++;
           this.loading = false;
