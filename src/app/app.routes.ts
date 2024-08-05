@@ -16,11 +16,16 @@ import { VeturatComponent } from './page/driver/driverprofile/veturat/veturat.co
 import { FindPostComponent } from './forms/find-trip-form/find-post/find-post.component';
 import { TripformComponent } from './forms/find-trip-form/tripform/tripform.component';
 import { InifintescrolltripsComponent } from './page/passenger/unfilteredtrips/inifintescrolltrips/inifintescrolltrips.component';
+import { TripComponent } from './page/passenger/unfilteredtrips/trip/trip.component';
 
 export const routes: Routes = [
     {
         path: "infinte-scroll",
         component: InifintescrolltripsComponent
+    },
+    {
+        path: "reserve-trip/:id",
+        component: TripComponent
     },
     {
         path: "",
