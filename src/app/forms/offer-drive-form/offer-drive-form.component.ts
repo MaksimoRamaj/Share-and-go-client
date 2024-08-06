@@ -86,6 +86,12 @@ export class OfferDriveFormComponent implements OnInit {
         console.log('Status Code:', response.status);  // Accessing the status code
       },
       error: (error: HttpErrorResponse) => {
+        if(error.status === 401) {
+          alert("Gabim ne postimin e udhetimit! Ju lutem provoni perseri.\n" +
+              error.message
+          );
+          this.router.navigate(['driver']);
+        }
         console.error('Error submitting trip details', error);
         console.log('Status Code:', error.status);  // Accessing the status code in case of error
       }

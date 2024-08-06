@@ -1,0 +1,25 @@
+<div class="backdrop" (click)="toggle()"></div>
+<dialog open style="margin-top: 8%;">
+  <h2>Rezervo</h2>
+  <!-- add-car.component.html -->
+<form [formGroup]="addCarForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <div>
+    <label for="make">Make:</label>
+    <input id="make" formControlName="make" type="text" />
+  </div>
+  <div>
+    <label for="model">Model:</label>
+    <input id="model" formControlName="model" type="text" />
+  </div>
+  <div>
+    <label for="licencePlateNumber">Licence Plate Number:</label>
+    <input id="licencePlateNumber" formControlName="licencePlateNumber" type="text" />
+  </div>
+  <div>
+    <label for="carImage">Car Image:</label>
+    <input id="carImage" type="file" (change)="onFileChange($event)" />
+  </div>
+  <button type="submit">Add Car</button>
+</form>
+
+</dialog>
