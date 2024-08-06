@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 import { PackageRequest } from '../../../../../shared/requests/packagerequest.model';
 import { PackageRequestWithId } from '../../../../../shared/requests/pckgReqWithId.model';
 import { TripApplicationRequest } from '../../../../../shared/requests/tripApplicationRequest.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rezervoform',
@@ -44,10 +45,10 @@ export class RezervoformComponent implements OnInit{
       applicationType: '',
       tripId: this.tripService.selectedTripId(),
       numberOfSeats: 0,
-      PackageRequests: []
+      packages: []
     };
 
-    constructor(private tripService : TripserviceService, private http : HttpClient) { }
+    constructor(private tripService : TripserviceService, private http : HttpClient, private router : Router) { }
 
     ngOnInit(): void {
 
@@ -96,18 +97,25 @@ export class RezervoformComponent implements OnInit{
           });
         });
 
-        this.tripApplicationRequest.PackageRequests = this.packages;
+        this.tripApplicationRequest.packages = this.packages;
         this.tripApplicationRequest.applicationType = this.bookingType;
-
-        this.http.post('http://localhost:8080/api/trip-application/apply-to-reserve', this.tripApplicationRequest).subscribe(
+        this.http.post<TripApplicationRequest>('http://localhost:8080/api/trip-application/apply-to-reserve', this.tripApplicationRequest, { observe: 'response' }).subscribe(
           {
-            next: (data) => {
-              console.log(data);
+            next: (response: HttpResponse<TripApplicationRequest>) => {
+              const statusCode = response.status;
+              if (statusCode === 200) {
+                  this.router.navigate(['']);
+              }
             },
             error: (error) => {
-              console.log(error);
+              console.log('Error:', error);
+              if (error.status === 200) {
+                this.router.navigate(['']);
+
+              }
+             
             }
-          } 
-        )
+            }
+        );
     }
 }

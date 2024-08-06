@@ -4,5 +4,5 @@ export interface TripApplicationRequest {
     applicationType: string;
     tripId: number;
     numberOfSeats: number;
-    PackageRequests: PackageRequest[];
+    packages: PackageRequest[];
 }

@@ -17,6 +17,7 @@ import { FindPostComponent } from './forms/find-trip-form/find-post/find-post.co
 import { TripformComponent } from './forms/find-trip-form/tripform/tripform.component';
 import { InifintescrolltripsComponent } from './page/passenger/unfilteredtrips/inifintescrolltrips/inifintescrolltrips.component';
 import { TripComponent } from './page/passenger/unfilteredtrips/trip/trip.component';
+import { SignupComponent } from './page/signup/signup.component';
 
 export const routes: Routes = [
     {
@@ -84,6 +85,10 @@ export const routes: Routes = [
                 component: VeturatComponent
             }
         ]
+    },
+    {
+        path: "sign-up",
+        component: SignupComponent
     },
     {
         path: "login",
