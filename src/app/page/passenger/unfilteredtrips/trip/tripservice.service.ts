@@ -7,7 +7,9 @@ import { TripResponse } from '../../../../shared/responses/tripresponse.model';
 })
 export class TripserviceService{
 
-  selectedTripId = signal<number>(1);  
+  selectedTripId = signal<number>(1);
+  
+  trip !: TripResponse;
 
   isApplying = signal<boolean>(false);
 
@@ -15,7 +17,7 @@ export class TripserviceService{
 
   
   getTripByTripId(tripId : number){
-    return this.http.get<TripResponse>('http://localhost:8080/api/trip/'+tripId);
+    return this.http.get<TripResponse>('http://localhost:8080/api/trip/trip-by-id?id='+tripId);
   }
 
   toggle(){

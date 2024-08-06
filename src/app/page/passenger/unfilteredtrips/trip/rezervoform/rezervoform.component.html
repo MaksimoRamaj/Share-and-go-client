@@ -2,24 +2,88 @@
 <dialog open>
   <h2>Rezervo</h2>
   <form>
+    @if (bookingType != bookingTypes[1]) {
+        <p>
+        <label for="title">Numrin e vendeve: </label>
+        <input type="number" min="1" max="{{actualTrip.availableSeats}}" id="title" name="title" [(ngModel)] = "tripApplicationRequest.numberOfSeats"/>
+        </p>
+    }
     <p>
-      <label for="title">Title</label>
-      <input type="text" id="title" name="title" />
-    </p>
-
-    <p>
-      <label for="summary">Summary</label>
+      <label for="summary">Mesazh per shoferin: </label>
       <textarea id="summary" rows="5" name="summary"></textarea>
     </p>
-
     <p>
-      <label for="due-date">Due Date</label>
-      <input type="date" id="due-date" name="due-date" />
+        <label for="bookingType">Tipi udhetimit:</label>
+        <select id="bookingType" name="bookingType" [(ngModel)]="bookingType">
+            <option [value]="bookingTypes[0]">Pasagjer</option>
+            <option [value]="bookingTypes[1]">Valixhe</option>
+            <option [value]="bookingTypes[2]">Pasagjer me valixhe</option>
+        </select>
     </p>
-
+    <p class="text-white">Valixhe te shtuara: {{luggages.length}}</p>
+    @if (bookingType != bookingTypes[0] && shfaqValixhe === false) {
+        <div class="row">
+            <div class="col-3">
+                <label for="luggageWeight">Pesha e valixhes: <br>(gr)</label>
+                <input type="number" min="1" id="luggageWeight" name="luggageWeight" [(ngModel)] = "luggage.weight" placeholder="100 gr"/>
+            </div>
+            <div class="col-3">
+                <label for="luggageWeight">Gjatesia e valixhes: (cm)</label>
+                <input type="number" min="1" id="luggageWeight" name="luggageWeight" [(ngModel)]= "luggage.length" placeholder="20 cm"/>
+            </div>
+            <div class="col-3">
+                <label for="luggageWeight">Gjeresia e valixhes: (cm)</label>
+                <input type="number" min="1" id="luggageWeight" name="luggageWeight" [(ngModel)]= "luggage.width" placeholder="20 cm"/>
+            </div>
+            <div class="col-3">
+                <label for="luggageWeight">Lartesia e valixhes: (cm)</label>
+                <input type="number" min="1" id="luggageWeight" name="luggageWeight" [(ngModel)]= "luggage.height" placeholder="20 cm" />
+            </div>
+        </div>
+        @if (bookingType == bookingTypes[1]) {
+            <p>
+                <label for="luggageWeight">Cel i marresit: </label>
+                <input type="tel" placeholder="+355 67 66 53 349" id="luggageWeight" name="luggageWeight" [(ngModel)] = "luggage.receiverPhoneNumber" />
+            </p>
+        }
+        
+        <button type="button" (click)="shtoValixhe()" style="border: 2px solid #818181;margin-top: 2%;">Shto Valixhe</button>
+        <button type="button" (click)="shfaqValixhef()" style="margin-left: 32%; border: 2px solid #818181;margin-top: 2%;" class="button-hoover">Shfaq valixhet</button>    
+    
+    }
+    @if(shfaqValixhe === true){
+        @for (lugg of luggages; track lugg.id) {
+            <div class="row">
+                <div class="col-3">
+                    <label for="luggageWeight">Pesha e valixhes: <br>(gr)</label>
+                    <input value="{{lugg.weight}}" disabled="true" type="number" min="1" id="luggageWeight" name="luggageWeight"/>
+                </div>
+                <div class="col-3">
+                    <label for="luggageWeight">Gjatesia e valixhes: (cm)</label>
+                    <input value="{{lugg.length}}"disabled="true" type="number" min="1" id="luggageWeight" name="luggageWeight" placeholder="20 cm"/>
+                </div>
+                <div class="col-3">
+                    <label for="luggageWeight">Gjeresia e valixhes: (cm)</label>
+                    <input value="{{lugg.width}}" disabled="true" type="number" min="1" id="luggageWeight" name="luggageWeight" placeholder="20 cm"/>
+                </div>
+                <div class="col-3">
+                    <label for="luggageWeight">Lartesia e valixhes: (cm)</label>
+                    <input value="{{lugg.height}}" disabled="true" type="number" min="1" id="luggageWeight" name="luggageWeight" placeholder="20 cm" />
+                </div>
+                <div class="col-9">
+                    <label for="luggageWeight">Cel i marresit: </label>
+                    <input disabled="true" value="{{lugg.receiverPhoneNumber}}" type="tel" placeholder="+355 67 66 53 349" id="luggageWeight" name="luggageWeight" [(ngModel)] = "luggage.receiverPhoneNumber" />
+                </div>
+                <div class="col-3">
+                    <button type= "button" style="border: 1px solid white; margin-top: 23%;padding-top: 3%;padding-bottom: 3%;" (click)="fshiValixhee(lugg.id)"> Fshi </button>
+                </div>    
+            </div>
+        }
+        <button type="button" (click)="shfaqValixhef()" style="margin-left: 32%; border: 2px solid #818181;margin-top: 2%;" class="button-hoover">Kthehu pas</button>    
+    }
     <p class="actions">
-      <button type="button" (click)="toggle()">Cancel</button>
-      <button type="submit">Create</button>
+      <button type="button" (click)="toggle()">Anullo</button>
+      <button type="button" id=1 (click)="rezervo()">Dergo</button>
     </p>
   </form>
 </dialog>

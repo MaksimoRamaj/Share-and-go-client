@@ -66,16 +66,25 @@ button[type="button"]:active {
   color: #ffffff;
 }
 
-button[type="submit"] {
+button[id="1"] {
   background-color: #ffffff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  color: black;
 }
 
 button[type="submit"]:hover,
 button[type="submit"]:active {
   background-color: #ffffff;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+button[id="1"]:hover,
+button[id="1"]:active {
+  background-color: #ffffff;
+  box-shadow: 0 1px 6px rgba(97, 97, 97, 0.3);
+  color: black;
 }
 
 @media (min-width: 768px) {
