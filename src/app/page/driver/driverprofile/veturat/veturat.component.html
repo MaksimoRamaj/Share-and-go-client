@@ -1,54 +1,55 @@
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top" src="../../../../../assets/images/audi.png" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+<div class="container mt-4" id="top-container">
+    @if (isCarAddedFormActive()) {
+        <app-addcarform></app-addcarform>
+    }@else if (
+        isCarRemovedFormActive()
+    ) {
+        <app-removecarform></app-removecarform>
+    }@else {
+
+            <div class="row">
+                @for (car of cars; track car.id) {
+                    <div class="col-md-4" (click)="removeCar(car)">
+                        <div class="card" style="margin-bottom: 20%;">
+                            <img class="card-img-top" [src]="'http://localhost:8080/images/'+car.carImageURL"
+                                alt="Car Image">
+                            <div class="card-body">
+                                <p class="card-text"><i class="fa fa-key"> Targa:</i> {{car.licencePlateNumber}} </p>
+                                <p class="card-text"><i class="fa fa-car"> Marka: </i> {{car.make}}</p>
+                                <p class="card-text"><i class="fa fa-tags"> Model: </i> {{car.model}}</p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top" src="../../../../../assets/images/audi.png" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+            <div class="mt-5">
+                <button class="edit-btn" (click)="toggleAddCarForm()">Shto makine</button>
+                <br><br><p><i>Kliko mbi makine per ta hequr nga lista!</i></p>
+            </div>   
+        
+        
+        <!-- @for (row of rows$|async; track $index) {
+            <div class="row">
+                @for (col of noOfCols(); track $index) {
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="../../../../../assets/images/audi.png" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text"><i class="fa fa-key"> Id:</i> {{row.valueOf}} </p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top" src="../../../../../assets/images/audi.png" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top" src="../../../../../assets/images/audi.png" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top" src="../../../../../assets/images/audi.png" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top" src="../../../../../assets/images/audi.png" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="mt-5">
+                <button class="edit-btn" (click)="toggleAddCarForm()">Shto makine</button>
+                <button class="edit-btn" style="margin-left: 2%;" (click)="toggleRemoveCarForm()">Fshi makine</button>
+            </div>   
+        } -->
+} 
 </div>
+    

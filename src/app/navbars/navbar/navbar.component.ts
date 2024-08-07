@@ -40,4 +40,12 @@ export class NavbarComponent implements OnInit{
         this.router.navigate(["passenger"]);
     }
 
+    signUp(){
+        this.router.navigate(['sign-up']);
+    }
+
+    balance(){
+        this.router.navigate(['balance']);
+    }
+
 }

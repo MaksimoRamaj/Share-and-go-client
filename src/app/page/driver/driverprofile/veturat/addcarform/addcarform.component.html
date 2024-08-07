@@ -1,0 +1,24 @@
+<div class="backdrop" (click)="toggle()"></div>
+<dialog open style="margin-top: 8%;">
+  <h2 style="margin-bottom: 5%;">Shto makine</h2>
+<form [formGroup]="addCarForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <div>
+    <label for="make">Marka:</label>
+    <input id="make" formControlName="make" type="text" placeholder="Audi"/>
+  </div>
+  <div>
+    <label for="model">Modeli:</label>
+    <input id="model" formControlName="model" type="text" placeholder="A6"/>
+  </div>
+  <div>
+    <label for="licencePlateNumber">Targa:</label>
+    <input id="licencePlateNumber" formControlName="licencePlateNumber" type="text" placeholder="AB124KM" />
+  </div>
+  <div>
+    <label for="carImage">Car Image:</label>
+    <input id="carImage" type="file" (change)="onFileChange($event)" />
+  </div>
+  <button type="submit" style="margin-left: 73%;margin-top: 4%;">Add Car</button>
+</form>
+
+</dialog>

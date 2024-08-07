@@ -37,6 +37,7 @@ export class TripComponent implements OnInit{
       {
         next: (data) => {
           this.trip = data;
+          this.tripService.trip = data;
           this.startCity = this.findCityByName(data.startCity);
           this.endCity = this.findCityByName(data.endCity);
           this.updateRoutingControl()
