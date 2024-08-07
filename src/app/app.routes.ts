@@ -18,8 +18,13 @@ import { TripformComponent } from './forms/find-trip-form/tripform/tripform.comp
 import { InifintescrolltripsComponent } from './page/passenger/unfilteredtrips/inifintescrolltrips/inifintescrolltrips.component';
 import { TripComponent } from './page/passenger/unfilteredtrips/trip/trip.component';
 import { SignupComponent } from './page/signup/signup.component';
+import { BalanceComponent } from './page/balance/balance/balance.component';
 
 export const routes: Routes = [
+    {
+        path: "balance",
+        component: BalanceComponent,
+    },
     {
         path: "infinte-scroll",
         component: InifintescrolltripsComponent
