@@ -9,8 +9,8 @@
 
             <div class="row">
                 @for (car of cars; track car.id) {
-                    <div class="col-md-4">
-                        <div class="card">
+                    <div class="col-md-4" (click)="removeCar(car)">
+                        <div class="card" style="margin-bottom: 20%;">
                             <img class="card-img-top" [src]="'http://localhost:8080/images/'+car.carImageURL"
                                 alt="Car Image">
                             <div class="card-body">
@@ -25,7 +25,7 @@
             </div>
             <div class="mt-5">
                 <button class="edit-btn" (click)="toggleAddCarForm()">Shto makine</button>
-                <button class="edit-btn" style="margin-left: 2%;" (click)="toggleRemoveCarForm()">Fshi makine</button>
+                <br><br><p><i>Kliko mbi makine per ta hequr nga lista!</i></p>
             </div>   
         
         

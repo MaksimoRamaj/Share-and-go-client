@@ -1,11 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { CarResponse } from '../../../../shared/responses/carresponse.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VeturatService {
+
+  carToBeRemoved : WritableSignal<CarResponse> = signal({} as CarResponse);
+
+  updateCars = new BehaviorSubject<boolean>(false);
+  updateCars$ = this.updateCars.asObservable();
 
   constructor( private http : HttpClient) { }
 

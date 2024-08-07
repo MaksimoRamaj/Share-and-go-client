@@ -50,11 +50,26 @@ export class AddcarformComponent {
       formData.append('carImage', this.carImage);
     }
 
-    this.http.post('', formData).subscribe(response => {
-      console.log('Car added successfully', response);
-    }, error => {
-      console.error('Error adding car', error);
-    });
+    this.http.post('http://localhost:8080/api/car/add-car', formData).subscribe(
+      {
+        next: (response) => {
+          alert('Car added successfully');
+          this.toggle();
+        },
+        error: (error) => {
+          if(error.status === 400){
+            alert('Car already exists');
+          }
+          else if(error.status === 403){
+            alert('You are not authorized to add a car');
+          }
+          else if(error.status === 200){
+            alert('Makina u shtua me sukses!');
+            this.toggle();
+            this.veturatService.updateCars.next(true);
+          }
+      }  }
+    );
   }
 }
 

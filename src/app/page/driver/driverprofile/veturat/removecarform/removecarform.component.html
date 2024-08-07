@@ -1,8 +1,17 @@
-
 <div class="backdrop" (click)="toggle()"></div>
 <dialog open style="margin-top: 8%;">
-  <h2>Rezervo</h2>
-  <form>
-   
-  </form>
+  <h2 style="margin-bottom: 5%;">Fshi makine</h2>
+    <div class="card" style="margin-bottom: 5%;">
+      <img class="card-img-top" src="../../../../../assets/images/audi.png"
+          alt="Car Image">
+      <div class="card-body">
+          <p class="card-text"><i class="fa fa-key"> Targa:</i> {{cars().licencePlateNumber}} </p>
+          <p class="card-text"><i class="fa fa-car"> Marka: </i> {{cars().make}} </p>
+          <p class="card-text"><i class="fa fa-tags"> Model: </i> {{cars().model}}</p>
+      </div>
+    </div>
+<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <button type="submit" style="margin-left: 73%;margin-top: 4%;">Konfirmo</button>
+</form>
+
 </dialog>

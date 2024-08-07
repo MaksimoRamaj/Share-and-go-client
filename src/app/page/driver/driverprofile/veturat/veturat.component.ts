@@ -29,14 +29,29 @@ export class VeturatComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.veturatService.fetchCars().subscribe({
+    this.veturatService.updateCars$.subscribe({
+      next: (response) => {
+        if(response == true){
+         this.fetchCars();
+        }
+      }
+    });
+      this.fetchCars();
+  }
+
+    fetchCars(){
+      this.veturatService.fetchCars().subscribe({
         next: (response) => {
+          console.log(response);
           this.cars = response;
           this.rows.next(this.noOfRows());
         },
         error: (error) => {
           console.error(error);
-        }}
+        },
+        complete: () => {console.log('completed') 
+      }
+    }
     )
     }
 
@@ -63,5 +78,10 @@ export class VeturatComponent implements OnInit {
       if (topContainer) {
           topContainer.scrollIntoView({ behavior: 'smooth' });
       }
+    }
+
+    removeCar(car : CarResponse){
+      this.veturatService.carToBeRemoved.set(car);
+      this.toggleRemoveCarForm();
     }
 }
