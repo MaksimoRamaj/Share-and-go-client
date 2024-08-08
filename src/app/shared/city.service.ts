@@ -30,5 +30,6 @@ export class CityService {
 
   updateDistance(distance: number): void {
     this.distanceSubject.next(distance);
+    console.log(distance + "updated");
   }
 }

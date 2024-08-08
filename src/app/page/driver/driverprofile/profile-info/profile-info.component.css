@@ -13,7 +13,7 @@
     height: 150px;
     border-radius: 50%;
     overflow: hidden;
-    position: relative;
+    /* position: relative; */
     margin-bottom: 15px;
     margin-left: 20%;
 }
@@ -23,7 +23,7 @@
     object-fit: cover;
 }
 .profile-pic .edit-icon {
-    position: absolute;
+    /* position: absolute; */
     bottom: 10px;
     right: 10px;
     background-color: #000;

@@ -4,6 +4,7 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { CityService } from '../shared/city.service';
 import { City } from '../shared/city.model';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -50,14 +51,34 @@ export class MapComponent implements OnInit {
         L.latLng(40.7058, 19.9522), 
         L.latLng(40.6275, 20.9897)
       ],
-      routeWhileDragging: true
+      routeWhileDragging: true,
+      showAlternatives: true,
+      altLineOptions: {
+        styles: [
+          {color: 'black', opacity: 0.15, weight: 9},
+          {color: 'white', opacity: 0.8, weight: 6},
+          {color: 'blue', opacity: 0.5, weight: 2}
+        ],
+        extendToWaypoints: true,
+        missingRouteTolerance: 10
+      }
     }).on('routesfound', (e) => {
       const routes = e.routes;
-      const summary = routes[0].summary;
-      console.log(`Distance: ${summary.totalDistance / 1000} km`);
-      console.log(`Time: ${Math.round(summary.totalTime / 60)} minutes`);
-      this.cityService.updateDistance(summary.totalDistance / 1000);
-      this.cityService.updateDuration(Math.round(summary.totalTime / 60));
+      console.log(typeof(e));
+      
+
+      // Process and display all routes
+      routes.forEach((route : any, index : number) => {
+        const summary = route.summary;
+        console.log(`Route ${index + 1}:`);
+        console.log(`Distance: ${summary.totalDistance / 1000} km`);
+        console.log(`Time: ${Math.round(summary.totalTime / 60)} minutes`);
+
+        if (index === 0) {  
+          this.cityService.updateDistance(summary.totalDistance / 1000);
+          this.cityService.updateDuration(Math.round(summary.totalTime / 60));
+        }
+      });
     }).addTo(this.map);
   }
 

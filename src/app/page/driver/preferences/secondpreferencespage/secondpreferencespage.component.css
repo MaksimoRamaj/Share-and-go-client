@@ -14,125 +14,6 @@ body {
     height: 100vh;
     margin: 0;
 }
-/* styles.css */
-body {
-    background: linear-gradient(to right, #4e54c8, #8f94fb);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-}
-
-.form-container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-    color: #333;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.input-container {
-    margin-bottom: 20px;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="time"],
-input[type="number"],
-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-    color: #333;
-    transition: border-color 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus,
-input[type="number"]:focus,
-select:focus {
-    border-color: #8f94fb;
-    outline: none;
-}
-
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4e54c8;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-button:hover {
-    background-color: #8f94fb;
-    color: white;
-}
-
-.search-container {
-    position: relative;
-}
-
-#searchBar {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    color: #333;
-    transition: border-color 0.3s;
-}
-
-#searchBar:focus {
-    border-color: #8f94fb;
-    outline: none;
-}
-
-.scroll-container {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: rgb(37, 37, 37);
-    border: 1px solid #ccc;
-    border-top: none;
-    max-height: 150px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.scroll-container div {
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.scroll-container div:hover {
-    background-color: #4b4b4b;
-}
 
 
 .form-container {
@@ -178,11 +59,12 @@ select {
 }
 
 button {
+    margin: 2%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #000000;
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
