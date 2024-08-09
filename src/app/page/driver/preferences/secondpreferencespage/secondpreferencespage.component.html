@@ -1,0 +1,52 @@
+<app-navbar></app-navbar> 
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-md-6">
+
+            <div class="form-container ml-5" id="searchForm">
+                <form>  
+
+                    <div>
+                        <label for="select">Zgjidh makinen: </label>
+                        <select id="select" [(ngModel)]="selectedCar" placeholder="Select ..." name="select">
+                            <option value="" disabled selected>Zgjidh makinen</option>
+                            @for (car of cars; track car.licencePlateNumber) {
+                          <option [ngValue]="car">
+                            {{ car.licencePlateNumber }}
+                          </option>
+                        }
+                        </select>
+                      </div>
+
+                        @if(preferences.length > 0){
+                            @for(pref of preferences; track pref){
+                                <label for="pref">Preferenca: </label>
+                                <div class="search-container">
+                                    <input type="text" id="searchBar" name="pref" placeholder="{{pref.title}}" disabled />
+                                    <button (click)="removePreference(pref)">Fshi</button>
+                                </div>
+                            }
+                            <label for="from">Preferenca: </label>
+                            <div class="search-container">
+                                <input type="text" id="searchBar" name="from" placeholder="Add ..." [(ngModel)] = "nextPreference" />
+                            </div>
+                            <button (click)="addPreference()">Shto</button>
+                        }@else{
+                            <label for="from">Preferenca: </label>
+                            <div class="search-container">
+                                <input type="text" id="searchBar" name="from" placeholder="Add ..." [(ngModel)] = "nextPreference" />
+                            </div>
+                            <button (click)="addPreference()">Shto</button>
+                        }    
+                    
+                    <button type="submit" (click)="submitForm()">Dergoje</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <app-veturat></app-veturat>
+        </div>
+    </div>
+
+<app-footer/>  

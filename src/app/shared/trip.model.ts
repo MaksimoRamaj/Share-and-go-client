@@ -10,4 +10,5 @@ export interface Trip{
     passengerCount: number;
     duration: number;
     distance: number;
+    carId?: number;
 }

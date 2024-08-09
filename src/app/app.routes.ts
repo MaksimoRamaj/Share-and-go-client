@@ -19,6 +19,7 @@ import { InifintescrolltripsComponent } from './page/passenger/unfilteredtrips/i
 import { TripComponent } from './page/passenger/unfilteredtrips/trip/trip.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { BalanceComponent } from './page/balance/balance/balance.component';
+import { SecondpreferencespageComponent } from './page/driver/preferences/secondpreferencespage/secondpreferencespage.component';
 
 export const routes: Routes = [
     {
@@ -62,6 +63,10 @@ export const routes: Routes = [
                 component: PreferencesComponent,
             },    
         ]
+    },
+    {
+        path: "driver-preferences",
+        component: SecondpreferencespageComponent
     },
     {
         path:"passenger",

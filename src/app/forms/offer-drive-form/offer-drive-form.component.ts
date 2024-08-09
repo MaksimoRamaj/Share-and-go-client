@@ -8,6 +8,7 @@ import { City } from '../../shared/city.model';
 import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { MyInterceptor } from '../../services/my-interceptor.service';
 import { Router } from '@angular/router';
+import { OfferDriveFormComponentCssService } from './offer-drive-form.component.css.service';
 
 @Component({
   selector: 'app-offer-drive-form',
@@ -28,6 +29,7 @@ export class OfferDriveFormComponent implements OnInit {
   private cityService = inject(CityService);
   private http = inject(HttpClient);
   private router = inject(Router);
+  private offerDriverService = inject(OfferDriveFormComponentCssService); 
 
   bookingTypes = Object.values(BookingType);
 
@@ -80,23 +82,8 @@ export class OfferDriveFormComponent implements OnInit {
 
   submitForm(): void {
     const url = 'http://localhost:8080/api/trip/create-trip';  // Replace with your actual API endpoint
-    this.http.post(url, this.tripDetails,{observe: 'response'}).subscribe({
-      next: (response: HttpResponse<any>) => {
-        console.log('Trip details submitted successfully', response);
-        console.log('Status Code:', response.status);  // Accessing the status code
-      },
-      error: (error: HttpErrorResponse) => {
-        if(error.status === 401) {
-          alert("Gabim ne postimin e udhetimit! Ju lutem provoni perseri.\n" +
-              error.message
-          );
-          this.router.navigate(['driver']);
-        }
-        console.error('Error submitting trip details', error);
-        console.log('Status Code:', error.status);  // Accessing the status code in case of error
-      }
-    });
-    //to be added to next 
-    this.router.navigate(['driver/preferences']);
+    this.offerDriverService.tripDet.next(this.tripDetails);
+   
+    this.router.navigate(['driver-preferences']);
   }
 }

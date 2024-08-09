@@ -20,7 +20,7 @@ import { InifintescrolltripsComponent } from "../passenger/unfilteredtrips/inifi
 })
 export class HomepageComponent implements OnInit {
 
-    isLoggegIn = this.authService.isLoggedInS;
+    isLoggegIn = signal(false);
     availableTrips = signal(this.onTripsAvailable());
     
     constructor(private authService : AuthService) {
@@ -28,7 +28,12 @@ export class HomepageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      
+      this.authService.isAuthenticated$.subscribe({
+        next: (isAuthenticated: boolean) => {
+          this.isLoggegIn.set(isAuthenticated);
+          console.log('Is authenticated:', isAuthenticated);
+        }
+      });
     }
 
     onTripsAvailable() {
