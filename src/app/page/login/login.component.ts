@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth-service.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
   
     loginObj: any = {
       email : '',
@@ -30,8 +31,9 @@ export class LoginComponent {
             alert('Te dhenat per userin nuk u gjeten ose fushat e paplotesuara!');
           }
           else if(response.status === 200){
-            localStorage.setItem('loginToken', response.body.token);
-            this.authService.login();
+            this.authService.login(response.body.token);
+            // localStorage.setItem('loginToken', response.body.token);
+            // this.authService.login();
             this.router.navigate(['/']);
           }
         },

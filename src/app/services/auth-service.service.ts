@@ -1,27 +1,33 @@
 import { Injectable, signal } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private isAuthenticated = false;
-  isLoggedInS = signal(false);
+   isAuthenticated = new BehaviorSubject<boolean>(this.isAuth());
+   isAuthenticated$ = this.isAuthenticated.asObservable();
 
   constructor() {}
 
-  login() {
-    this.isAuthenticated = true;
-    this.isLoggedInS.set(true);
+  login(token : string) {
+        localStorage.setItem('loginToken', token);
+        this.isAuthenticated.next(true);
   }
 
   logout() {
-    this.isAuthenticated = false;
-    this.isLoggedInS.set(false);
-    localStorage.removeItem('loginToken');
+        localStorage.removeItem('loginToken');
+        this.isAuthenticated.next(false);
   }
 
-  isLoggedIn(): boolean {
-    return this.isAuthenticated;
+  isAuth() {
+    if(localStorage.getItem('loginToken') !== null){
+      return true;
+    }
+    return false;
   }
+
 }
+
+
