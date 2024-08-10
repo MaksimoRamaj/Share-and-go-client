@@ -16,7 +16,6 @@ import { AsyncPipe } from '@angular/common';
 })
 export class VeturatComponent implements OnInit {
 
-
   cars : CarResponse[] = [];
   
   isCarAddedFormActive = this.veturatService.isCarAddedFormActive;

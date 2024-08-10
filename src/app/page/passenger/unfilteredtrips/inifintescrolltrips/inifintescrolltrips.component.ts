@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { TripResponse } from '../../../../shared/responses/tripresponse.model';
 import { DurationPipe } from '../../../../shared/pipes/duration.pipe';
 import { InfinitescrollserviceService } from './infinitescrollservice.service';
@@ -32,6 +32,8 @@ export class InifintescrolltripsComponent implements OnInit {
   pageSize = 100;
 
   private cityService = inject(InfinitescrollserviceService);
+
+  hasTrips = this.cityService.hasTrips;
 
   startCityObs = this.cityService.startCity$;  
   endCityObs = this.cityService.endCity$;
@@ -106,14 +108,20 @@ export class InifintescrolltripsComponent implements OnInit {
         }
       });
     }else{
-        this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/all-trips?page=${this.page}&size=${this.pageSize}`)
+        this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/all-trips?page=${this.page}&size=${this.pageSize}`,{observe: 'response'})
           .subscribe({
             next: (data) => {
-              this.items = [...data];
+              if(data.status === 204){
+                console.log(data.body);
+                console.log('no data');
+              }else{
+              this.items = [...data.body!];
+              this.cityService.hasTrips.set(true);
               // if(data.length === 0){
               //   this.page = -1;
               // }
               // this.page++;
+              }
               this.loading = false;
             },
             error: (err) => {

@@ -9,6 +9,8 @@ import { MapComponent } from '../../map/map.component';
 import { AuthService } from '../../services/auth-service.service';
 import { UnfilteredtripsComponent } from "../passenger/unfilteredtrips/unfilteredtrips.component";
 import { InifintescrolltripsComponent } from "../passenger/unfilteredtrips/inifintescrolltrips/inifintescrolltrips.component";
+import { InfinitescrollserviceService } from '../passenger/unfilteredtrips/inifintescrolltrips/infinitescrollservice.service';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-homepage',
@@ -21,9 +23,9 @@ import { InifintescrolltripsComponent } from "../passenger/unfilteredtrips/inifi
 export class HomepageComponent implements OnInit {
 
     isLoggegIn = signal(false);
-    availableTrips = signal(this.onTripsAvailable());
     
-    constructor(private authService : AuthService) {
+    
+    constructor(private authService : AuthService,private infintescrollserviceService : InfinitescrollserviceService, private http : HttpClient) { 
         
     }
 
@@ -32,12 +34,26 @@ export class HomepageComponent implements OnInit {
         next: (isAuthenticated: boolean) => {
           this.isLoggegIn.set(isAuthenticated);
           console.log('Is authenticated:', isAuthenticated);
+          if(isAuthenticated){
+            console.log('Fetching userprofile');
+            this.fetchUserProfile();
+          }
         }
       });
     }
 
-    onTripsAvailable() {
-        return true;
+    fetchUserProfile(){
+      this.http.get('http://localhost:8080/api/user/auth-user',{observe: 'response'}).subscribe({
+        next: (response: HttpResponse<any>) => {
+          if(response.status === 200){
+            localStorage.setItem('userprofile',JSON.stringify(response.body));
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log('Status Code:', error.status);  // Accessing the status code in case of error
+        },
+
+      });
     }
 
     

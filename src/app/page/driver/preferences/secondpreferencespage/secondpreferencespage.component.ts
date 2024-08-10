@@ -31,13 +31,20 @@ export class SecondpreferencespageComponent implements OnInit{
   constructor(private veturatService : VeturatService
     ,private http : HttpClient,private router : Router, private offerdriveService : OfferDriveFormComponentCssService) { }
 
-  ngOnInit(): void {
-    this.veturatService.fetchCars().subscribe({
+  ngOnInit(): void {  
+
+    this.veturatService.updateCars$.subscribe({
       next: (response) => {
-        this.cars = response;
-      },
-      error: (error) => {
-        console.error(error);
+        if(response == true){
+          this.veturatService.fetchCars().subscribe({
+            next: (response) => {
+              this.cars = response;
+            },
+            error: (error) => {
+              console.error(error);
+            }
+          });
+        }
       }
     });
   }
@@ -72,12 +79,12 @@ export class SecondpreferencespageComponent implements OnInit{
             console.log('Status Code:', response.status);  // Accessing the status code
           },
           error: (error: HttpErrorResponse) => {
-            if(error.status === 401) {
+            if(error.status == 401) {
               alert("Gabim ne postimin e udhetimit! Ju lutem provoni perseri.\n" +
                   error.message
               );
               this.router.navigate(['driver']);
-            }else if(error.status === 200){
+            }else if(error.status == 200){
               this.http.post('http://localhost:8080/api/preference/choose-preferences', 
                 this.preferences).subscribe({
                   next: data => {

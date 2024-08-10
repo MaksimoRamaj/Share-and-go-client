@@ -12,6 +12,7 @@ import { InfinitescrollserviceService } from '../../../passenger/unfilteredtrips
 import { City } from '../../../../shared/city.model';
 import { HttpClient } from '@angular/common/http';
 import { TripserviceService } from '../../../passenger/unfilteredtrips/trip/tripservice.service';
+import { PreferenceResponse } from '../../../../shared/responses/preferenceresponse.model';
 
 @Component({
   selector: 'app-triplist',
@@ -23,16 +24,14 @@ import { TripserviceService } from '../../../passenger/unfilteredtrips/trip/trip
 export class TriplistComponent {
 
   items: TripResponse[] = [];
+  preferences : PreferenceResponse[] = [];
   loading = false;
   page = 0;
   pageSize = 100;
 
   private cityService = inject(InfinitescrollserviceService);
 
-  startCityObs = this.cityService.startCity$;  
-  endCityObs = this.cityService.endCity$;
-  dateObs = this.cityService.date$;
-
+ 
   startCity !: City | null;
   endCity !: City | null;
   date !: string | null;
@@ -46,15 +45,6 @@ export class TriplistComponent {
   ) {}
 
   ngOnInit() {
-    this.startCityObs.subscribe((city) => {
-      this.startCity = city;
-    });
-    this.endCityObs.subscribe((city) => {
-     this.endCity = city;
-    });
-    this.dateObs.subscribe((date) => {
-      this.date = date;
-    });
     this.ready.subscribe((value) => {
       if(value){
         this.loadMore();
@@ -65,6 +55,22 @@ export class TriplistComponent {
 
   showMore(tripId : number){
       this.show = tripId;
+
+      this.http.get<PreferenceResponse[]>('http://localhost:8080/api/preference/preferences-by-trip-id?id='+tripId,
+      {observe: 'response'}).subscribe({
+        next: (response) => {
+          if(response.status === 200){
+            if(response.body){
+              this.preferences = response.body;
+            }
+          }else if(response.status === 204){
+            console.log('No preferences found for this trip');
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
   }
 
   showLess(){
@@ -87,34 +93,15 @@ export class TriplistComponent {
     }
 
     this.loading = true;
-    console.log(this.startCity);
-    console.log(this.endCity);
-    if(this.startCity?.name !== '' && this.endCity?.name !=='' && this.date!==''){
-      console.log('filtered');
-      this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/filtered-trips?page=${this.page}&size=${this.pageSize}&startCity=${this.startCity?.name}&endCity=${this.endCity?.name}&date=${this.date}`)
-      .subscribe({
-        next: (data) => {
-          this.items =  [...data];
-          // if(data.length === 0){
-          //   this.page = 0;
-          // }
-          // this.page++;
-          this.loading = false;
-        },
-        error: (err) => {
-          console.error('Error loading data', err);
-          this.loading = false;
-        }
-      });
-    }else{
-        this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/all-trips?page=${this.page}&size=${this.pageSize}`)
+    
+        this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/trips-as-driver`, {observe: 'response'})
           .subscribe({
             next: (data) => {
-              this.items = [...data];
-              // if(data.length === 0){
-              //   this.page = -1;
-              // }
-              // this.page++;
+              if(data.body){
+                this.items = [...data.body];
+              }else if(data.status === 204){
+                console.log('No trips found');
+              }
               this.loading = false;
             },
             error: (err) => {
@@ -124,5 +111,5 @@ export class TriplistComponent {
           });
   }
 }
-}
+
 

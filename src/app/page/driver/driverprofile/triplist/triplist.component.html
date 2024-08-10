@@ -5,7 +5,7 @@
     <div class="timeline">
       <span class="time">Nisja ne : {{ item.time }}</span>
       <span class="location"> nga {{ item.startCity }}</span>
-      <span class="price">{{ item.pricePerSeat | currency }}</span>
+      <span class="price">{{ item.pricePerSeat | currency:'ALL'}}</span>
     </div>
     <div class="timeline" style="color: #6c757d;">
       <span class="location">Kohezgjatja e parashikuar per {{ item.endCity }}: </span>
@@ -17,12 +17,16 @@
         
       </div>
       <div class="timeline" style="color: #6c757d;">
-        <span class="location"> Preferencat </span>
-        
+        <div class="location"> Preferencat </div>
       </div>
+      <div style="margin-bottom: 4%;">
+        @for (preference of preferences; track preference.title) {
+          <div style="color:  #6c757d;"> <b><i class="fa fa-arrow-right">   {{ preference.title }} </i></b></div> 
+        }
+      </div>  
 
     }
-    <div class="button-container">
+    <div class="button-container margin-top: 10%;">
       @if (show != item.id) {
       <button class="btn btn-success" (click)="showMore(item.id)">Show more</button>
       }@else {

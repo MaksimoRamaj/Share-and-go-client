@@ -6,18 +6,19 @@ import { AuthService } from '../services/auth-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, OnInit {
+export class AuthGuard implements CanActivate{
 
   isAuthenticated : boolean = false;
   
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
 
-  ngOnInit(): void {
     this.authService.isAuthenticated$.subscribe({
       next: (isAuthenticated: boolean) => {
         this.isAuthenticated = isAuthenticated;
+        console.log('Is authenticated inside authguard:', isAuthenticated);
       }
     });
+     
   }
 
   canActivate(
