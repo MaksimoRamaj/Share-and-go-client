@@ -32,7 +32,7 @@
                 <div class="input">
 
                     <i class="fa fa-user"></i>
-                  <input type="text" class="form-control" placeholder="Emer Mbiemer">
+                  <input type="text" class="form-control" placeholder="Emer Mbiemer" [(ngModel)]="recharegeRequest.nameOnCard">
                   
                 </div> 
                 
@@ -40,7 +40,7 @@
                 <div class="input">
 
                   <i class="fa fa-credit-card"></i>
-                  <input type="text" class="form-control" placeholder="0000 0000 0000 0000">
+                  <input type="text" class="form-control" placeholder="0000 0000 0000 0000" [(ngModel)]="recharegeRequest.cardNumber">
                   
                 </div> 
 
@@ -52,7 +52,7 @@
                     <div class="input">
 
                       <i class="fa fa-calendar"></i>
-                      <input type="text" class="form-control" placeholder="MM/YY">
+                      <input type="text" class="form-control" placeholder="MM/YY" [(ngModel)]="recharegeRequest.expirationDate">
                       
                     </div> 
                     
@@ -65,7 +65,7 @@
                     <div class="input">
 
                       <i class="fa fa-lock"></i>
-                      <input type="text" class="form-control" placeholder="000">
+                      <input type="text" class="form-control" placeholder="000" [(ngModel)]="recharegeRequest.cvv">
                       
                     </div> 
                     
@@ -78,12 +78,12 @@
                     <div class="input">
 
                         <i class="fa fa-cash-register"></i>
-                      <input type="text" class="form-control" placeholder="000">
+                      <input type="text" class="form-control" placeholder="000" [(ngModel)]="recharegeRequest.amount">
                       
                     </div> 
                 </div>  
                
-                    <button class="btn btn-primary btn-block free-button" style="margin-top: 10%;padding: 0%;">Rimbush</button> 
+                    <button class="btn btn-primary btn-block free-button" style="margin-top: 10%;padding: 0%;" (click)="rimbush()">Rimbush</button> 
 
                     
                   </div>

@@ -11,9 +11,9 @@
                         <select id="select" [(ngModel)]="selectedCar" placeholder="Select ..." name="select">
                             <option value="" disabled selected>Zgjidh makinen</option>
                             @for (car of cars; track car.licencePlateNumber) {
-                          <option [ngValue]="car">
-                            {{ car.licencePlateNumber }}
-                          </option>
+                                <option [ngValue]="car">
+                                    {{ car.licencePlateNumber }}
+                                </option>
                         }
                         </select>
                       </div>

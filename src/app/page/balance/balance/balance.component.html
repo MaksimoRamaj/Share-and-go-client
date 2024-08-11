@@ -9,10 +9,8 @@
                         <div class="col-md-8 ps-0 ">
                             <p class="ps-3 textmuted fw-bold h6 mb-0">Balanca</p>
                             <p class="h1 fw-bold d-flex">
-                                ALL 84,254
-                                <span class="textmuted">.58</span>
+                                 {{accountBalance | currency:'ALL '}}
                             </p>
-                            <p class="ms-3 px-2 bg-green">+10% since last month</p>
                         </div>
                         <div class="col-md-4">
                             <p class="p-blue">
@@ -26,7 +24,7 @@
                                 Fonde te bllokuara
                             </p>
                             <p class="fw-bold">
-                                ALL 00<span class="textmuted">.00</span>
+                                {{onWaitingTotal() | currency:'ALL '}}
                             </p>
                         </div>
                     </div>
