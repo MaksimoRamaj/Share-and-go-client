@@ -16,6 +16,16 @@ export class NavbarComponent implements OnInit{
     constructor(private authService : AuthService,private router: Router
     ) { }
 
+    balancee : WritableSignal<string | number> = signal('Balance');
+
+    onHover(){
+        this.balancee.set("ALL " + JSON.parse(localStorage.getItem('userprofile')!).accountBalance);
+    }
+
+    onLeave(){
+        this.balancee.set('Balance');
+    }
+
 
     ngOnInit(): void {
         this.authService.isAuthenticated$.subscribe({
