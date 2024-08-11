@@ -1,3 +1,7 @@
+@if (isOpen()) {
+  <app-reviews></app-reviews>
+}
+
 <div><h1>Udhetimet si shofer</h1></div>
 <div class="container" (scroll)="onScroll()">
   <div class="card-custom" *ngFor="let item of items">
@@ -28,11 +32,11 @@
     }
     <div class="button-container margin-top: 10%;">
       @if (show != item.id) {
-      <button class="btn btn-success" (click)="showMore(item.id)">Show more</button>
+      <button class="btn btn-secondary" (click)="showMore(item.id)">Show more</button>
       }@else {
-        <button class="btn btn-success" (click)="showLess()">Show less</button>
+        <button class="btn btn-secondary" (click)="showLess()">Show less</button>
       }
-      <button class="btn btn-success" style="margin-left: 1%;"> Pershtypjet </button>
+      <button class="btn btn-secondary" style="margin-left: 1%;" (click)="toggle(item.id)"> Pershtypjet </button>
     </div>
   </div>
   <div *ngIf="loading" class="loading">Loading...</div>

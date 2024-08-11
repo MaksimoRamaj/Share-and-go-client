@@ -3,6 +3,7 @@ import { UserProfile } from '../../../../shared/userprofile.model';
 import { Router } from '@angular/router';
 import { EditprofileComponent } from "../editprofile/editprofile.component";
 import { ProfileService } from '../editprofile/profile.service';
+import { userprofile } from '../../../../shared/responses/userresponse.model';
 
 @Component({
   selector: 'app-profile-info',
@@ -13,17 +14,18 @@ import { ProfileService } from '../editprofile/profile.service';
 })
 export class ProfileInfoComponent {
     
-    user : UserProfile = {
-        firstName: "John",
-        lastName: "Doe",
-        email: "JohnDoe@gmail.com",
-    }
+    user : userprofile = JSON.parse(localStorage.getItem('userprofile')!);
 
     editMode = this.profileService.editMode;
+    more = false;
 
     constructor(
       private router : Router, private profileService : ProfileService
     ) { } 
+
+    toggleMore(){
+        this.more = !this.more;
+    }
 
     onVeturat(){
         this.router.navigate(['driver-profile/veturat']);

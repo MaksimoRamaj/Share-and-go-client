@@ -42,7 +42,7 @@
     border-radius: 5px;
     width: 100%;
     max-width: 200px;
-    margin: 5px auto;
+    /* margin: 5px auto; */
 }
 
 /* Media Queries */

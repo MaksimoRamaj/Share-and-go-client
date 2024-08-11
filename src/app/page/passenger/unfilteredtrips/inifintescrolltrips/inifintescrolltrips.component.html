@@ -6,14 +6,14 @@
     <div class="timeline">
       <span class="time">Nisja ne : {{ item.time }}</span>
       <span class="location"> nga {{ item.startCity }}</span>
-      <span class="price">{{ item.pricePerSeat | currency }}</span>
+      <span class="price">{{ item.pricePerSeat | currency:'ALL' }}</span>
     </div>
     <div class="timeline" style="color: #6c757d;">
       <span class="location">Kohezgjatja mesatare per {{ item.endCity }}: </span>
       <span class="time">{{ item.duration | duration }}</span>
     </div>
     <div class="profile">
-      <img [src]="'http://localhost:8080/images/users/default_profile_picture.jpg'" alt="Profile Image">
+      <img [src]="'http://localhost:8080/images/users/'+item.driverProfilePictureURL" alt="Profile Image">
       <span class="name">{{ item.driverFirstname }} {{ item.driverLastname }}</span>
     </div>
     <div class="button-container">

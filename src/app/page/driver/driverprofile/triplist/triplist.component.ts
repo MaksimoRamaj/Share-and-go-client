@@ -13,11 +13,13 @@ import { City } from '../../../../shared/city.model';
 import { HttpClient } from '@angular/common/http';
 import { TripserviceService } from '../../../passenger/unfilteredtrips/trip/tripservice.service';
 import { PreferenceResponse } from '../../../../shared/responses/preferenceresponse.model';
+import { ReviewsService } from './reviews.service';
+import { ReviewsComponent } from "./reviews/reviews.component";
 
 @Component({
   selector: 'app-triplist',
   standalone: true,
-  imports: [RouterModule , DurationPipe, CurrencyPipe, DatePipe, CommonModule],
+  imports: [RouterModule, DurationPipe, CurrencyPipe, DatePipe, CommonModule, ReviewsComponent],
   templateUrl: './triplist.component.html',
   styleUrl: './triplist.component.css'
 })
@@ -40,9 +42,16 @@ export class TriplistComponent {
 
   ready = this.cityService.ready$;
 
+  isOpen = this.reviewService.isOpen;  
+
   constructor(private http: HttpClient,
-    private router : Router
+    private router : Router,private reviewService : ReviewsService
   ) {}
+
+  toggle(tripId : number){
+    this.reviewService.isOpen.set(!this.reviewService.isOpen());
+    this.reviewService.tripId.set(tripId);
+  }
 
   ngOnInit() {
     this.ready.subscribe((value) => {

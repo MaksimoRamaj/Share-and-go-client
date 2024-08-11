@@ -1,39 +1,43 @@
-<section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section">Udhetimet si pasagjer</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="table-wrap" style="overflow: hidden;border-radius: 10px;">
-                    <table class="table table-striped table-dark table-hover" style="border-radius: 10px;">
-                      <thead>
-                        <tr>
-                          <th>From</th>
-                          <th>Destination</th>
-                          <th>Date</th>
-                          <th>Passengers</th>
-                          <th>Trip details</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @for (trip of trips; track trip) {
-                        <tr>
-                          <th>{{trip.startCity}}</th>
-                          <td>{{trip.endCity}}</td>
-                          <td>{{trip.dateOfTrip}}</td>
-                          <td>{{trip.passengerCount}}</td>
-                          <td><button (click)="getTripDetails(trip.id!)" class="btn btn-success">Show</button></td>
-                          <td><a href="#" class="btn btn-success">Active</a></td>
-                        </tr>
-                    }
-                      </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+@if (isLeavingReview()) {
+  <app-reviewform></app-reviewform>
+}
+
+<div><h1>Udhetimet si pasagjer</h1></div>
+<div class="container" (scroll)="onScroll()">
+  <div class="card-custom" *ngFor="let item of items">
+    <div class="date-header">{{ item.date | date: 'fullDate' }}</div>
+    <div class="timeline">
+      <span class="time">Nisja ne : {{ item.time }}</span>
+      <span class="location"> nga {{ item.startCity }}</span>
+      <span class="price">{{ item.pricePerSeat | currency:'ALL'}}</span>
     </div>
-</section>
+    <div class="timeline" style="color: #6c757d;">
+      <span class="location">Kohezgjatja e parashikuar per {{ item.endCity }}: </span>
+      <span class="time">{{ item.duration | duration }}</span>
+    </div>
+    @if (show == item.id) {
+      <div class="timeline" style="color: #6c757d;">
+        <span class="location"> Pasagjeret:  </span>
+        
+      </div>
+      <div class="timeline" style="color: #6c757d;">
+        <div class="location"> Preferencat </div>
+      </div>
+      <div style="margin-bottom: 4%;">
+        @for (preference of preferences; track preference.title) {
+          <div style="color:  #6c757d;"> <b><i class="fa fa-arrow-right">   {{ preference.title }} </i></b></div> 
+        }
+      </div>  
+
+    }
+    <div class="button-container margin-top: 10%;">
+      @if (show != item.id) {
+      <button class="btn btn-success" (click)="showMore(item.id)">Show more</button>
+      }@else {
+        <button class="btn btn-success" (click)="showLess()">Show less</button>
+      }
+      <button class="btn btn-success" style="margin-left: 1%;" (click)="showReviewForm(item.id,item.driverId)"> Jep pershtypje per udhetimin </button>
+    </div>
+  </div>
+  <div *ngIf="loading" class="loading">Loading...</div>
+</div>
