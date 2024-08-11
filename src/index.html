@@ -11,5 +11,21 @@
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    !function(w, d, s, ...args){
+      var div = d.createElement('div');
+      div.id = 'aichatbot';
+      d.body.appendChild(div);
+      w.chatbotConfig = args;
+      var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s);
+      j.defer = true;
+      j.type = 'module';
+      j.src = 'https://aichatbot.sendbird.com/index.js';
+      f.parentNode.insertBefore(j, f);
+    }(window, document, 'script', '5C1851E5-73D9-496B-A58B-5F9069BBEF6F', 'onboarding_bot', {
+      apiHost: 'https://api-cf-eu-1.sendbird.com',
+    });
+    </script>
 </body>
 </html>

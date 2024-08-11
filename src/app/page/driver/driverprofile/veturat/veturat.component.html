@@ -11,7 +11,7 @@
                 @for (car of cars; track car.id) {
                     <div class="col-md-4" (click)="removeCar(car)">
                         <div class="card" style="margin-bottom: 20%;">
-                            <img class="card-img-top" [src]="'http://localhost:8080/images/'+car.carImageURL"
+                            <img class="card-img-top" [src]="'http://localhost:8080/images/cars/'+car.carImageURL"
                                 alt="Car Image">
                             <div class="card-body">
                                 <p class="card-text"><i class="fa fa-key"> Targa:</i> {{car.licencePlateNumber}} </p>

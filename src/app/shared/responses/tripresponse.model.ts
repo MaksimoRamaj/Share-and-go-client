@@ -13,5 +13,6 @@ export interface TripResponse {
     driverFirstname: string;
     driverLastname: string;
     driverProfilePictureURL: string;
+    carId ?: number;
   }
   

@@ -14,6 +14,8 @@ export class InfinitescrollserviceService {
   endCity$ = this.endCitySubject.asObservable();
   date$ = this.dateSubject.asObservable();
 
+  hasTrips : WritableSignal<boolean> = signal(false);
+
  private ready  = new BehaviorSubject<boolean>(false);
   ready$ = this.ready.asObservable();
 

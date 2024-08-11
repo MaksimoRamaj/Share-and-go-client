@@ -6,51 +6,50 @@
     </div>
     <form>
         <div class="form-group">
-            <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="First name">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="First name" name="firstName" [(ngModel)]="profileRequest.firstname">
         </div>
         <div class="form-group">
-            <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Last name">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" [(ngModel)]="profileRequest.lastname" id="lastName" name="lastName" placeholder="Last name">
         </div>
         <div class="form-group">
-            <label for="phoneNumber">Phone number</label>
+            <label for="phoneNumber">Phone Number</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                         <img src="../../../../../assets/images/albanian.png" alt="country-flag"> <!-- Placeholder for country flag -->
                     </span>
                 </div>
-                <input type="tel" class="form-control" id="phoneNumber" placeholder="+355 6765 349" style="margin-top: 3%;">
+                <input type="tel" class="form-control" name="tel" [(ngModel)]="profileRequest.phoneNumber" id="phoneNumber" style="margin-top: 3%;" >
             </div>
         </div>
         <div class="form-group">
             <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" placeholder="masimoramaj18@gmail.com">
+            <input type="email" class="form-control" name="E-mail" value="{{userprofile.email}}" disabled>
         </div>
         <div class="form-group">
-            <label for="gender">Gender</label>
-            <select class="form-control" id="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
+            <label for="birthdate">Birthdate</label>
+            <input type="date" class="form-control" name="birthDate" [(ngModel)]="profileRequest.birthDate">
         </div>
         <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" placeholder="Address">
-            <small class="form-text text-muted">We will only use your address for gifts and offers from us and our partners</small>
+            <label for="email">Old password</label>
+            <input type="email" class="form-control" name="oldPassword" [(ngModel)]="profileRequest.oldPassword">
         </div>
-        <div class="form-group row">
-            <div class="col">
-                <label for="town">Town</label>
-                <input type="text" class="form-control" id="town" placeholder="Town">
-            </div>
-            <div class="col">
-                <label for="postalCode">Postal code</label>
-                <input type="text" class="form-control" id="postalCode" placeholder="Postal code">
-            </div>
+        <div class="form-group">
+            <label for="email">New Password</label>
+            <input type="email" class="form-control" name="new" [(ngModel)]="profileRequest.newPassword">
         </div>
-        <button type="submit" class="btn btn-custom btn-block">Save by</button>
+        <div class="form-group">
+            <label for="email">New Password</label>
+            <input type="email" class="form-control" name="pass" [(ngModel)]="profileRequest.newConfirmPassword">
+        </div>
+        <div class="form-group">
+            <label for="email">Profile picture</label>
+            <input type="file" class="form-control" name="pass" (change)="onFileSelected($event)">
+        </div>
+        
+        <button (click)="updateProfile()" class="btn btn-custom btn-block" style="margin-top: 4%;">Save</button>
     </form>
 </div>
 </dialog>

@@ -20,6 +20,8 @@ export class TripserviceService{
     return this.http.get<TripResponse>('http://localhost:8080/api/trip/trip-by-id?id='+tripId);
   }
 
+  
+
   toggle(){
     this.isApplying.set(!this.isApplying());
   }

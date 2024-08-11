@@ -7,19 +7,18 @@ import { NavbarComponent } from './navbars/navbar/navbar.component';
 import { OfferDriveFormComponent } from './forms/offer-drive-form/offer-drive-form.component';
 import { MapComponent } from "./map/map.component";
 import { HomepageComponent } from "./page/homepage/homepage.component";
+import { ChatComponent } from "./chat/chat.component";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [OfferDriveFormComponent, RouterOutlet, FindTripFormComponent, CardsComponent, FooterComponent, NavbarComponent, MapComponent, HomepageComponent],
+  imports: [OfferDriveFormComponent, RouterOutlet, FindTripFormComponent, CardsComponent, FooterComponent, NavbarComponent, MapComponent, HomepageComponent, ChatComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   
-
-  
   title = 'carpool';
-
 
 }

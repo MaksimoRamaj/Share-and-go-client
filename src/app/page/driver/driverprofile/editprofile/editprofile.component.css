@@ -44,10 +44,17 @@ body {
     font-size: 12px;
 }
 .btn-custom {
-    background-color: #8bc34a;
+    background-color: #2e2e2e;
     color: #fff;
     border-radius: 8px;
     height: 50px;
+}
+
+.btn-custom:hover {
+    background-color: #0e0e0e;
+    color: #fff;
+    border-radius: 8px;
+    height: 55px;
 }
 
 .backdrop {

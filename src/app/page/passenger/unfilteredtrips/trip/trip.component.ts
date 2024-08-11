@@ -12,6 +12,10 @@ import 'leaflet-routing-machine';
 import { City } from '../../../../shared/city.model';
 import { citiesArray } from '../../../../shared/citiesArray.model';
 import { RezervoformComponent } from "./rezervoform/rezervoform.component";
+import { HttpClient } from '@angular/common/http';
+import { PreferenceResponse } from '../../../../shared/responses/preferenceresponse.model';
+import { CarResponse } from '../../../../shared/responses/carresponse.model';
+
 
 @Component({
   selector: 'app-trip',
@@ -23,13 +27,15 @@ import { RezervoformComponent } from "./rezervoform/rezervoform.component";
 export class TripComponent implements OnInit{
 
   trip !: TripResponse;
+  preferences : PreferenceResponse[] = [];
+  car !: CarResponse; 
 
   startCity !: City;
   endCity !: City;
 
   isApplying = this.tripService.isApplying; 
 
-  constructor( private tripService : TripserviceService) { }
+  constructor( private tripService : TripserviceService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.tripService.getTripByTripId(this.tripService.selectedTripId())
@@ -44,8 +50,40 @@ export class TripComponent implements OnInit{
         },
         error: (error) => {
           console.log(error);
+        },
+      });
+
+      this.http.get<PreferenceResponse[]>('http://localhost:8080/api/preference/preferences-by-trip-id?id='+this.tripService.selectedTripId(),
+      {observe: 'response'}).subscribe({
+        next: (response) => {
+          if(response.status === 200){
+            if(response.body){
+              this.preferences = response.body;
+            }
+          }else if(response.status === 204){
+            console.log('No preferences found for this trip');
+          }
+        },
+        error: (error) => {
+          console.log(error);
         }
       });
+
+      this.http.get<CarResponse[]>('http://localhost:8080/api/car/all-cars',{observe: 'response'}).subscribe({
+        next: (response) => {
+          if(response.status === 200){
+            response.body?.forEach(car => {
+              if(car.id === this.trip.carId){
+                this.car = car;
+              }
+            });
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      }); 
+  
   }
 
   toggle(){

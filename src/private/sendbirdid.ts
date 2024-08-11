@@ -1,0 +1,1 @@
+export const sendbirdid = "5C1851E5-73D9-496B-F";
