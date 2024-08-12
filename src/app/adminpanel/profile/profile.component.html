@@ -1,0 +1,25 @@
+
+<div class="profile-card">
+    <div class="profile-pic">
+        <img src="../../../assets/images/dummy-avatar.jpg" alt="Profile Picture">
+    </div>
+    <h4>user.profile?.firstname user.profile?.lastname</h4>
+    <p>user.email</p>
+    @if (more) {
+    <p>Udhetime si shofer: user.profile?.tripsOffered</p>
+    <p>Udhetime si pasagjer: user.profile?.tripsReceived</p>
+    <p>Numri cel: user.phoneNumber</p>
+    }
+    @if (!more) {
+        @if (activeTrips()) {
+            <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimet()">Udhetimet e kryera</button>
+        }@else {
+            <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimetAktive()">Udhetimet aktive</button>
+        }
+    <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="toggleMore()">Shiko me shume</button>
+    }@else {
+        <button class="edit-profile-btn" style="padding: 10px 29px;" (click)="editProfile()">Edit profile</button><br><br>
+        <button class="edit-profile-btn"  style="padding: 10px 29px" (click)="onVeturat()">Veturat e mia</button>
+        <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="toggleMore()">Prapa</button>
+    }
+</div>
