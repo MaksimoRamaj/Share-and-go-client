@@ -23,6 +23,7 @@
     "bootstrap": "^5.3.3",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
+    "ngx-infinite-scroll": "^18.0.0",
     "rxjs": "~7.8.0",
     "sendbird": "^3.1.33",
     "tslib": "^2.3.0",

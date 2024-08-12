@@ -6,16 +6,18 @@ import { AuthService } from '../services/auth-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate{
+export class AuthGuardRoleUser implements CanActivate{
 
   isAuthenticated : boolean = false;
+  role : string = '';
   
   constructor(private authService: AuthService, private router: Router) {
 
     this.authService.isAuthenticated$.subscribe({
-      next: (isAuthenticated: boolean) => {
-        this.isAuthenticated = isAuthenticated;
-        console.log('Is authenticated inside authguard:', isAuthenticated);
+      next: ({isAuth,role}) => {
+        this.isAuthenticated = isAuth;
+        this.role = role;
+        console.log('Is authenticated inside authguard:', isAuth);
       }
     });
      
@@ -25,7 +27,7 @@ export class AuthGuard implements CanActivate{
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    if (this.isAuthenticated) {
+    if (this.isAuthenticated && this.role === 'USER') {
       return true;
     } else {
       return this.router.createUrlTree(['/login']);

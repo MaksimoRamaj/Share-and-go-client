@@ -22,7 +22,7 @@
                         <button class="nav-link" (click)="signUp()">Sign up</button>
                     </li>
                 </ul>}
-            @else {
+            @else if (isLoggedInS() &&  (role() == 'USER')) {
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <button class="nav-link" id="balance-button"

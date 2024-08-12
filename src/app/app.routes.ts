@@ -4,7 +4,7 @@ import { OfferDriveFormComponent } from './forms/offer-drive-form/offer-drive-fo
 import { HomepageComponent } from './page/homepage/homepage.component';
 import { PostDriveComponent } from './page/driver/post-drive/post-drive.component';
 import { LoginComponent } from './page/login/login.component';
-import { AuthGuard } from './authentication/auth-guard.service';
+import { AuthGuardRoleUser } from './authentication/auth-guard.service';
 import { DriverprofileComponent } from './page/driver/driverprofile/driverprofile.component';
 import { TriplistComponent } from './page/driver/driverprofile/triplist/triplist.component';
 import { TripdetailsComponent } from './page/driver/driverprofile/tripdetails/tripdetails.component';
@@ -21,6 +21,7 @@ import { SignupComponent } from './page/signup/signup.component';
 import { BalanceComponent } from './page/balance/balance/balance.component';
 import { SecondpreferencespageComponent } from './page/driver/preferences/secondpreferencespage/secondpreferencespage.component';
 import { ActivetripsComponent } from './page/driver/driverprofile/triplist/activetrips/activetrips.component';
+import { AdminComponent } from './adminpanel/admin/admin.component';
 
 export const routes: Routes = [
     {
@@ -53,7 +54,7 @@ export const routes: Routes = [
     {
         path: "driver",
         component: PostDriveComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuardRoleUser],
         children: [
             {
                 path: "",
@@ -100,6 +101,10 @@ export const routes: Routes = [
                 component: ActivetripsComponent
             }
         ]
+    },
+    {
+        path:"admin",
+        component: AdminComponent
     },
     {
         path: "sign-up",

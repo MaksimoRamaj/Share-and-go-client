@@ -31,12 +31,15 @@ export class HomepageComponent implements OnInit {
 
     ngOnInit(): void {
       this.authService.isAuthenticated$.subscribe({
-        next: (isAuthenticated: boolean) => {
-          this.isLoggegIn.set(isAuthenticated);
-          console.log('Is authenticated:', isAuthenticated);
-          if(isAuthenticated){
+        next: ({isAuth,role}) => {
+          this.isLoggegIn.set(isAuth);
+          console.log('Is authenticated:', isAuth);
+          if(isAuth && role === 'USER'){
             console.log('Fetching userprofile');
             this.fetchUserProfile();
+          }else if(isAuth && role === 'ADMIN'){
+            console.log('Fetching driverprofile');
+            this.fetchAdminProfile();
           }
         }
       });
@@ -47,6 +50,21 @@ export class HomepageComponent implements OnInit {
         next: (response: HttpResponse<any>) => {
           if(response.status === 200){
             localStorage.setItem('userprofile',JSON.stringify(response.body));
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log('Status Code:', error.status);  // Accessing the status code in case of error
+        },
+
+      });
+    }
+
+    fetchAdminProfile(){
+      return;
+      this.http.get('http://localhost:8080/api/admin/auth-admin',{observe: 'response'}).subscribe({
+        next: (response: HttpResponse<any>) => {
+          if(response.status === 200){
+            localStorage.setItem('adprofile',JSON.stringify(response.body));
           }
         },
         error: (error: HttpErrorResponse) => {

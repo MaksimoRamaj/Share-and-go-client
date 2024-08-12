@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../../services/auth-service.service';
 import { Router, RouterModule } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 export class NavbarComponent implements OnInit{
 
     isLoggedInS : WritableSignal<boolean> = signal(false);
+    role = signal('');
     
     constructor(private authService : AuthService,private router: Router
     ) { }
@@ -29,8 +30,12 @@ export class NavbarComponent implements OnInit{
 
     ngOnInit(): void {
         this.authService.isAuthenticated$.subscribe({
-            next: (isAuthenticated: boolean) => {
-                this.isLoggedInS.set(isAuthenticated);
+            next: ({isAuth,role}) => {
+                this.isLoggedInS.set(isAuth);
+                this.role.set(role);
+                console.log('Navbar:');
+                console.log('Is authenticated:', isAuth);
+                console.log('Role:', role); 
             }
         });
     }

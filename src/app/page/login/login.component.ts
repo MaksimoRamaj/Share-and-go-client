@@ -31,10 +31,17 @@ export class LoginComponent {
             alert('Te dhenat per userin nuk u gjeten ose fushat e paplotesuara!');
           }
           else if(response.status === 200){
-            this.authService.login(response.body.token);
+            this.authService.login(response.body.token,response.body.role);
+            localStorage.setItem('loginToken', response.body.token);
+            if (response.body.role == 'ADMIN' || response.body.role == 'SUPERADMIN') {
+              console.log('Admin login');
+              this.router.navigate(['/admin']);
+            }
+            else{
             // localStorage.setItem('loginToken', response.body.token);
             // this.authService.login();
             this.router.navigate(['/']);
+            }
           }
         },
         error: (error: HttpErrorResponse) => {

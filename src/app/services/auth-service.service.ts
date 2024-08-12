@@ -6,19 +6,21 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-   isAuthenticated = new BehaviorSubject<boolean>(this.isAuth());
+   isAuthenticated = new BehaviorSubject<{isAuth : boolean,role : string}>({isAuth : false,role : ''});
    isAuthenticated$ = this.isAuthenticated.asObservable();
 
   constructor() {}
 
-  login(token : string) {
+  login(token : string, role : string) {
         localStorage.setItem('loginToken', token);
-        this.isAuthenticated.next(true);
+        this.isAuthenticated.next({isAuth: true, role: role});
   }
 
   logout() {
         localStorage.removeItem('loginToken');
-        this.isAuthenticated.next(false);
+        localStorage.removeItem('userprofile');
+        localStorage.removeItem('adminprofile');
+        this.isAuthenticated.next({isAuth: false, role: ''});
   }
 
   isAuth() {
