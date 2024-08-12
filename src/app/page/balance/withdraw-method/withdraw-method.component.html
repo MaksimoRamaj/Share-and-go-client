@@ -14,7 +14,7 @@
               <div class="input">
 
                 <i class="fas fa-credit-card"></i>
-                <input type="text" class="form-control" placeholder="AL47 2121 1009 0000 0002 3569 8741">
+                <input type="text" class="form-control" name="accountNumber" [(ngModel)]="withdrawalRequest.accountNumber" placeholder="AL47 2121 1009 0000 0002 3569 8741">
                 
               </div> 
 
@@ -26,12 +26,12 @@
                   <div class="input">
 
                       <i class="fa fa-cash-register"></i>
-                    <input type="text" class="form-control" placeholder="000">
+                    <input type="text" class="form-control" placeholder="000" name="amount" [(ngModel)]="withdrawalRequest.amount">
                     
                   </div> 
               </div>  
              
-                  <button class="btn btn-primary btn-block free-button" style="margin-top: 10%;padding: 0%;">Dergo nje kerkese per terheqje</button> 
+                  <button class="btn btn-primary btn-block free-button" (click)="makeRequest()" style="margin-top: 10%;padding: 0%;">Dergo nje kerkese per terheqje</button> 
 
                   
                 </div>

@@ -7,6 +7,8 @@ export class ProfileService {
 
   editMode = signal(false);
 
+  activeTrips = signal(false);
+
   constructor() { }
 
   toggleEditMode(){

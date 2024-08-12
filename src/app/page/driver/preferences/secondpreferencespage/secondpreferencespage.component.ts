@@ -10,6 +10,7 @@ import { OfferDriveFormComponentCssService } from '../../../../forms/offer-drive
 import { Trip } from '../../../../shared/trip.model';
 import { CarResponse } from '../../../../shared/responses/carresponse.model';
 import { VeturatService } from '../../driverprofile/veturat/veturat.service';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-secondpreferencespage',
@@ -33,6 +34,15 @@ export class SecondpreferencespageComponent implements OnInit{
 
   ngOnInit(): void {  
 
+    this.veturatService.fetchCars().subscribe({
+      next: (response) => {
+        this.cars = response;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
     this.veturatService.updateCars$.subscribe({
       next: (response) => {
         if(response == true){
@@ -47,6 +57,7 @@ export class SecondpreferencespageComponent implements OnInit{
         }
       }
     });
+
   }
 
   addPreference() {
@@ -66,42 +77,52 @@ export class SecondpreferencespageComponent implements OnInit{
 
   submitForm(){
     const url = 'http://localhost:8080/api/trip/create-trip'; 
-    
+
     this.offerdriveService.tripDet$.subscribe({
       next: (trip: Trip) => {
         this.trip = trip;
         this.trip.carId = this.selectedCar.id;
         console.log('Car ID:', this.trip.carId);  // Accessing the car ID
         console.log('Trip details:', this.trip);  // Accessing the trip details
-        this.http.post(url, this.trip ,{observe: 'response'}).subscribe({
-          next: (response: HttpResponse<any>) => {
-            console.log('Trip details submitted successfully', response);
-            console.log('Status Code:', response.status);  // Accessing the status code
-          },
-          error: (error: HttpErrorResponse) => {
-            if(error.status == 401) {
-              alert("Gabim ne postimin e udhetimit! Ju lutem provoni perseri.\n" +
-                  error.message
-              );
-              this.router.navigate(['driver']);
-            }else if(error.status == 200){
-              this.http.post('http://localhost:8080/api/preference/choose-preferences', 
-                this.preferences).subscribe({
-                  next: data => {
-                    alert('Preferencat u ruajten me sukses!');
-                    this.router.navigate(['driver-profile']);
-                  },
-                }); 
-            }
-            console.error('Error submitting trip details', error);
-            console.log('Status Code:', error.status);  // Accessing the status code in case of error
-          }
-        });
       },
       error: (error: any) => {
         console.error('Error getting trip details', error);
       },
+      complete: () => { 
+        console.log('Trip details fetched successfully');
+      }
     })
+
+    this.http.post(url, this.trip ,{observe: 'response'})
+    .pipe(
+      catchError(this.handleError)
+    )
+      .subscribe({
+      next: (response: HttpResponse<any>) => {
+        if(response.status == 200){
+          this.http.post('http://localhost:8080/api/preference/choose-preferences', 
+            this.preferences).subscribe({
+              next: data => {
+                alert('Preferencat u ruajten me sukses!');
+                this.router.navigate(['driver-profile']);
+              },
+            }); 
+        }
+      },
+       
+    });
+  }
+
+  handleError(error: HttpErrorResponse) {
+    if (error.status === 409) {
+      // Handle 409 Conflict
+      console.error('Conflict error:', error.error);
+      alert('Conflict error:' + error.error);
+    } else if (error.status === 200) {
+      alert('Preferencat u ruajten me sukses!');
+      this.router.navigate(['']);
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
 }

@@ -12,6 +12,7 @@ export class ReviewsService {
 
   isOpen = signal(false);
   tripId = signal(-1);
+  activeTrips = signal(false);
 
   fetchAllReviews(){
     return this.http.get<ReviewResponse[]>('http://localhost:8080/api/feedback/review/by-trip?id='+this.tripId(),{observe: 'response'})

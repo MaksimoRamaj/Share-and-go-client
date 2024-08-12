@@ -20,6 +20,7 @@ import { TripComponent } from './page/passenger/unfilteredtrips/trip/trip.compon
 import { SignupComponent } from './page/signup/signup.component';
 import { BalanceComponent } from './page/balance/balance/balance.component';
 import { SecondpreferencespageComponent } from './page/driver/preferences/secondpreferencespage/secondpreferencespage.component';
+import { ActivetripsComponent } from './page/driver/driverprofile/triplist/activetrips/activetrips.component';
 
 export const routes: Routes = [
     {
@@ -93,6 +94,10 @@ export const routes: Routes = [
             {
                 path: "veturat",
                 component: VeturatComponent
+            },
+            {
+                path: "udhetimet-aktive",
+                component: ActivetripsComponent
             }
         ]
     },

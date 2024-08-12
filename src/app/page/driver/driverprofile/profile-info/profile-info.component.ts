@@ -18,6 +18,7 @@ export class ProfileInfoComponent {
 
     editMode = this.profileService.editMode;
     more = false;
+    activeTrips = this.profileService.activeTrips;
 
     constructor(
       private router : Router, private profileService : ProfileService
@@ -27,11 +28,25 @@ export class ProfileInfoComponent {
         this.more = !this.more;
     }
 
+    toggleActiveTrips(){
+        this.activeTrips.set(!this.activeTrips());
+    }
+
     onVeturat(){
         this.router.navigate(['driver-profile/veturat']);
     }
 
     editProfile(){
         this.profileService.toggleEditMode();
+    }
+
+    shfaqUdhetimetAktive(){
+        this.toggleActiveTrips();
+        this.router.navigate(['driver-profile/udhetimet-aktive']);
+    }
+
+    shfaqUdhetimet(){
+        this.toggleActiveTrips();
+        this.router.navigate(['driver-profile']);
     }
 }
