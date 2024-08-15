@@ -55,9 +55,9 @@ export class ActivetripsComponent {
     this.loadMore();
   }
 
-  showApplications(tripId : number){
+  showApplications(tripId : number,availableSeats : number){
     this.activeTripsService.openRequests.set(true);
-    this.activeTripsService.openTripApplications(tripId);
+    this.activeTripsService.openTripApplications(tripId,availableSeats);
   }
 
   showMore(tripId : number){
@@ -116,22 +116,7 @@ export class ActivetripsComponent {
           console.log(error);
         }
       });
-    
-        // this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/trips-as-driver`, {observe: 'response'})
-        //   .subscribe({
-        //     next: (data) => {
-        //       if(data.body){
-        //         this.items = [...data.body];
-        //       }else if(data.status === 204){
-        //         console.log('No trips found');
-        //       }
-        //       this.loading = false;
-        //     },
-        //     error: (err) => {
-        //       console.error('Error loading data', err);
-        //       this.loading = false;
-        //     }
-        //   });
+  
   }
 }
 

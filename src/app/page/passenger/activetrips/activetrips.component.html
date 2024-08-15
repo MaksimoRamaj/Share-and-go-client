@@ -4,6 +4,11 @@
   
   <div><h1>Udhetimet ne vijim ...</h1></div>
   <div class="container" (scroll)="onScroll()">
+    @if (trips.length == 0) {
+    <div class="alert alert-info" style="margin-top: 5%;" role="alert">
+      Nuk keni asnje udhetim te kryer!
+    </div>
+    } @else {
     @for (item of trips; track item.id) {
     <div class="card-custom">
       <div class="date-header">{{ item.date | date: 'fullDate' }}</div>
@@ -55,5 +60,6 @@
       </div>
     </div>}
     <div *ngIf="loading" class="loading">Loading...</div>
+    }
   </div>
   

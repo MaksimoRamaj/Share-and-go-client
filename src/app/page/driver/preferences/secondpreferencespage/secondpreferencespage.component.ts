@@ -11,6 +11,7 @@ import { Trip } from '../../../../shared/trip.model';
 import { CarResponse } from '../../../../shared/responses/carresponse.model';
 import { VeturatService } from '../../driverprofile/veturat/veturat.service';
 import { catchError, throwError } from 'rxjs';
+import { SweetAlertService } from '../../../../../sweet-alert/sweet-alert-service.service';
 
 @Component({
   selector: 'app-secondpreferencespage',
@@ -29,7 +30,7 @@ export class SecondpreferencespageComponent implements OnInit{
   cars : CarResponse[] = [];
   selectedCar : CarResponse = this.cars[0];
 
-  constructor(private veturatService : VeturatService
+  constructor(private sweetAlert : SweetAlertService,private veturatService : VeturatService
     ,private http : HttpClient,private router : Router, private offerdriveService : OfferDriveFormComponentCssService) { }
 
   ngOnInit(): void {  
@@ -82,8 +83,6 @@ export class SecondpreferencespageComponent implements OnInit{
       next: (trip: Trip) => {
         this.trip = trip;
         this.trip.carId = this.selectedCar.id;
-        console.log('Car ID:', this.trip.carId);  // Accessing the car ID
-        console.log('Trip details:', this.trip);  // Accessing the trip details
       },
       error: (error: any) => {
         console.error('Error getting trip details', error);
@@ -102,8 +101,8 @@ export class SecondpreferencespageComponent implements OnInit{
             this.preferences,{observe:'response',responseType: 'text'}).subscribe({
               next: (response: HttpResponse<any>) => {
                 if(response.status == 200){
-                alert('Udhetimi u ruajt me sukses!');
-                this.router.navigate(['']);
+                  this.sweetAlert.successNotification('Sukses', 'Udhetimi u postua!');
+                  this.router.navigate(['']);
                 }
               },
             }); 

@@ -24,12 +24,20 @@ export class WithdrequestComponent implements OnInit {
     this.http.get<WithdrawalResponse[]>('http://localhost:8080/api/withdrawal/all-withdrawals')
     .subscribe({
       next: (response) => {
-        this.withdrawalresponse = response;
-        let total = 0;
-        this.withdrawalresponse.forEach((withdrawal) => {
-          total = total + withdrawal.amount;
-        });
-        this.balanceService.onWaiting.next(total);
+        if(response){
+          this.withdrawalresponse = response;
+          let total = 0;
+          this.withdrawalresponse.forEach((withdrawal) => {
+            total = total + withdrawal.amount;
+          });
+          this.balanceService.onWaiting.next(total);
+        }
+        // this.withdrawalresponse = response;
+        // let total = 0;
+        // this.withdrawalresponse.forEach((withdrawal) => {
+        //   total = total + withdrawal.amount;
+        // });
+        // this.balanceService.onWaiting.next(total);
       }
     });
 

@@ -3,6 +3,7 @@ import { UserSignUpRequest } from '../../shared/requests/signuprequest.model';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
+import { SweetAlertService } from '../../../sweet-alert/sweet-alert-service.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,17 +24,21 @@ export class SignupComponent {
     birthDate: '1990-01-01',
   };
 
-  constructor(private http : HttpClient, private router : Router) { }
+  constructor(private http : HttpClient, private router : Router,private swal : SweetAlertService) { }
     
   register(){
-    this.http.post('http://localhost:8080/api/user/sign-up', this.signUpRequest)
+    this.http.post('http://localhost:8080/api/user/sign-up', this.signUpRequest,{observe: 'response',responseType:'text'})
     .subscribe({
-      next: (data) => {
-        console.log(data);
+      next: (response) => {
+       if(response.status === 200){
         this.router.navigate(['login']);
+       }
+       if(response.status === 400){
+        this.swal.failNotification('Gabim!',''+ response.body);
+       }
       },
       error: (error) => {
-        console.log(error);   
+        this.swal.failNotification('Gabim!', 'Regjistrimi nuk u krye, provoni perseri!');   
     }});
   }
 }

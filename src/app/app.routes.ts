@@ -23,6 +23,7 @@ import { SecondpreferencespageComponent } from './page/driver/preferences/second
 import { ActivetripsComponent } from './page/driver/driverprofile/triplist/activetrips/activetrips.component';
 import { AdminComponent } from './adminpanel/admin/admin.component';
 import { ActivepassengerTripsComponent } from './page/passenger/activetrips/activetrips.component';
+import { ProfileComponent } from './page/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -107,6 +108,10 @@ export const routes: Routes = [
                 component: ActivetripsComponent
             }
         ]
+    },
+    {
+        path: "profile/:id",
+        component: ProfileComponent,
     },
     {
         path:"admin",

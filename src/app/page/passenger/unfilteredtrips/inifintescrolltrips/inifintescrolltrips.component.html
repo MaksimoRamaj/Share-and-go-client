@@ -1,12 +1,15 @@
-
+@if (showProfile()) {
+  <app-usrprofile></app-usrprofile>
+}
 @if (hasTrips()) {
 <div class="container" (scroll)="onScroll()">
   <div class="card-custom" *ngFor="let item of items">
     <div class="date-header">{{ item.date | date: 'fullDate' }}</div>
     <div class="timeline">
-      <span class="time">Nisja ne : {{ item.time }}</span>
+      <span style="font-weight: bold;">Nisja ne : &nbsp;</span>
+      <span class="time"> {{ item.time.slice(0,-3) }}</span>
       <span class="location"> nga {{ item.startCity }}</span>
-      <span class="price">{{ item.pricePerSeat | currency:'ALL' }}</span>
+      <span class="price">{{ item.pricePerSeat | currency:'ALL ' }}</span>
     </div>
     <div class="timeline" style="color: #6c757d;">
       <span class="location">Kohezgjatja mesatare per {{ item.endCity }}: </span>
@@ -14,10 +17,10 @@
     </div>
     <div class="profile">
       <img [src]="'http://localhost:8080/images/users/'+item.driverProfilePictureURL" alt="Profile Image">
-      <span class="name">{{ item.driverFirstname }} {{ item.driverLastname }}</span>
+      <span class="name" (click)="findUserProfile(item.driverId)">{{ item.driverFirstname }} {{ item.driverLastname }}</span>
     </div>
     <div class="button-container">
-      <button class="btn btn-success" (click)="showMore(item.id)">Show more</button>
+      <button class="btn btn-dark" (click)="showMore(item.id)">Show more</button>
     </div>
   </div>
   <div *ngIf="loading" class="loading">Loading...</div>

@@ -8,12 +8,14 @@ import { City } from '../../../../shared/city.model';
 import { MyInterceptor } from '../../../../services/my-interceptor.service';
 import { TripService } from '../../../driver/driverprofile/tripdetails/trip.service';
 import { TripserviceService } from '../trip/tripservice.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ProfileService } from '../../../profile/profile.service';
+import {  ProfileComponent } from "../../../profile/profile.component";
 
 @Component({
   selector: 'app-inifintescrolltrips',
   standalone: true,
-  imports: [CommonModule,DurationPipe],
+  imports: [CommonModule, DurationPipe, RouterModule, ProfileComponent],
   templateUrl: './inifintescrolltrips.component.html',
   styleUrls: ['./inifintescrolltrips.component.css'],
   providers: [
@@ -45,8 +47,10 @@ export class InifintescrolltripsComponent implements OnInit {
 
   ready = this.cityService.ready$;
 
+  showProfile =  this.profileService.showProfile;
+
   constructor(private http: HttpClient,private tripService : TripserviceService,
-    private router : Router
+    private router : Router,private profileService : ProfileService,
   ) {}
 
   ngOnInit() {
@@ -65,6 +69,11 @@ export class InifintescrolltripsComponent implements OnInit {
       }
     });
     this.loadMore();
+  }
+
+  findUserProfile(userId : number){
+    this.showProfile.set(true);
+    this.profileService.userId.set(userId);
   }
 
   showMore(tripId : number){

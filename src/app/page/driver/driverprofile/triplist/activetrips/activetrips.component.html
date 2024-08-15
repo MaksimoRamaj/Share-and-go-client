@@ -4,6 +4,11 @@
   
   <div><h1>Udhetimet ne vijim ...</h1></div>
   <div class="container" (scroll)="onScroll()">
+    @if (trips.length == 0) {
+      <div class="alert alert-info" style="margin-top: 5%;" role="alert">
+        Nuk keni asnje udhetim ne vijim!
+      </div>
+    }@else {
     <div class="card-custom" *ngFor="let item of trips">
       <div class="date-header">{{ item.date | date: 'fullDate' }}</div>
       <div class="timeline">
@@ -40,9 +45,10 @@
         }@else {
           <button class="btn btn-secondary" (click)="showLess()">Show less</button>
         }
-        <button class="btn btn-secondary" style="margin-left: 1%;" (click)="showApplications(item.id)"> Aplikimett </button>
+        <button class="btn btn-secondary" style="margin-left: 1%;" (click)="showApplications(item.id,item.availableSeats)"> Aplikimett </button>
       </div>
     </div>
     <div *ngIf="loading" class="loading">Loading...</div>
+  }
   </div>
   
