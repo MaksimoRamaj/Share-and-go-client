@@ -2,7 +2,8 @@
 <dialog open>
   <h2>Rezervo</h2>
   <form>
-    @if (bookingType != bookingTypes[1]) {
+    
+    @if ((bookingType != bookingTypes[1])||(actualTrip.availableSeats > 0)) {
         <p>
         <label for="title">Numrin e vendeve: </label>
         <input type="number" min="1" max="{{actualTrip.availableSeats}}" id="title" name="title" [(ngModel)] = "tripApplicationRequest.numberOfSeats"/>
@@ -15,9 +16,13 @@
     <p>
         <label for="bookingType">Tipi udhetimit:</label>
         <select id="bookingType" name="bookingType" [(ngModel)]="bookingType">
+            @if (actualTrip.availableSeats>0) {
             <option [value]="bookingTypes[0]">Pasagjer</option>
+            }
             <option [value]="bookingTypes[1]">Valixhe</option>
+            @if (actualTrip.availableSeats>0) {
             <option [value]="bookingTypes[2]">Pasagjer me valixhe</option>
+            }
         </select>
     </p>
     <p class="text-white">Valixhe te shtuara: {{luggages.length}}</p>
