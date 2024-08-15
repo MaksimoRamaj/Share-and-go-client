@@ -1,59 +1,76 @@
 .trip-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    padding: 25px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+.trip-card:hover {
+    transform: translateY(-5px);
 }
 .trip-card .date-header {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2c3e50;
 }
 .trip-card .timeline {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 12px;
+    font-size: 1rem;
+    color: #34495e;
 }
-.trip-card .timeline span {
-    margin-right: 10px;
+.trip-card .timeline .text, 
+.trip-card .timeline .location {
+    margin-right: 5px;
+    font-weight: 500;
 }
-.trip-card .price {
-    font-size: 1.2rem;
-    font-weight: bold;
+.trip-card .features {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+.trip-card .features .label {
+    font-weight: 600;
+}
+.trip-card .features .price {
+    font-size: 1.4rem;
+    color: #27ae60;
+    font-weight: 700;
+    margin-bottom: 5px;
 }
 .trip-card .profile {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .trip-card .profile img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 .trip-card .profile .name {
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
 }
 .trip-card .button-container {
     text-align: right;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 .trip-card .button-container button {
-    background-color: #28a745;
+    background-color: #27ae60;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 .trip-card .button-container button:hover {
-    background-color: #218838;
+    background-color: #1e8449;
 }
-.trip-card .icon {
-    margin-right: 5px;
-}
-.trip-card .features {
-    margin-top: 10px;
-}
-
