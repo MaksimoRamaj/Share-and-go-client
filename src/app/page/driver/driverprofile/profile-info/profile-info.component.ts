@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserProfile } from '../../../../shared/userprofile.model';
 import { Router } from '@angular/router';
 import { EditprofileComponent } from "../editprofile/editprofile.component";
@@ -13,6 +13,12 @@ import { userprofile } from '../../../../shared/responses/userresponse.model';
   styleUrl: './profile-info.component.css'
 })
 export class ProfileInfoComponent {
+
+    @Input({required: true})
+    udhetimetAktivePath !: string;
+
+    @Input({required: true})
+    udhetimetPath !: string;
     
     user : userprofile = JSON.parse(localStorage.getItem('userprofile')!);
 
@@ -22,14 +28,14 @@ export class ProfileInfoComponent {
 
     constructor(
       private router : Router, private profileService : ProfileService
-    ) { } 
+    ) { console.log(this.activeTrips()); } 
 
     toggleMore(){
         this.more = !this.more;
     }
 
-    toggleActiveTrips(){
-        this.activeTrips.set(!this.activeTrips());
+    toggleActiveTrips(value : boolean){
+        this.activeTrips.set(value);
     }
 
     onVeturat(){
@@ -41,12 +47,12 @@ export class ProfileInfoComponent {
     }
 
     shfaqUdhetimetAktive(){
-        this.toggleActiveTrips();
-        this.router.navigate(['driver-profile/udhetimet-aktive']);
+        this.toggleActiveTrips(false);
+        this.router.navigate([this.udhetimetAktivePath]);
     }
 
     shfaqUdhetimet(){
-        this.toggleActiveTrips();
-        this.router.navigate(['driver-profile']);
+        this.toggleActiveTrips(true);
+        this.router.navigate([this.udhetimetPath]);
     }
 }

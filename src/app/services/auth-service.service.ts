@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, OnInit, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-   isAuthenticated = new BehaviorSubject<{isAuth : boolean,role : string}>({isAuth : false,role : ''});
+   isAuthenticated = new BehaviorSubject<{isAuth : boolean,role : string}>
+   ({isAuth : this.isAuth(),role : this.getRole()});
    isAuthenticated$ = this.isAuthenticated.asObservable();
 
   constructor() {}
@@ -28,6 +29,14 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  getRole(){
+     let role : string | null = localStorage.getItem('role');
+     if(role){
+      return role;
+     }
+     return '';
   }
 
 }

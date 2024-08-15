@@ -7,10 +7,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto me-auto">
                 <li class="nav-item">
-                    <button class="nav-link" >Kerkesat e terheqjes</button>
+                    <button class="nav-link" (click)="toggle(false)">Kerkesat e terheqjes</button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link active" aria-current="page">Reportet</button>
+                    <button class="nav-link active" aria-current="page" (click)="toggle(true)" >Reportet</button>
                 </li>
             </ul>
             <ul class="navbar-nav">

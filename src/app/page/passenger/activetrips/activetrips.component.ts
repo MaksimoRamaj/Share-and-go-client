@@ -1,28 +1,26 @@
-import { Component, inject } from '@angular/core';
-import { TripResponse } from '../../../../../shared/responses/tripresponse.model';
-import { PreferenceResponse } from '../../../../../shared/responses/preferenceresponse.model';
+import { Component } from '@angular/core';
+import { TripResponse } from '../../../shared/responses/tripresponse.model';
+import { PreferenceResponse } from '../../../shared/responses/preferenceresponse.model';
 import { HttpClient } from '@angular/common/http';
+import { ReviewsService } from '../../driver/driverprofile/triplist/reviews.service';
+import { ActivetripsService } from '../../driver/driverprofile/triplist/activetrips/activetrips.service';
 import { Router } from '@angular/router';
-import { ReviewsService } from '../reviews.service';
-import { City } from '../../../../../shared/city.model';
-import { InfinitescrollserviceService } from '../../../../passenger/unfilteredtrips/inifintescrolltrips/infinitescrollservice.service';
-import { ReviewsComponent } from "../reviews/reviews.component";
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { DurationPipe } from '../../../../../shared/pipes/duration.pipe';
-import { ActivetripsService } from './activetrips.service';
-import { JointriprequestsComponent } from "./jointriprequests/jointriprequests.component";
+import { DurationPipe } from '../../../shared/pipes/duration.pipe';
+import { JointriprequestsComponent } from './jointriprequests/jointriprequests.component';
+import { TripApplicationResponse } from '../../../shared/responses/tripapplicationresponse.model';
 
 @Component({
   selector: 'app-activetrips',
   standalone: true,
-  imports: [ReviewsComponent, CommonModule, DurationPipe, CurrencyPipe, DatePipe, JointriprequestsComponent],
+  imports: [CommonModule, DurationPipe, CurrencyPipe, DatePipe, JointriprequestsComponent],
   templateUrl: './activetrips.component.html',
   styleUrl: './activetrips.component.css'
 })
-export class ActivetripsComponent {
-  
+export class ActivepassengerTripsComponent {
   trips: TripResponse[] = [];
   preferences : PreferenceResponse[] = [];
+  tripApplicationResponses : TripApplicationResponse[] = []; 
   loading = false;
   page = 0;
   pageSize = 100;
@@ -37,12 +35,13 @@ export class ActivetripsComponent {
   ) {}
 
   ngOnInit() {
-    this.http.get<TripResponse[]>('http://localhost:8080/api/trip/active-trips-as-driver',
+    this.http.get<TripResponse[]>('http://localhost:8080/api/trip/active-trips-as-passenger',
       {observe: 'response'}).subscribe({
         next: (response) => {
           if(response.status === 200){
             if(response.body){
               this.trips = response.body;
+              console.log(this.trips);
             }
           }else if(response.status === 204){
             console.log('No trips found!');
@@ -52,12 +51,28 @@ export class ActivetripsComponent {
           console.log(error);
         }
       });
-    this.loadMore();
+
+      this.http.get<TripApplicationResponse[]>
+      (`http://localhost:8080/api/trip-application/for-passenger-by-trip-id`,{observe: 'response'})
+      .subscribe({
+        next: (response) => {
+          if(response.status === 200){
+            if(response.body){
+              this.tripApplicationResponses = response.body;
+              console.log(this.tripApplicationResponses);
+            }
+          }else if(response.status === 204){
+            console.log('No requests found!');
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
   }
 
-  showApplications(tripId : number){
-    this.activeTripsService.openRequests.set(true);
-    this.activeTripsService.openTripApplications(tripId);
+  findApplicatioResponse(tripId : number):TripApplicationResponse{
+      return this.tripApplicationResponses.find(x => x.tripId === tripId)!;
   }
 
   showMore(tripId : number){
@@ -101,7 +116,7 @@ export class ActivetripsComponent {
 
     this.loading = true;
 
-    this.http.get<TripResponse[]>('http://localhost:8080/api/trip/active-trips-as-driver',
+    this.http.get<TripResponse[]>('http://localhost:8080/api/trip/active-trips-as-passenger',
       {observe: 'response'}).subscribe({
         next: (response) => {
           if(response.status === 200){
@@ -116,22 +131,5 @@ export class ActivetripsComponent {
           console.log(error);
         }
       });
-    
-        // this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/trips-as-driver`, {observe: 'response'})
-        //   .subscribe({
-        //     next: (data) => {
-        //       if(data.body){
-        //         this.items = [...data.body];
-        //       }else if(data.status === 204){
-        //         console.log('No trips found');
-        //       }
-        //       this.loading = false;
-        //     },
-        //     error: (err) => {
-        //       console.error('Error loading data', err);
-        //       this.loading = false;
-        //     }
-        //   });
   }
 }
-

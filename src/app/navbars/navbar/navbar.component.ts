@@ -1,6 +1,7 @@
 import { Component, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../../services/auth-service.service';
 import { Router, RouterModule } from '@angular/router';
+import { ProfileService } from '../../page/driver/driverprofile/editprofile/profile.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit{
     isLoggedInS : WritableSignal<boolean> = signal(false);
     role = signal('');
     
-    constructor(private authService : AuthService,private router: Router
+    constructor(private authService : AuthService,private router: Router,private profileService : ProfileService
     ) { }
 
     balancee : WritableSignal<string | number> = signal('Balance');
@@ -51,10 +52,12 @@ export class NavbarComponent implements OnInit{
     }
 
     onDriver(){
+        this.profileService.activeTrips.set(false);
         this.router.navigate(["driver-profile"]);
     }
 
     onPassenger(){
+        this.profileService.activeTrips.set(false);
         this.router.navigate(["passenger"]);
     }
 

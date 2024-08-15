@@ -1,6 +1,7 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../../../services/auth-service.service';
 import { Router } from '@angular/router';
+import { AdminService } from '../../admin.service';
 
 @Component({
   selector: 'app-navbaradmin',
@@ -14,7 +15,7 @@ export class NavbaradminComponent implements OnInit{
     isLoggedInS : WritableSignal<boolean> = signal(false);
     role = signal('');
     
-    constructor(private authService : AuthService,private router: Router
+    constructor(private authService : AuthService,private router: Router,private adminService : AdminService
     ) { }
 
     ngOnInit(): void {
@@ -34,5 +35,9 @@ export class NavbaradminComponent implements OnInit{
         this.authService.logout();
         this.router.navigate(['']);
     } 
+
+    toggle(val : boolean){
+        this.adminService.reports.set(val);
+    }
 
 }
