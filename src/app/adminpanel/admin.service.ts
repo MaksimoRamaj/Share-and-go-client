@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,4 +6,6 @@ import { Injectable } from '@angular/core';
 export class AdminService {
 
   constructor() { }
+
+  reports = signal(true);
 }

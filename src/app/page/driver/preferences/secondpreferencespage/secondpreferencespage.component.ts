@@ -93,24 +93,24 @@ export class SecondpreferencespageComponent implements OnInit{
       }
     })
 
-    this.http.post(url, this.trip ,{observe: 'response'})
-    .pipe(
+    this.http.post(url, this.trip ,{observe: 'response',responseType: 'text'}).pipe(
       catchError(this.handleError)
-    )
-      .subscribe({
+    ).subscribe({
       next: (response: HttpResponse<any>) => {
         if(response.status == 200){
           this.http.post('http://localhost:8080/api/preference/choose-preferences', 
-            this.preferences).subscribe({
-              next: data => {
-                alert('Preferencat u ruajten me sukses!');
-                this.router.navigate(['driver-profile']);
+            this.preferences,{observe:'response',responseType: 'text'}).subscribe({
+              next: (response: HttpResponse<any>) => {
+                if(response.status == 200){
+                alert('Udhetimi u ruajt me sukses!');
+                this.router.navigate(['']);
+                }
               },
             }); 
         }
       },
-       
     });
+    
   }
 
   handleError(error: HttpErrorResponse) {

@@ -33,6 +33,7 @@ export class LoginComponent {
           else if(response.status === 200){
             this.authService.login(response.body.token,response.body.role);
             localStorage.setItem('loginToken', response.body.token);
+            localStorage.setItem('role',response.body.role);
             if (response.body.role == 'ADMIN' || response.body.role == 'SUPERADMIN') {
               console.log('Admin login');
               this.router.navigate(['/admin']);

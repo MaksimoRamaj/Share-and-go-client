@@ -1,0 +1,152 @@
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  dialog {
+    width: 100%;
+    max-width: 600px; /* Limit the max-width for larger screens */
+    height: auto; /* Adjust height automatically */
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    padding: 1rem;
+    top: 5rem;
+    margin: auto;
+  }
+  
+  @media (max-width: 768px) {
+    dialog {
+        max-width: 90%;
+        padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    dialog {
+        max-width: 95%;
+        padding: 0.5rem;
+        top: 2rem;
+    }
+  }
+  .container {
+    height: auto;
+    max-height: 60vh; /* Control maximum height */
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+        max-height: 50vh;
+    }
+  }
+  
+  .card-custom {
+    border-radius: 15px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .profile img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .card-custom {
+        padding: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .profile img {
+        width: 30px;
+        height: 30px;
+    }
+  
+    .profile .name {
+        font-size: 0.9em;
+    }
+  
+    .card-custom {
+        padding: 10px;
+    }
+  
+    .button-container {
+        margin-left: auto;
+    }
+  }
+  button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Full width for small screens */
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  #myBtn {
+    background-color: #b32525;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Full width for small screens */
+  }
+  
+  #myBtn:hover {
+    background-color: #661919;
+  }
+  .text-white {
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .text-white {
+        font-size: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .text-white {
+        font-size: 1rem;
+    }
+  }
+  
+
+  
+
+
+
+
+

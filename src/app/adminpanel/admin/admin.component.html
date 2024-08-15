@@ -1,1 +1,18 @@
-<p>admin works!</p>
+<app-navbaradmin></app-navbaradmin>
+
+<div class="container mt-5" style="margin-bottom: 30%;">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
+           <app-profile></app-profile>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 text-white" > 
+              @if (reports()) {
+                <app-reports></app-reports>
+              }@else{
+                <app-withdrawals></app-withdrawals>
+              }
+        </div>
+    </div>
+</div>
+
+<app-footer/>

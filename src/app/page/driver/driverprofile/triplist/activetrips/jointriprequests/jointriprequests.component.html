@@ -1,0 +1,44 @@
+<div class="backdrop" (click)="close()"></div>
+<dialog open>
+  <h2 class="text-white">Aplikimet</h2>
+  <form>
+          <div class="container" (scroll)="onScroll()">
+            @if (tripApplicationResponses.length == 0) {
+            <div class="card-custom">
+              <div class="date-header">Nuk ka aplikime</div>
+            </div>
+            }
+            @for (requestToJoin of tripApplicationResponses; track requestToJoin.id) {
+            <div class="card-custom">
+              <div class="date-header">{{ requestToJoin.status }}</div>
+              <div class="profile row">
+                <div class="col-8">
+                  <img [src]="'http://localhost:8080/images/users/'+requestToJoin.applicantProfilePictureUrl" alt="Profile Image">
+                  <span class="name">{{ requestToJoin.applicantFirstname}} {{ requestToJoin.applicantLastname }}</span>
+                </div>
+                @if (requestToJoin.status == 'PENDING') {
+                <div class="col-2">
+                  <button class="" type="button" (click)="acceptRequest(requestToJoin.id)">Prano</button>
+                </div>
+                <div class="col-2">
+                  <button style="background-color: red;" type="button" (click)="rejectRequest(requestToJoin.id)" >Refuzo</button>
+                </div>}
+              </div>
+              <div class="row">
+                <div class="col">
+                  Tipi udhetimit: {{requestToJoin.applicationType}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  Vendet e kerkuara: {{requestToJoin.numberOfSeats}}
+                </div>
+              </div>
+            </div>
+          }
+    </div>
+    
+      <button type="button" class="btn btn-secondary" style="background-color: gray;" (click)="close()">Prapa</button>
+ 
+  </form>
+</dialog>

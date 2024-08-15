@@ -22,6 +22,7 @@ import { BalanceComponent } from './page/balance/balance/balance.component';
 import { SecondpreferencespageComponent } from './page/driver/preferences/secondpreferencespage/secondpreferencespage.component';
 import { ActivetripsComponent } from './page/driver/driverprofile/triplist/activetrips/activetrips.component';
 import { AdminComponent } from './adminpanel/admin/admin.component';
+import { ActivepassengerTripsComponent } from './page/passenger/activetrips/activetrips.component';
 
 export const routes: Routes = [
     {
@@ -77,7 +78,12 @@ export const routes: Routes = [
             {   
                 path: "",
                 component: PtriplistComponent,
-            },]
+            },
+            {
+                path: "udhetimet-aktive",
+                component: ActivepassengerTripsComponent
+            }
+        ]
     }
     ,
     {

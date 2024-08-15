@@ -14,10 +14,10 @@
     <p>Numri cel: {{user.phoneNumber}}</p>
     }
     @if (!more) {
-        @if (activeTrips()) {
-            <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimet()">Udhetimet e kryera</button>
+        @if (!activeTrips()) {
+            <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimet()">Udhetimet aktive</button>
         }@else {
-            <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimetAktive()">Udhetimet aktive</button>
+            <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimetAktive()">Udhetimet e kryera</button>
         }
     <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="toggleMore()">Shiko me shume</button>
     }@else {
