@@ -18,6 +18,11 @@
     padding: 20px;
     margin: 20px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .card-custom:hover {
+    transform: translateY(-5px);
   }
   
   .date-header {

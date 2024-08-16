@@ -3,6 +3,12 @@
   <h2>Pershtypjet e marra</h2>
   <form>
     <div class="container">
+      @if (reviews.length == 0) {
+        <div class="card-custom">
+          <div class="date-header">Nuk ka pershtypje</div>
+        </div>
+      }
+      @else {
     @for (review of reviews; track review.reviewId) {
         <p>
         <label for="summary" style="margin-top: 6%; margin-bottom: 2%;">Mesazhi: </label>
@@ -19,8 +25,9 @@
             </ng-container>
           </div>
 
-    }
+    }}
     </div>
+  
     <p class="actions">
       <button type="button" (click)="toggle()">Prapa</button>
     </p>

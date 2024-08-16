@@ -15,12 +15,14 @@ import { RezervoformComponent } from "./rezervoform/rezervoform.component";
 import { HttpClient } from '@angular/common/http';
 import { PreferenceResponse } from '../../../../shared/responses/preferenceresponse.model';
 import { CarResponse } from '../../../../shared/responses/carresponse.model';
+import { ProfileService } from '../../../profile/profile.service';
+import { ProfileComponent } from "../../../profile/profile.component";
 
 
 @Component({
   selector: 'app-trip',
   standalone: true,
-  imports: [NavbarComponent, CardsComponent, FooterComponent, DatePipe, CurrencyPipe, DurationPipe, LeafletModule, RezervoformComponent],
+  imports: [NavbarComponent, CardsComponent, FooterComponent, DatePipe, CurrencyPipe, DurationPipe, LeafletModule, RezervoformComponent, ProfileComponent],
   templateUrl: './trip.component.html',
   styleUrl: './trip.component.css'
 })
@@ -35,7 +37,11 @@ export class TripComponent implements OnInit{
 
   isApplying = this.tripService.isApplying; 
 
-  constructor( private tripService : TripserviceService, private http: HttpClient) { }
+  showProfile = this.usrProfileService.showProfile;
+  userId = this.usrProfileService.userId;
+
+  constructor(private tripService : TripserviceService, private http: HttpClient,
+    private usrProfileService : ProfileService) {}
 
   ngOnInit(): void {
     this.tripService.getTripByTripId(this.tripService.selectedTripId())
@@ -84,6 +90,11 @@ export class TripComponent implements OnInit{
         }
       }); 
   
+  }
+
+  showUsrInfo(usrId : number){
+    this.usrProfileService.showProfile.set(true);
+    this.usrProfileService.userId.set(usrId);
   }
 
   toggle(){

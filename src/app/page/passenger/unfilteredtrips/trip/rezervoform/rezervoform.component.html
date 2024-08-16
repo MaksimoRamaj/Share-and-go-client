@@ -3,7 +3,7 @@
   <h2>Rezervo</h2>
   <form>
     
-    @if ((bookingType != bookingTypes[1])||(actualTrip.availableSeats > 0)) {
+    @if ((bookingType != bookingTypes[1])&&(actualTrip.availableSeats > 0)) {
         <p>
         <label for="title">Numrin e vendeve: </label>
         <input type="number" min="1" max="{{actualTrip.availableSeats}}" id="title" name="title" [(ngModel)] = "tripApplicationRequest.numberOfSeats"/>

@@ -12,17 +12,21 @@ import { DurationPipe } from '../../../shared/pipes/duration.pipe';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { ReviewformService } from './reviewform/reviewform.service';
 import { ReviewformComponent } from './reviewform/reviewform.component';
+import { ReportService } from './report.service';
+import { ReportformComponent } from "./reportform/reportform.component";
 
 @Component({
   selector: 'app-ptriplist',
   standalone: true,
-  imports: [RouterOutlet,DurationPipe,CurrencyPipe,DatePipe,CommonModule,ReviewformComponent],
+  imports: [RouterOutlet, DurationPipe, CurrencyPipe, DatePipe, CommonModule, ReviewformComponent, ReportformComponent],
   templateUrl: './ptriplist.component.html',
   styleUrl: './ptriplist.component.css'
 })
 export class PtriplistComponent {
 
-  constructor(private route: Router,private tripService:TripService, private http : HttpClient,private reviewFormService : ReviewformService) { }
+  constructor(private route: Router,private tripService:TripService,
+     private http : HttpClient,private reviewFormService : ReviewformService
+    ,private reportService : ReportService) { }
 
   items: TripResponse[] = [];
   preferences : PreferenceResponse[] = [];
@@ -30,6 +34,7 @@ export class PtriplistComponent {
   page = 0;
   pageSize = 100;
   isLeavingReview = this.reviewFormService.isOpen;
+  isLeavingReport = this.reportService.isReportOpen;
 
   private cityService = inject(InfinitescrollserviceService);
 
@@ -113,6 +118,16 @@ export class PtriplistComponent {
     this.reviewFormService.isOpen.set(true);
     this.reviewFormService.tripId.set(tripId);
     this.reviewFormService.driverId.set(driverId);
+  }
+
+  showReportForm(tripId : number,driverId : number){
+    this.reportService.isReportOpen.set(true);
+    this.reportService.report.tripId = tripId;
+    this.reportService.report.recipientId = driverId;
+  }
+
+  closeReportForm(){
+    this.reportService.isReportOpen.set(false);
   }
 
 }

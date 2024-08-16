@@ -1,0 +1,22 @@
+<div class="backdrop" (click)="toggle()"></div>
+<dialog open>
+  <h2>Raportoni problemin...</h2>
+  <form>
+    <p>
+      <label for="report-purpose" style="margin-top: 6%; margin-bottom: 2%;">Report purpose:</label>
+      <select id="report-purpose" [(ngModel)]="report.reportPurpose" name="report-purpose" class="select-field">
+        <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="summary" style="margin-top: 6%; margin-bottom: 2%;">Mesazhi:</label>
+      <textarea id="summary" rows="5" name="summary" [(ngModel)]="report.description"></textarea>
+    </p>
+
+    <p class="actions">
+      <button type="button" (click)="toggle()">Prapa</button>
+      <button type="button" id="1" (click)="dergo()">Dergo</button>
+    </p>
+  </form>
+</dialog>
