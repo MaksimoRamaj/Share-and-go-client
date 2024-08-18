@@ -19,16 +19,16 @@
     margin: 20px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-
+ 
   .show-more{
     font-weight: bold;
     margin-right: auto;
-    color: #6c757d;
+    color: #2c3e50;
   }
   
   .date-header {
     font-weight: bold;
-    color: #6c757d;
+    color: #2c3e50;
     margin-bottom: 15px;
   }
   
@@ -39,7 +39,7 @@
   }
   
   .timeline .time {
-    color: green;
+    color: #27ae60;
     font-weight: bold;
     margin-right: 10px;
   }
@@ -47,11 +47,11 @@
   .timeline .location {
     font-weight: bold;
     margin-right: auto;
-    color: #6c757d;
+    color: #2c3e50;
   }
   
   .timeline .price {
-    color: green;
+    color: #27ae60;
     font-size: 1.2em;
     font-weight: bold;
   }
@@ -71,7 +71,7 @@
   
   .profile .name {
     font-weight: bold;
-    color: #6c757d;
+    color: #2c3e50;
   }
   
   .icon-row {

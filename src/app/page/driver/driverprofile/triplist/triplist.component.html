@@ -7,37 +7,38 @@
   <div class="alert alert-info" style="margin-top: 5%;" role="alert">
     Nuk keni asnje udhetim te kryer!
   </div>
-}@else {
+}@else { 
 <div class="container" (scroll)="onScroll()">
   <div class="card-custom" *ngFor="let item of items">
     <div class="date-header">{{ item.date | date: 'fullDate' }}</div>
     <div class="timeline">
-      <span class="time">Nisja ne : {{ item.time }}</span>
-      <span class="location"> nga {{ item.startCity }}</span>
+      <span style="font-weight: bold;color: #2c3e50;">Nisja ne : &nbsp;</span>
+      <span class="time">{{ item.time.slice(0,-3) }}</span>
+      <span class="location"> nga {{ item.startCity }} !</span>
       <span class="price">{{ item.pricePerSeat | currency:'ALL'}}</span>
     </div>
-    <div class="timeline" style="color: #6c757d;">
+    <div class="timeline" style="color: #2c3e50;">
       <span class="location">Kohezgjatja e parashikuar per {{ item.endCity }}: </span>
       <span class="time">{{ item.duration | duration }}</span>
     </div>
     @if (show == item.id) {
-      <div class="timeline" style="color: #6c757d;">
+      <div class="timeline" style="color: #2c3e50;">
         <span class="location"> Pasagjeret:  </span>
         
       </div>
-      <div class="timeline" style="color: #6c757d;">
+      <div class="timeline" style="color: #2c3e50;">
         <div class="location"> Preferencat </div>
       </div>
       <div style="margin-bottom: 4%;">
         @for (preference of preferences; track preference.title) {
-          <div style="color:  #6c757d;"> <b><i class="fa fa-arrow-right">   {{ preference.title }} </i></b></div> 
+          <div style="color:  #2c3e50;"> <b><i class="fas fa-sticky-note">   {{ preference.title }} </i></b></div> 
         }
       </div>  
 
     }
     <div class="button-container margin-top: 10%;">
       @if (show != item.id) {
-      <button class="btn btn-secondary" (click)="showMore(item.id)">Show more</button>
+      <button class="btn " style="background-color:  #27ae60;color: white;" (click)="showMore(item.id)">Show more</button>
       }@else {
         <button class="btn btn-secondary" (click)="showLess()">Show less</button>
       }

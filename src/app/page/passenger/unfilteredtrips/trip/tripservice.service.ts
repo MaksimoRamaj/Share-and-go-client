@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { TripResponse } from '../../../../shared/responses/tripresponse.model';
+import { ProfileService } from '../../../profile/profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class TripserviceService{
 
   isApplying = signal<boolean>(false);
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,) { }
 
   
   getTripByTripId(tripId : number){
