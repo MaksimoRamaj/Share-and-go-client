@@ -1,10 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NavbaradminComponent } from '../adminnav/navbaradmin/navbaradmin.component';
 import { FooterComponent } from "../../footer/footer.component";
 import { ProfileComponent } from "../profile/profile.component";
 import { Router } from '@angular/router';
 import { TripserviceService } from '../../page/passenger/unfilteredtrips/trip/tripservice.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ReviewformService } from '../../page/passenger/ptriplist/reviewform.service';
 import { TripResponse } from '../../shared/responses/tripresponse.model';
 import { PreferenceResponse } from '../../shared/responses/preferenceresponse.model';
@@ -24,7 +24,7 @@ import { ReportsComponent } from "../reports/reports.component";
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit{
   constructor(private route: Router,private tripService:TripserviceService, private http : HttpClient
     ,private reviewFormService : ReviewformService, private adminService : AdminService) { }
 
@@ -33,5 +33,12 @@ export class AdminComponent {
     toggleReports(){
         this.adminService.reports.set(!this.adminService.reports());
     }
+
+    ngOnInit(): void {
+      
+    }
+
+    
+    
 }
 

@@ -60,15 +60,14 @@ export class HomepageComponent implements OnInit {
     }
 
     fetchAdminProfile(){
-      return;
-      this.http.get('http://localhost:8080/api/admin/auth-admin',{observe: 'response'}).subscribe({
+      return this.http.get('http://localhost:8080/api/admin/auth-admin',{observe: 'response',responseType:'text'}).subscribe({
         next: (response: HttpResponse<any>) => {
           if(response.status === 200){
-            localStorage.setItem('adprofile',JSON.stringify(response.body));
+            localStorage.setItem('adminprofile',JSON.stringify(response.body));
           }
         },
         error: (error: HttpErrorResponse) => {
-          console.log('Status Code:', error.status);  // Accessing the status code in case of error
+          console.log('Status Code:', error.status); 
         },
 
       });
