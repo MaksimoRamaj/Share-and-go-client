@@ -3,6 +3,7 @@ body {
     font-family: "Poppins", sans-serif;
     font-weight: 300;
 }
+
 .form-container {
     max-width: 500px;
     margin: 50px auto;
@@ -10,7 +11,9 @@ body {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
+
 .form-header {
     margin-bottom: 20px;
     text-align: center;
@@ -64,6 +67,7 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
+    position: absolute;
   }
   
   dialog {
@@ -76,11 +80,14 @@ body {
     overflow: hidden;
     padding: 1rem;
     top: 5rem;
+    z-index: 1000;
+    position: absolute;
   }
   
 
   @media (min-width: 768px) {
     dialog {
       padding: 2rem;
+      position: absolute;
     }
   }

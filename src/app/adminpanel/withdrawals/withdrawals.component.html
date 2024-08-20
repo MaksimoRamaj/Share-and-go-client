@@ -1,5 +1,5 @@
 
-@if (withdrawalresponses.length > 0) {
+@if (withdrawalresponses && withdrawalresponses.length > 0) {
     <div class="container" (scroll)="onScroll()">
     @for (withdrawal of withdrawalresponses; track withdrawal.id) {
         <div class="card" style="margin-top:3%">

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { NavbaradminComponent } from '../adminnav/navbaradmin/navbaradmin.component';
 import { FooterComponent } from "../../footer/footer.component";
 import { ProfileComponent } from "../profile/profile.component";
@@ -12,100 +12,71 @@ import { InfinitescrollserviceService } from '../../page/passenger/unfilteredtri
 import { City } from '../../shared/city.model';
 import { DurationPipe } from '../../shared/pipes/duration.pipe';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ReportResponse } from '../../shared/responses/report-response.model';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [CommonModule,NavbaradminComponent, FooterComponent, ProfileComponent, DurationPipe, CurrencyPipe, DatePipe],
+  imports: [FormsModule,CommonModule,NavbaradminComponent, FooterComponent, ProfileComponent, DurationPipe, CurrencyPipe, DatePipe],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
 export class ReportsComponent {
+
+  private date = new Date();
+  
+  ReportResponses ?: ReportResponse[] = undefined;
+
+  fromDate : string = this.date.toISOString().split('T')[0];
+  toDate : string = new Date(this.date.setMonth(this.date.getMonth() + 1)).toISOString().split('T')[0];
+
   constructor(private route: Router,private tripService:TripserviceService, private http : HttpClient
     ,private reviewFormService : ReviewformService) { }
 
-  items: TripResponse[] = [];
-  preferences : PreferenceResponse[] = [];
-  loading = false;
-  page = 0;
-  pageSize = 100;
-
-  private cityService = inject(InfinitescrollserviceService);
-
- 
-  startCity !: City | null;
-  endCity !: City | null;
-  date !: string | null;
-
-  show : number = -1;
-
-  ready = this.cityService.ready$;
-
   ngOnInit() {
-    this.ready.subscribe((value) => {
-      if(value){
-        this.loadMore();
+    this.fetchReports();
+  }
+
+  onDateChange(event : any){
+    this.fetchReports();
+    console.log(this.ReportResponses);
+  }
+
+  fetchReports(){
+    this.http.get<ReportResponse[]>('http://localhost:8080/api/feedback/admin/report/un-checked?begin='+this.fromDate+'&end='+this.toDate,
+      {observe: 'response',}
+    )
+    .subscribe(
+      {
+        next: response => {
+          if(response.status == 200 && response.body != null){
+          this.ReportResponses = response.body;
+          }
+          if(response.status == 204){
+            this.ReportResponses = [];
+          }
+        },
+        error: error => {
+          console.error('There was an error!', error);
       }
     });
-    this.loadMore();
   }
 
   showMore(tripId : number){
-      this.show = tripId;
-
-      this.http.get<PreferenceResponse[]>('http://localhost:8080/api/preference/preferences-by-trip-id?id='+tripId,
-      {observe: 'response'}).subscribe({
-        next: (response) => {
-          if(response.status === 200){
-            if(response.body){
-              this.preferences = response.body;
-            }
-          }else if(response.status === 204){
-            console.log('No preferences found for this trip');
-          }
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
+      
   }
 
   showLess(){
-    this.show = -1;
+   
   }
 
   onScroll() {
-    const container = document.querySelector('.container');
-    if (container) {
-      const { scrollTop, scrollHeight, clientHeight } = container;
-      if (scrollTop + clientHeight >= scrollHeight - 10) {
-        this.loadMore();
-      }
-    }
+    
   }
 
   loadMore() {
-    if (this.loading) {
-      return;
-    }
-
-    this.loading = true;
-    
-        this.http.get<TripResponse[]>(`http://localhost:8080/api/trip/trips-as-passenger`, {observe: 'response'})
-          .subscribe({
-            next: (data) => {
-              if(data.body){
-                this.items = [...data.body];
-              }else if(data.status === 204){
-                console.log('No trips found');
-              }
-              this.loading = false;
-            },
-            error: (err) => {
-              console.error('Error loading data', err);
-              this.loading = false;
-            }
-          });
+  
   }
 
   showReviewForm(tripId : number,driverId : number){
