@@ -26,8 +26,8 @@
             </div>
 
             <label for="dateNisje">Data e nisjes:</label>
-            <div class="search-container" style="margin-bottom: 10%;">
-                <input type="date" id="dateNisje" name="dateNisje" [(ngModel)]="tripDetails.dateOfTrip" (input)="onInputToDate($event)">
+            <div class="form-group" style="margin-bottom: 10%;">
+                <input type="date" class="form-control" id="dateNisje" name="dateNisje" [(ngModel)]="tripDetails.dateOfTrip" (input)="onInputToDate($event)">
             </div>
             
             <button (click)="submitForm()">Gjej Udhetim</button>

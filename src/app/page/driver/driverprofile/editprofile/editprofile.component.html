@@ -2,19 +2,19 @@
 <dialog open>
 <div class="form-container">
     <div class="form-header">
-        <h2>Personal Information</h2>
+        <h2>Informacione personale</h2>
     </div>
     <form>
         <div class="form-group">
-            <label for="firstName">First Name</label>
+            <label for="firstName">Emri</label>
             <input type="text" class="form-control" id="firstName" placeholder="First name" name="firstName" [(ngModel)]="profileRequest.firstname">
         </div>
         <div class="form-group">
-            <label for="lastName">Last Name</label>
+            <label for="lastName">Mbiemri</label>
             <input type="text" class="form-control" [(ngModel)]="profileRequest.lastname" id="lastName" name="lastName" placeholder="Last name">
         </div>
         <div class="form-group">
-            <label for="phoneNumber">Phone Number</label>
+            <label for="phoneNumber">Numer celulari</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -29,27 +29,27 @@
             <input type="email" class="form-control" name="E-mail" value="{{userprofile.email}}" disabled>
         </div>
         <div class="form-group">
-            <label for="birthdate">Birthdate</label>
+            <label for="birthdate">Datelindja</label>
             <input type="date" class="form-control" name="birthDate" [(ngModel)]="profileRequest.birthDate">
         </div>
         <div class="form-group">
-            <label for="email">Old password</label>
+            <label for="email">Kodi i vjeter</label>
             <input type="email" class="form-control" name="oldPassword" [(ngModel)]="profileRequest.oldPassword">
         </div>
         <div class="form-group">
-            <label for="email">New Password</label>
+            <label for="email">Kodi i ri</label>
             <input type="email" class="form-control" name="new" [(ngModel)]="profileRequest.newPassword">
         </div>
         <div class="form-group">
-            <label for="email">New Password</label>
+            <label for="email">Kodi i ri</label>
             <input type="email" class="form-control" name="pass" [(ngModel)]="profileRequest.newConfirmPassword">
         </div>
         <div class="form-group">
-            <label for="email">Profile picture</label>
+            <label for="email">Foto profili</label>
             <input type="file" class="form-control" name="pass" (change)="onFileSelected($event)">
         </div>
         
-        <button (click)="updateProfile()" class="btn btn-custom btn-block" style="margin-top: 4%;">Save</button>
+        <button (click)="updateProfile()" class="btn btn-custom btn-block" style="margin-top: 4%;">Ruaj</button>
     </form>
 </div>
 </dialog>

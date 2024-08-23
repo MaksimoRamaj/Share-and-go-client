@@ -32,7 +32,7 @@
                 <div class="col-md-6">
                     <div class="details-section">
                         <h4 class="section-title">Reporter</h4>
-                        <img src="../../../assets/images/dummy-avatar.jpg" alt="Reporter Profile Picture" class="profile-img mb-3">
+                        <img [src]="'http://localhost:8080/images/users/'+report.reporterProfilePictureUrl" alt="Reporter Profile Picture" class="profile-img mb-3">
                         <p><strong>Name:</strong> <span>{{report.reporterName}}</span></p>
                         <p><strong>ID:</strong> <span>{{report.reporterId}}</span></p>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-6">
                     <div class="details-section">
                         <h4 class="section-title">Reported</h4>
-                        <img src="../../../assets/images/dummy-avatar.jpg" alt="Recipient Profile Picture" class="profile-img mb-3">
+                        <img [src]="'http://localhost:8080/images/users/'+report.reporterProfilePictureUrl" alt="Recipient Profile Picture" class="profile-img mb-3">
                         <p><strong>Name:</strong> <span>{{report.recipientName}}</span></p>
                         <p><strong>ID:</strong> <span>{{report.recipientId}}</span></p>
                     </div>

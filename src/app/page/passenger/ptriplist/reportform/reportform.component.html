@@ -3,7 +3,7 @@
   <h2>Raportoni problemin...</h2>
   <form>
     <p>
-      <label for="report-purpose" style="margin-top: 6%; margin-bottom: 2%;">Report purpose:</label>
+      <label for="report-purpose" style="margin-top: 6%; margin-bottom: 2%;">Qellimi i reportit:</label>
       <select id="report-purpose" [(ngModel)]="report.reportPurpose" name="report-purpose" class="select-field">
         <option *ngFor="let option of options" [value]="option">{{ option }}</option>
       </select>
