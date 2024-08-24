@@ -11,6 +11,8 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { DurationPipe } from '../../../../../shared/pipes/duration.pipe';
 import { ActivetripsService } from './activetrips.service';
 import { JointriprequestsComponent } from "./jointriprequests/jointriprequests.component";
+import Swal from 'sweetalert2';
+import { SweetAlertService } from '../../../../../../sweet-alert/sweet-alert-service.service';
 
 @Component({
   selector: 'app-activetrips',
@@ -33,7 +35,8 @@ export class ActivetripsComponent {
 
   constructor(private http: HttpClient,
     private router : Router,private reviewService : ReviewsService,
-    private activeTripsService : ActivetripsService
+    private activeTripsService : ActivetripsService,
+    private swal : SweetAlertService
   ) {}
 
   ngOnInit() {
@@ -77,6 +80,38 @@ export class ActivetripsComponent {
           console.log(error);
         }
       });
+  }
+
+  perfundo(tripId : number){
+      this.http.put('http://localhost:8080/api/trip/finish-trip',null,{observe: 'response',responseType: 'text'},).subscribe({
+        next: (response) => {
+          if(response.status === 200){
+            this.swal.successNotification("Sukses!",'Udhetimi perfundoi me sukses!');
+            this.trips = this.trips.filter(trip => trip.id !== tripId);
+          }
+          if(response.status === 404){
+            this.swal.failNotification("Gabim!",'Udhetimi nuk ka filluar akoma!');
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+  }
+
+  anullo(tripId : number){
+    this.http.put('http://localhost:8080/api/trip/cancel-trip?id='+tripId,null,{observe: 'response',responseType: 'text'}).subscribe({
+      next: (response) => {
+        if(response.status === 200){
+          this.swal.successNotification("Sukses!",'Trip cancelled successfully!');
+          this.trips = this.trips.filter(trip => trip.id !== tripId);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+
   }
 
 
