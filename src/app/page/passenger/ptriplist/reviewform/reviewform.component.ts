@@ -43,10 +43,8 @@ export class ReviewformComponent {
         }
 
 
-        this.http.post('http://localhost:8080/api/feedback/review/leave-review',review,{observe: 'response'})
-        .pipe(
-          catchError(this.handleError)
-        ).subscribe({
+        this.http.post('http://localhost:8080/api/feedback/review/leave-review',review,{observe: 'response',responseType: 'text'})
+        .subscribe({
             next: (response) => {
               console.log(response);
                 if(response.status === 200){

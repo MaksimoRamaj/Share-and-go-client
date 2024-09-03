@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-md-6 mb-3">
-        <label for="fromDate" class="date-label">From:</label>
+        <label for="fromDate" class="date-label">Data e fillimit:</label>
         <input type="date" id="fromDate" class="form-control date-input" placeholder="From Date" 
         [(ngModel)]="fromDate" (ngModelChange)="onDateChange($event)">
     </div>
     <div class="col-md-6 mb-3">
-        <label for="toDate" class="date-label">To:</label>
+        <label for="toDate" class="date-label">Data e mbarimit:</label>
         <input type="date" id="toDate" class="form-control date-input" placeholder="To Date"
          [(ngModel)]="toDate" (ngModelChange)="onDateChange($event)">
     </div>
@@ -16,35 +16,39 @@
     @for (report of ReportResponses; track report.reportId) {
     <div class="card">
         <div class="card-header text-center">
-            <h2 class="card-title">Report #{{report.reportId}} Details</h2>
+            <h2 class="card-title">Detajet e reportit #{{report.reportId}}</h2>
         </div>
         <div class="card-body">
             <div class="report-info text-center">
                 <p><strong>Report ID: &nbsp;</strong> <span>{{report.reportId}}</span></p>
-                <p><strong>Purpose: &nbsp;</strong> <span>{{report.reportPurpose}}</span></p>
+                <p><strong>Arsyeja: &nbsp;</strong> <span>{{formatResponsePurpose(report.reportPurpose)}}</span></p>
             </div>
             <div class="description-section mt-4">
-                <h4 class="section-title">Description</h4>
+                <h4 class="section-title">Pershkrimi</h4>
                 <p>{{report.description}}</p>
             </div>
             <hr>
             <div class="row text-center mb-4">
                 <div class="col-md-6">
                     <div class="details-section">
-                        <h4 class="section-title">Reporter</h4>
+                        <h4 class="section-title">Raportuesi</h4>
                         <img [src]="'http://localhost:8080/images/users/'+report.reporterProfilePictureUrl" alt="Reporter Profile Picture" class="profile-img mb-3">
-                        <p><strong>Name:</strong> <span>{{report.reporterName}}</span></p>
+                        <p><strong>Emri: </strong> <span>{{report.reporterName}}</span></p>
+                        <p><strong> </strong> <span></span></p>
                         <p><strong>ID:</strong> <span>{{report.reporterId}}</span></p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="details-section">
-                        <h4 class="section-title">Reported</h4>
+                        <h4 class="section-title">I raportuari</h4>
                         <img [src]="'http://localhost:8080/images/users/'+report.reporterProfilePictureUrl" alt="Recipient Profile Picture" class="profile-img mb-3">
-                        <p><strong>Name:</strong> <span>{{report.recipientName}}</span></p>
-                        <p><strong>ID:</strong> <span>{{report.recipientId}}</span></p>
+                        <p><strong>Emri: </strong> <span>Mario Doe</span></p>
+                        <p><strong>ID:</strong> <span>7</span></p>
                     </div>
                 </div>
+            </div>
+            <div class="bottom-button-container">
+                <button class="btn btn-primary" (click)="shikoShenimet(report.recipientId)">Shiko shenimet</button>
             </div>
         </div>
     </div>

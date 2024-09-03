@@ -10,12 +10,8 @@
     <p>{{user.role}}</p>
     }
     @if (!more) {
-        @if (activeTrips()) {
-            <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimet()">Udhetimet e kryera</button>
-        }@else {
-            <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimetAktive()">Udhetimet aktive</button>
-        }
-    <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="toggleMore()">Shiko me shume</button>
+    <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="shfaqUdhetimetAktive()">Reportet e zgjidhura</button>
+    <button class="edit-profile-btn"  style="padding: 10px 29px;margin-top: 8%;" (click)="toggleMore()">Kerkesat e aprovuara</button>
     }@else {
         <button class="edit-profile-btn" style="padding: 10px 29px;" (click)="editProfile()">Edit profile</button><br><br>
         <button class="edit-profile-btn"  style="padding: 10px 29px" (click)="onVeturat()">Veturat e mia</button>

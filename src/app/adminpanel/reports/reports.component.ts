@@ -14,6 +14,7 @@ import { DurationPipe } from '../../shared/pipes/duration.pipe';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReportResponse } from '../../shared/responses/report-response.model';
+import { ReportTypes } from '../../shared/report-types.model';
 
 @Component({
   selector: 'app-reports',
@@ -25,6 +26,7 @@ import { ReportResponse } from '../../shared/responses/report-response.model';
 export class ReportsComponent {
 
   private date = new Date();
+  private openNotes = signal(false);  
   
   ReportResponses ?: ReportResponse[] = undefined;
 
@@ -61,6 +63,38 @@ export class ReportsComponent {
           console.error('There was an error!', error);
       }
     });
+  }
+
+  formatResponsePurpose(purpose : ReportTypes){
+    if(purpose === ReportTypes.LATE_ARRIVAL){
+      return 'Vonese ne mberritje ose ne nisje!';
+    }else if(purpose === ReportTypes.NO_SHOW){
+      return 'Nuk u paraqit!';
+    }
+    else if(purpose === ReportTypes.PAYMENT_ISSUES){
+      return 'Probleme me pagesen!';
+    }
+    else if(purpose === ReportTypes.ROUTE_CHANGE){
+      return 'Ndryshim i rruges!';
+    }
+    else if(purpose === ReportTypes.RUDE_BEHAVIOR){
+      return 'Dhune verbale ose sjellje e keqe!';
+    }
+    else if(purpose === ReportTypes.SUBSTANCE_USE){
+      return 'Perdorim i substancave narkotike!';
+    }
+    else if(purpose === ReportTypes.UNAPPROVED_STOPS){
+      return 'Ndalime te shpeshta pa arsye!';
+    }
+    else if(purpose === ReportTypes.UNSAFE_DRIVING){
+      return 'Vozitje e papergjegjshme!';
+    }
+
+    return 'Dicka tjeter!';
+  }
+
+  shikoShenimet(recipientId : number){
+      this.openNotes.set(true);
   }
 
   showMore(tripId : number){

@@ -141,4 +141,26 @@ body::-webkit-scrollbar {
     display: none; /* Hide default scrollbar in IE/Edge */
 }
 
-  
+/* Centering and styling the button */
+.bottom-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.bottom-button-container .btn {
+    background-color: #0d1a28; /* Same color as the details header */
+    border: none;
+    color: #ffffff; /* White text color */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bottom-button-container .btn:hover {
+    background-color: #0b1520; /* Slightly darker on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
