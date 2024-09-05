@@ -6,4 +6,5 @@ export interface UserSignUpRequest {
     lastname: string;
     gender: string;
     birthDate: string;
+    mfaEnabled: boolean;
 }
