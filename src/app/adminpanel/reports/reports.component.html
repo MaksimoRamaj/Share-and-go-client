@@ -16,11 +16,11 @@
     @for (report of ReportResponses; track report.reportId) {
     <div class="card">
         <div class="card-header text-center">
-            <h2 class="card-title">Detajet e reportit #{{report.reportId}}</h2>
+            <h2 class="card-title">Detajet e reportit #6</h2>
         </div>
         <div class="card-body">
             <div class="report-info text-center">
-                <p><strong>Report ID: &nbsp;</strong> <span>{{report.reportId}}</span></p>
+                <p><strong>Report ID: &nbsp;</strong> <span>6</span></p>
                 <p><strong>Arsyeja: &nbsp;</strong> <span>{{formatResponsePurpose(report.reportPurpose)}}</span></p>
             </div>
             <div class="description-section mt-4">
@@ -34,6 +34,7 @@
                         <h4 class="section-title">Raportuesi</h4>
                         <img [src]="'http://localhost:8080/images/users/'+report.reporterProfilePictureUrl" alt="Reporter Profile Picture" class="profile-img mb-3">
                         <p><strong>Emri: </strong> <span>{{report.reporterName}}</span></p>
+                        <p><strong>Cel: </strong> <span>067 66 53 349</span></p>
                         <p><strong> </strong> <span></span></p>
                         <p><strong>ID:</strong> <span>{{report.reporterId}}</span></p>
                     </div>
@@ -43,6 +44,7 @@
                         <h4 class="section-title">I raportuari</h4>
                         <img [src]="'http://localhost:8080/images/users/'+report.reporterProfilePictureUrl" alt="Recipient Profile Picture" class="profile-img mb-3">
                         <p><strong>Emri: </strong> <span>Mario Doe</span></p>
+                        <p><strong>Cel: </strong> <span>069 57 95 283</span></p>
                         <p><strong>ID:</strong> <span>7</span></p>
                     </div>
                 </div>
@@ -60,4 +62,32 @@
     <div class="alert alert-info" style="margin-top: 5%;" role="alert">
         Nuk ka reporte!
     </div>
+}
+
+@if (openNotes()) {
+    <div class="backdrop" (click)="mbyllShenimet()"></div>
+    <dialog open>
+      <div class="report-notes-container">
+        <h3>Shënimet e Raportit</h3>
+        <div class="report-notes-grid">
+          <div *ngFor="let note of reportNotes" class="report-note-card">
+            <div class="note-header">
+              <span class="note-title">Raporti #{{ note.reportNoteId }}</span>
+              <span class="note-date">{{ note.createdDate | date }}</span>
+            </div>
+            <div class="note-body">
+              <p><strong>Shënimi:</strong> {{ note.reportNote }}</p>
+              <p><strong>Përdoruesi i raportuar:</strong> {{ note.reportedUserName }}</p>
+              <p><strong>Qëllimi i raportit:</strong> {{ note.reportPurpose }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="button-container">
+            <div><i>Shenim* Te dy veprimet e meposhtme kryejn mbylljen e reportit!</i></div>
+            <button class="action-button" (click)="bllokoPerdoruesin()">Blloko perdoruesin</button>
+            <button class="action-button" (click)="lerShenim()">Vendos shenim</button>
+          </div>
+      </div>
+    </dialog>
+      
 }

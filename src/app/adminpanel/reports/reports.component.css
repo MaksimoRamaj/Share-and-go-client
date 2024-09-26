@@ -5,6 +5,27 @@ body {
     color: #333;
 }
 
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  dialog {
+    width: 90%;
+    max-width: 90rem;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    padding: 1rem;
+    top: 5rem;
+  }
+
 /* Card Styling */
 .card {
     border-radius: 12px;
@@ -162,5 +183,141 @@ body::-webkit-scrollbar {
     background-color: #0b1520; /* Slightly darker on hover */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
+.button-container {
+    display: flex; /* Use Flexbox for horizontal alignment */
+    justify-content: center; /* Center align horizontally */
+    gap: 20px; /* Space between buttons */
+    margin-top: 30px; /* Add some margin to separate from the content */
+  }
+  
+  .action-button {
+    padding: 10px 20px; /* Button padding */
+    font-size: 16px; /* Font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+  }
+  
+  .action-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
 
+.report-notes-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f0f4f8; /* Light background for better contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    max-width: 800px; /* Restrict maximum width for readability */
+    margin: auto; /* Center the container */
+  }
+  
+  .report-note-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Light shadow for cards */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition effect */
+  }
+  
+  .report-note-card:hover {
+    transform: translateY(-4px); /* Lift effect on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  }
+  
+  .note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0; /* Separator line */
+    padding-bottom: 10px; /* Spacing below the separator */
+  }
+  
+  .note-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333; /* Darker color for emphasis */
+  }
+  
+  .note-date {
+    font-size: 14px;
+    color: #777; /* Softer color for secondary info */
+  }
+  
+  .note-body {
+    margin-top: 10px; /* Space between header and body */
+  }
+  
+  .note-body p {
+    margin: 5px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555; /* Medium color for body text */
+  }
+  
+  .note-body p strong {
+    color: #333; /* Strong color for labels */
+  }
+  
+  .note-icon {
+    margin-right: 8px;
+    vertical-align: middle; /* Align icons with text */
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    margin-top: 20px;
+  }
+  
+  .action-buttons button {
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 10px; /* Spacing between buttons */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover */
+  }
+  
+  .action-buttons button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
+  .empty-state {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 30px;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
 
+  .report-notes-grid {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
+    gap: 20px; /* Spacing between cards */
+    margin-top: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .report-notes-grid {
+      grid-template-columns: repeat(2, 1fr); /* Two columns for medium screens */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .report-notes-grid {
+      grid-template-columns: 1fr; /* One column for small screens */
+    }
+  }
+  

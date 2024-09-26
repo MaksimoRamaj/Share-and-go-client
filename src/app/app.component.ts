@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FindTripFormComponent } from "./forms/find-trip-form/find-trip-form.component";
 import { CardsComponent } from "./cards/cards.component";
@@ -11,6 +11,8 @@ import { ChatComponent } from "./chat/chat.component";
 
 import { UIKitSettingsBuilder } from "@cometchat/uikit-shared";
 import { CometChatUIKit } from "@cometchat/chat-uikit-angular";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LanguagesComponent } from "./languages/languages/languages.component";
 
 const COMETCHAT_CONSTANTS = {
   APP_ID: "26302336c44da3eb", //Replace with your App ID
@@ -30,11 +32,20 @@ const UIKitSettings = new UIKitSettingsBuilder()
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [OfferDriveFormComponent, RouterOutlet, FindTripFormComponent, CardsComponent, FooterComponent, NavbarComponent, MapComponent, HomepageComponent, ChatComponent],
+  imports: [TranslateModule, OfferDriveFormComponent, RouterOutlet, FindTripFormComponent, CardsComponent, FooterComponent, NavbarComponent, MapComponent, HomepageComponent, ChatComponent, LanguagesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
+
+  languages = ['al', 'en'];
+  
+  private translate = inject(TranslateService);
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('language', lang);
+  }
 
   ngOnInit(): void {
     CometChatUIKit.init(UIKitSettings)!
@@ -43,6 +54,9 @@ export class AppComponent implements OnInit{
     // You can now call login function.
   })
   .catch(console.log);
+  const defaultLang = localStorage.getItem('language') || 'al';
+    this.translate.setDefaultLang(defaultLang);
+    this.translate.use(defaultLang);
   }
   
   title = 'carpool';

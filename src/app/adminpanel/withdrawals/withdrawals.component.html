@@ -4,16 +4,17 @@
     @for (withdrawal of withdrawalresponses; track withdrawal.id) {
         <div class="card" style="margin-top:3%">
             <div class="card-header">
-                Withdrawal Record {{withdrawal.id}}
+                Kerkese terheqje #{{withdrawal.id}}
             </div>
             <div class="card-body">
-                <h5 class="card-title">Account Number:&nbsp; {{withdrawal.accountNumber}}</h5>
-                <p class="card-text"><strong>Amount: &nbsp;</strong>{{withdrawal.amount | currency:'ALL '}}</p>
-                <p class="card-text"><strong>Status:  &nbsp; &nbsp;   </strong> <span [ngClass]="withdrawal.withdrawalStatus">{{withdrawal.withdrawalStatus}}</span></p>
-                <p class="card-text"><strong>User ID:</strong>{{withdrawal.userId}} </p>
+                <h5 class="card-title">Numri llogarise:&nbsp; {{withdrawal.accountNumber}}</h5>
+                <p class="card-text"><strong>Terheqje: &nbsp;</strong>{{withdrawal.amount | currency:'ALL '}}</p>
+                <p class="card-text"><strong>Statusi:  &nbsp; &nbsp;   </strong> <span [ngClass]="withdrawal.withdrawalStatus">Ne pritje!</span></p>
+                <p class="card-text"><strong>Balanca: &nbsp;</strong>{{20000 | currency:'ALL '}}</p>
+                <p class="card-text"><strong>ID perdoruesi:</strong>{{withdrawal.userId}} </p>
                 <div class="text-center mt-4">
-                    <button class="btn btn-success mx-2" (click)="accept(withdrawal.id)">Accept</button>
-                    <button class="btn btn-danger mx-2" (click)="reject(withdrawal.id)">Reject</button>
+                    <button class="btn btn-success mx-2" (click)="accept(withdrawal.id)">Prano</button>
+                    <button class="btn btn-danger mx-2" (click)="reject(withdrawal.id)">Refuzo</button>
                 </div>
             </div>
         </div>

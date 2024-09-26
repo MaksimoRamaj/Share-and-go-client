@@ -7,11 +7,12 @@ import { CurrencyPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { BalanceService } from '../balance.service';
+import { TransactionsComponent } from "../transactions/transactions.component";
 
 @Component({
   selector: 'app-balance',
   standalone: true,
-  imports: [PaymentmethodComponent, WithdrawMethodComponent, NavbarComponent, WithdrequestComponent,CurrencyPipe],
+  imports: [PaymentmethodComponent, WithdrawMethodComponent, NavbarComponent, WithdrequestComponent, CurrencyPipe, TransactionsComponent],
   templateUrl: './balance.component.html',
   styleUrl: './balance.component.css'
 })

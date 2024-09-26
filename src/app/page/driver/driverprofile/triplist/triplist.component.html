@@ -24,7 +24,12 @@
     @if (show == item.id) {
       <div class="timeline" style="color: #2c3e50;">
         <span class="location"> Pasagjeret:  </span>
-        
+      </div>  
+      <div class="timeline" style="color: #2c3e50;">
+        <i class="fa fa-user">Redjon Belishta</i>
+      </div>
+      <div class="timeline" style="color: #2c3e50;">
+        <i class="fa fa-user">Enrik Agalliu</i>
       </div>
       <div class="timeline" style="color: #2c3e50;">
         <div class="location"> Preferencat </div>
@@ -40,7 +45,7 @@
       @if (show != item.id) {
       <button class="btn " style="background-color:  #27ae60;color: white;" (click)="showMore(item.id)">Shiko me shume</button>
       }@else {
-        <button class="btn btn-secondary" (click)="showLess()">Show less</button>
+        <button class="btn btn-secondary" (click)="showLess()">Shiko me pak</button>
       }
       <button class="btn btn-secondary" style="margin-left: 1%;" (click)="toggle(item.id)"> Pershtypjet </button>
     </div>
