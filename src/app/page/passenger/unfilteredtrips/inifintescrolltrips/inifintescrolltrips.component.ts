@@ -11,11 +11,12 @@ import { TripserviceService } from '../trip/tripservice.service';
 import { Router, RouterModule } from '@angular/router';
 import { ProfileService } from '../../../profile/profile.service';
 import {  ProfileComponent } from "../../../profile/profile.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-inifintescrolltrips',
   standalone: true,
-  imports: [CommonModule, DurationPipe, RouterModule, ProfileComponent],
+  imports: [CommonModule, DurationPipe, RouterModule, ProfileComponent,TranslateModule],
   templateUrl: './inifintescrolltrips.component.html',
   styleUrls: ['./inifintescrolltrips.component.css'],
   providers: [

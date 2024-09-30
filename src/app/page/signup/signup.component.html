@@ -1,7 +1,40 @@
+@if (mfaEnabled()) {
+    
+    <dialog open style="margin-top: 8%;">
+        <div class="success-message-panel" *ngIf="message">
+            <div class="success-icon">&#10004;</div>
+            <div class="success-message">{{message}}</div>
+          </div>
+          <h2>Identifikimi me ane te 2 faktoreve (Two factor Authentication)</h2>
+          <div class="qr-code">
+            <img [src]="adminLoginResponse.secretImageUri" alt="QR Code">
+          </div>
+          <div class="form-group">
+            <label for="validationCode">Vendos kodin 6-shifror te gjeneruar prej aplikacionit</label>
+            <input
+              type="text"
+              id="validationCode"
+              name="validationCode"
+              required
+              [(ngModel)]="otpCode"
+            >
+          </div>
+          <button
+            type="button"
+            class="btn btn-dark"
+            id="1"
+            style="margin-top: 5%;"
+            (click)="verifyTfa()"
+            [class.button-disabled]="otpCode.length < 6"
+          >Verifiko kodin</button>
+
+</dialog>
+}@else {
+
 <div class="form_wrapper">
     <div class="form_container">
         <div class="title_container">
-            <h2>Registration Form</h2>
+            <h2>Formular Regjistrimi</h2>
         </div>
         <div class="row clearfix">
             <div class="">
@@ -37,16 +70,20 @@
                         <input style="padding-left: 14%;" type="date" name="birthDate" placeholder="Birthdate" [(ngModel)]="signUpRequest.birthDate" required />
                     </div>
                     <div class="input_field checkbox_option">
-                        <input type="checkbox" id="cb1">
-                        <label for="cb1">I agree with terms and conditions</label>
-                    </div>
-                    <div class="input_field checkbox_option">
-                        <input type="checkbox" id="cb2">
-                        <label for="cb2">I want to receive the newsletter</label>
-                    </div>
+                        <input
+                          id="cb3"
+                          type="checkbox"
+                          name="cb3"
+                          [(ngModel)]="signUpRequest.mfaEnabled"
+                        >
+                        <label for="cb3">Aktivizo 2FA (Two Factors Authentication)</label>
+                      </div>
                     <input class="button" type="submit" value="Register" />
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+}

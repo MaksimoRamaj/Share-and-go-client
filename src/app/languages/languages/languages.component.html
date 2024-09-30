@@ -1,0 +1,15 @@
+<!-- Floating Button -->
+<button class="floating-btn" (click)="toggleLanguageSelector()">
+    <img src="../../../assets/images/settings-icon-transparent-13-1816047447 (1).png" alt="Chat">
+  </button>
+  
+  <!-- Language Selection Modal -->
+  <div *ngIf="isLanguageSelectorVisible()" class="language-selector">
+    <h3>Select Language</h3>
+    <ul>
+      <li (click)="selectLanguage('al')">Albanian</li>
+      <li (click)="selectLanguage('en')">English</li>
+      <!-- Add more languages as needed -->
+    </ul>
+  </div>
+  

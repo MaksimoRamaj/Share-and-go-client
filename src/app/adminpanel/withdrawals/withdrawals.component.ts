@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class WithdrawalsComponent implements OnInit {
 
-  badge = "Pending";
+  badge = "Ne pritje!";
   withdrawalresponses : WithdrawalResponse[] = [];
   showList = signal(true);  
 

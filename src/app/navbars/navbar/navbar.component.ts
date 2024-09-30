@@ -2,11 +2,12 @@ import { Component, OnInit, Signal, signal, WritableSignal } from '@angular/core
 import { AuthService } from '../../services/auth-service.service';
 import { Router, RouterModule } from '@angular/router';
 import { ProfileService } from '../../page/driver/driverprofile/editprofile/profile.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,TranslateModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

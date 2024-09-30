@@ -2,7 +2,7 @@
     <app-jointriprequests></app-jointriprequests>
   }
   
-  <div><h1>Udhetimet ne vijim ...</h1></div>
+  <div><h1>Udhetimet ne vijim si pasagjer ...</h1></div>
   <div class="container" (scroll)="onScroll()">
     @if (trips.length == 0) {
     <div class="alert alert-info" style="margin-top: 5%;" role="alert">
@@ -33,9 +33,14 @@
         <span class="time">{{ item.duration | duration }}</span>
       </div>
       @if (show == item.id) {
-        <div class="timeline" style="color: #6c757d;">
+        <div class="timeline" style="color: #2c3e50;">
           <span class="location"> Pasagjeret:  </span>
-          
+        </div>  
+        <div class="timeline" style="color: #2c3e50;">
+          <i class="fa fa-user">Redjon Belishta</i>
+        </div>
+        <div class="timeline" style="color: #2c3e50;">
+          <i class="fa fa-user">Enrik Agalliu</i>
         </div>
         <div class="timeline" style="color: #6c757d;">
           <div class="location"> Preferencat: </div>
@@ -55,7 +60,11 @@
         @if (show != item.id) {
         <button class="btn btn-success" (click)="showMore(item.id)">Shiko me shume</button>
         }@else {
+          <div>
+            <i style="color: black;">Kujdes! Anullimi duhet te behet te pakten 6 ore perpara udhetimit!</i>
+          </div>
           <button class="btn btn-secondary" (click)="showLess()">Shiko me pak</button>
+          <button class="btn btn-danger" style="margin-left: 2%;" (click)="showMore(item.id)">Anullo udhetimin</button>
         }
       </div>
     </div>}

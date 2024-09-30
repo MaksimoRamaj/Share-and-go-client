@@ -15,6 +15,7 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReportResponse } from '../../shared/responses/report-response.model';
 import { ReportTypes } from '../../shared/report-types.model';
+import { reportNote } from '../../shared/report-note.model';
 
 @Component({
   selector: 'app-reports',
@@ -25,8 +26,41 @@ import { ReportTypes } from '../../shared/report-types.model';
 })
 export class ReportsComponent {
 
+
   private date = new Date();
-  private openNotes = signal(false);  
+  openNotes = signal(false);  
+  reportNotes : reportNote[] = [
+    {
+      reportNoteId: 1,
+      reportNote: 'Shoferi nuk vendosi rripin e sigurimit dhe ishte i pa sjellshëm me pasagjerët.',
+      createdDate: '2024-08-25T10:45:00',
+      reportedUserId: 7,
+      reportedUserName: 'Mario Doe',
+      reporterUserSurname: 'Ramaj',
+      reporterUserTotalReports: 3,
+      reportPurpose: 'Mosrespektimi i rregullave të sigurisë dhe sjellja e keqe.'
+    },
+    {
+      reportNoteId: 2,
+      reportNote: 'Udhëtoi me shpejtësi të madhe dhe përdori telefonin gjatë vozitjes.',
+      createdDate: '2024-09-01T14:30:00',
+      reportedUserId: 7,
+      reportedUserName: 'Mario Doe',
+      reporterUserSurname: 'Shehu',
+      reporterUserTotalReports: 5,
+      reportPurpose: 'Shpejtësi e tepruar dhe përdorimi i telefonit gjatë vozitjes.'
+    },
+    {
+      reportNoteId: 3,
+      reportNote: 'Nuk mbërriti në kohë në destinacionin e caktuar.',
+      createdDate: '2024-09-10T09:15:00',
+      reportedUserId: 7,
+      reportedUserName: 'Mario Doe',
+      reporterUserSurname: 'Meta',
+      reporterUserTotalReports: 4,
+      reportPurpose: 'Vonese në mbërritje.'
+    }
+  ];
   
   ReportResponses ?: ReportResponse[] = undefined;
 
@@ -97,12 +131,19 @@ export class ReportsComponent {
       this.openNotes.set(true);
   }
 
+  mbyllShenimet(){
+    this.openNotes.set(false);
+  }
+
   showMore(tripId : number){
       
   }
 
-  showLess(){
+  bllokoPerdoruesin(){
    
+  }
+
+  lerShenim(){
   }
 
   onScroll() {

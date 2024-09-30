@@ -1,0 +1,55 @@
+/* Floating Button */
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .floating-btn img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* Language Selector Modal */
+  .language-selector {
+    position: fixed;
+    bottom: 100px; /* Position above the button */
+    left: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+  }
+  
+  .language-selector h3 {
+    margin: 0;
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
+  
+  .language-selector ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .language-selector ul li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .language-selector ul li:hover {
+    background-color: #f0f0f0;
+  }
+  
